@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View, Text, Image, TouchableOpacity, Platform, RefreshControl } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import colors from '../Styles/colors';
 import MainHeader from '../Components/Header/MainHeader';
@@ -10,8 +10,18 @@ import LineSeprator from '../Components/LineSeprator/LineSeprator';
 import LeftRightImgText from '../Components/LeftRightImgText/LeftRightImgText';
 import Button from '../Components/Button/Button';
 import fontFamily from '../Styles/fontFamily';
+import { Linking } from 'react-native';
+
+import { getChallan } from '../Redux/Features/getChallans/challans';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 const Challans = () => {
+
+    const dispatch = useDispatch();
+    const feeChallanHere = useSelector((state) => state.feeChallan);
+    const childDatahere = useSelector(state => state.children);
+
 
     const navigation = useNavigation();
     const [refreshing, setRefreshing] = React.useState(false);
@@ -23,16 +33,35 @@ const Challans = () => {
         }
     }
 
+    const [payOnlineState, setPayOnlineState] = useState(false);
+
+
     const [payableChallans, setPayablesChallans] = useState([
         { id: 1, challnaDate: 'Oct 2022 - Oct 2022', amount: '11,145' },
         { id: 2, challnaDate: 'Sep 2022 - Sep 2022', amount: '10,000' }
     ]);
 
-    const [paidChallans, setPaidChallans] = useState([
-        { id: 1, challnDate: 'Apr 2022 - Apr 2022', amount: '10,000', challnaDate: 'Apr 2022 - Apr 2022', paidDate: '20-Apr' },
-        { id: 2, challnaDate: 'Mar 2022 - Mar 2022', amount: '8500', challnaDate: 'Mar 2022 - Mar 2022', paidDate: '20-Mar' },
-        { id: 3, challnaDate: 'Feb 2022 - Feb 2022', amount: '8000', challnaDate: 'Feb 2022 - Feb 2022', paidDate: '20-Feb' }
-    ])
+    const [paidChallans, setPaidChallans] = useState(
+        [
+            { id: 1, challnDate: 'Apr 2022 - Apr 2022', amount: '10,000', challnaDate: 'Apr 2022 - Apr 2022', paidDate: '20-Apr' },
+            { id: 2, challnaDate: 'Mar 2022 - Mar 2022', amount: '8500', challnaDate: 'Mar 2022 - Mar 2022', paidDate: '20-Mar' },
+            { id: 3, challnaDate: 'Feb 2022 - Feb 2022', amount: '8000', challnaDate: 'Feb 2022 - Feb 2022', paidDate: '20-Feb' }
+        ]
+    )
+    // childrenData?.posts?.result?.children[]?.system_id
+    useEffect((index) => {
+        dispatch(getChallan(childDatahere?.posts?.result?.children[0]?.system_id));
+        // setPayablesChallans(feeChallanHere);
+        // if (feeChallanHere) {
+        //     setPaidChallans(feeChallanHere);
+        //     setPayablesChallans(feeChallanHere)
+        // }
+    }, [])
+    // console.log(paidChallans, "paid")
+    // console.log(payableChallans, "payable")
+
+
+
 
     const onRefresh = () => {
         setRefreshing(true);
@@ -42,96 +71,121 @@ const Challans = () => {
         // console.log("calling again", initialCall());
     }
 
+    // console.log("paidChallansHere11", paidChallans);
+
+
+
     const renderItem = ({ item, index }) => {
 
+        setPayOnlineState(item.status == 0 ? true : false);
+
         return (
-            <View style={styles.challansMainView}>
-                <LeftRightImgText
-                    leftText={item.challnaDate}
-                />
-                <LineSeprator style={styles.listSeprator} />
+            <>
+                {
+                    item.status == 0 ?
+                        <View style={styles.challansMainView}>
+                            <LeftRightImgText
+                                leftText={item.fee_period}
+                            />
+                            <LineSeprator style={styles.listSeprator} />
 
 
-                <View style={styles.challanUpperMainView}>
-                    <View style={styles.challanUpperView}>
-                        <Text style={styles.challanUpperText1}>{`Rs ${item.amount}/-`}</Text>
-                        <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
-                    </View>
-                    <View style={styles.challanUpperRightView}>
-                        <Button
-                            height={hp('4.5')}
-                            width={wp('25')}
-                            borderRadius={wp('1.5')}
-                            text="View Challan"
-                            bgColor={colors.appColor}
-                            textColor={colors.white}
-                            textSize={hp('1.3')}
-                            textWeight={"bold"}
-                        />
-                    </View>
-                </View>
+                            <View style={styles.challanUpperMainView}>
+                                <View style={styles.challanUpperView}>
+                                    <Text style={styles.challanUpperText1}>{`Rs ${item.net_payable}/-`}</Text>
+                                    <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
+                                </View>
+                                <View style={styles.challanUpperRightView}>
+                                    <Button
+                                        onPress={() => Linking.openURL('http://b2training.beaconhouse.net/students/ism/ism_report_invoice_printed_n.php?company_id=1&from_date=01/02/2019&app=Y&invoice_num=2140005127671')}
+                                        height={hp('4.5')}
+                                        width={wp('25')}
+                                        borderRadius={wp('1.5')}
+                                        text="View Challan"
+                                        bgColor={colors.appColor}
+                                        textColor={colors.white}
+                                        textSize={hp('1.3')}
+                                        textWeight={"bold"}
+                                    />
+                                </View>
+                            </View>
 
-                <LineSeprator style={styles.listSecondSeprator} />
+                            <LineSeprator style={styles.listSecondSeprator} />
 
-                <View style={styles.challanUpperMainView}>
-                    <View style={{ flex: 0.5, justifyContent: 'center' }}>
-                        <Text style={styles.challanUpperText1}>{`Rs ${item.amount}/-`}</Text>
-                        <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
-                    </View>
-                    <View style={styles.challanLowerRightView}>
-                        <Button
-                            height={hp('4.5')}
-                            width={wp('38')}
-                            borderRadius={wp('1.5')}
-                            text="Get Challan Via Email"
-                            bgColor={colors.appColor}
-                            textColor={colors.white}
-                            textSize={hp('1.3')}
-                            textWeight={"bold"}
-                        />
-                    </View>
-                </View>
+                            <View style={styles.challanUpperMainView}>
+                                <View style={{ flex: 0.5, justifyContent: 'center' }}>
+                                    <Text style={styles.challanUpperText1}>{`Rs ${item.net_payable}/-`}</Text>
+                                    <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
+                                </View>
+                                <View style={styles.challanLowerRightView}>
+                                    <Button
+                                        height={hp('4.5')}
+                                        width={wp('38')}
+                                        borderRadius={wp('1.5')}
+                                        text="Get Challan Via Email"
+                                        bgColor={colors.appColor}
+                                        textColor={colors.white}
+                                        textSize={hp('1.3')}
+                                        textWeight={"bold"}
+                                    />
+                                </View>
+                            </View>
 
-            </View>
+                        </View>
+                        :
+                        null
+                }
+
+            </>
         );
     }
-
+    // const renderItemStatus  = ({item, index}) =>{
+    //     return()
+    // }
     const renderItemPastChallan = ({ item, index }) => {
+        console.log("itemHere", item);
+        // console.log("itemStatus", item.status);
         return (
-            <View style={styles.pastChallanMainView}>
+            <>
+                {
+                    item.status == 1 ?
+                        <View style={styles.pastChallanMainView}>
 
-                <View style={styles.pastChallanView}>
-                    <View style={styles.pastChallanUpperView}>
-                        <Text style={styles.pastChallanUpperText}>{`${item.paidDate}`}</Text>
-                    </View>
-                    <View style={styles.pastChallanLowerView}>
-                        <Text style={styles.pastChallanLowerText1}>{`Rs ${item.amount}`}</Text>
-                        <Text style={styles.pastChallanLowerText2}>{`${item.paidDate} - ${item.paidDate}`}</Text>
-                        <Text style={styles.pastChallanLowerText2}>{`Paid on ${item.paidDate}`}</Text>
-                    </View>
-                </View>
+                            <View style={styles.pastChallanView}>
+                                <View style={styles.pastChallanUpperView}>
+                                    <Text style={styles.pastChallanUpperText}>{`${item.paid_date}`}</Text>
+                                </View>
+                                <View style={styles.pastChallanLowerView}>
+                                    <Text style={styles.pastChallanLowerText1}>{`Rs ${item.net_payable}`}</Text>
+                                    <Text style={styles.pastChallanLowerText2}>{`${item.paid_date} - ${item.paid_date}`}</Text>
+                                    <Text style={styles.pastChallanLowerText2}>{`Paid on ${item.paid_date}`}</Text>
+                                </View>
+                            </View>
 
-                <LineSeprator style={styles.listSecondSeprator} />
-            </View>
+                            <LineSeprator style={styles.listSecondSeprator} />
+                        </View>
+                        :
+                        null
+                }
+            </>
+
         );
     }
+
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Platform.OS === "android" ? colors.white : colors.white }}>
 
             <StatusBar barStyle={'default'} backgroundColor={"#606060"} />
 
-            <MainHeader
-                onPressRightImg={() => navigation.goBack()}
-                topLeftImg={"backarrow"}
-                text={"Challans"}
-                stuName={"Azaan Ali"}
-                stuNumber={"170838"}
-                campName={"Canal side Campus"}
-                className={"Class 3 - Red"}
-                stuImage={"student"}
-                stuStatus={"On-Roll"}
-            />
+{childDatahere?.posts?.result?.children.length > 0 && (
+        <MainHeader
+          onPressRightImg={() => navigation.goBack()}
+          topLeftImg={'menu'}
+          text={'Student Profile'}
+          data={childDatahere?.posts?.result?.children}
+        />
+      )}
 
             <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: colors.white, marginVertical: hp(2) }}
                 refreshControl={
@@ -155,26 +209,36 @@ const Challans = () => {
 
 
                 <View style={{ marginTop: hp('5') }}>
-                    <FlatListItem
-                        data={payableChallans}
-                        renderItem={renderItem}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
+                    {feeChallanHere?.posts?.result?.feechallan?.length > 0 &&
+                        <FlatListItem
+                            data={feeChallanHere.posts.result.feechallan}
+                            renderItem={renderItem}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
+                    }
 
                 </View>
 
-                <View style={{ alignItems: 'center', marginVertical: hp('2') }}>
-                    <Button
-                        height={hp('4.5')}
-                        width={wp('35')}
-                        borderRadius={wp('1.5')}
-                        text="Pay Online"
-                        bgColor={colors.appColor}
-                        textColor={colors.white}
-                        textSize={hp('1.5')}
-                        textWeight={"bold"}
-                    />
-                </View>
+                {
+                    payOnlineState ?
+                        <View style={{ alignItems: 'center', marginVertical: hp('2') }}>
+                            <Button
+                                height={hp('4.5')}
+                                width={wp('35')}
+                                borderRadius={wp('1.5')}
+                                text="Pay Online"
+                                bgColor={colors.appColor}
+                                textColor={colors.white}
+                                textSize={hp('1.5')}
+                                textWeight={"bold"}
+                            />
+                        </View>
+                        :
+                        null
+
+                }
+
+
 
                 <View style={{ marginTop: hp('2') }}>
 
@@ -184,11 +248,15 @@ const Challans = () => {
                     />
                     <LineSeprator style={styles.listSepratorPast} />
 
-                    <FlatListItem
-                        data={paidChallans}
-                        renderItem={renderItemPastChallan}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
+                    {feeChallanHere?.posts?.result?.feechallan?.length > 0 &&
+                        <FlatListItem
+                            data={feeChallanHere.posts.result.feechallan
+                            }
+                            renderItem={renderItemPastChallan}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
+
+                    }
 
                 </View>
 

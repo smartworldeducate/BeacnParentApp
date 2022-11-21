@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, ScrollView, RefreshControl, StatusBar, StyleSheet, View, Text, Image, TouchableOpacity, Platform } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { useNavigation } from '@react-navigation/native';
@@ -12,15 +12,22 @@ import LineSeprator from '../Components/LineSeprator/LineSeprator';
 import Button from '../Components/Button/Button';
 import AssessmentReportModal from '../Components/Modal/AssessmentReportModal';
 import ViewReportModal from '../Components/Modal/ViewReportModal';
+import { getAssessment } from '../Redux/Features/Assessments/assessment';
+import { useDispatch, useSelector } from 'react-redux';
+import { logProfileData } from 'react-native-calendars/src/Profiler';
+
 
 
 const Assessment = () => {
 
+    const dispatch = useDispatch();
+    const assessmentHere = useSelector(state => state.assessment);
+    const childDatahere = useSelector(state =>state.children)
     const navigation = useNavigation();
     const [refreshing, setRefreshing] = React.useState(false);
 
     const [dateFrom, setDateFrom] = useState();
-    const [dateTo, setDateTo] = useState();
+    // const [dateTo, setDateTo] = useState();
     const [stdSection, setStdSection] = useState();
     const [campus, setCampus] = useState();
 
@@ -45,6 +52,15 @@ const Assessment = () => {
             console.log("Clear")
         }
     }
+
+    useEffect(() => {
+        dispatch(getAssessment(childDatahere?.posts?.result?.children[0]?.system_id));
+        // setPayablesChallans(feeChallanHere);
+        // if (feeChallanHere) {
+        //     setPaidChallans(feeChallanHere);
+        //     setPayablesChallans(feeChallanHere)
+        // }
+    }, [])
 
     const [assessmentData, setAssessmentData] = useState([
         {
@@ -106,15 +122,15 @@ const Assessment = () => {
     }
 
     const onPressViewReport = ({ item }) => {
-        setDateFrom(item.dateFrom);
-        setDateTo(item.dateTo);
-        setStdSection(item.assessmentReport.section);
-        setCampus(item.assessmentReport.campus);
-        setHeadRemarksDetails(item.assessmentReport.schoolHeadRemarks);
-        setClassRemarksDetails(item.assessmentReport.classTeacherRemarks);
+        setDateFrom(assessmentHere.posts?.result?.gradebook?.class_info[0]?.acad_year_title);
+        // setDateTo(assessmentHere.posts?.result?.gradebook.class_info[0].acad_year_title);
+        setStdSection(assessmentHere?.posts?.result?.gradebook?.class_info[1]?.terms[0]?.section_name);
+        setCampus(assessmentHere?.posts?.result?.gradebook?.class_info[1]?.terms[0]?.branch_name);
+        setHeadRemarksDetails(assessmentHere.posts?.result?.gradebook?.class_info[1]?.terms[0]?.school_head_remarks);
+        setClassRemarksDetails(assessmentHere.posts?.result?.gradebook?.class_info[1]?.terms[0]?.class_teacher_remarks);
 
-        setAchievements(item.assessmentReport.achievements);
-        setSelfAssessment(item.assessmentReport.selfAssessment);
+        setAchievements(assessmentHere.posts?.result?.gradebook?.class_info[1]?.terms[0]?.achievements);
+        setSelfAssessment(assessmentHere.posts?.result?.gradebook?.class_info[1]?.terms[0]?.self_assessment);
         onPressModal();
     }
 
@@ -192,8 +208,8 @@ const Assessment = () => {
                 <View style={styles.bottomRowView}>
 
                     <View style={{ flex: item.assessment ? 0.65 : 1, justifyContent: 'center', paddingHorizontal: wp('1.5') }}>
-                        <Text style={styles.sectionText}>{`${item.assessment ? `Section: ${item.assessmentReport.section}` : "No Assessment has been uploaded yet."}`}</Text>
-                        <Text style={styles.campusText}>{`${item.assessment ? item.assessmentReport.campus : ''}`}</Text>
+                        <Text style={styles.sectionText}>{`${item.assessment ? `Section: ${assessmentHere?.posts?.result?.gradebook?.class_info[1]?.terms[0]?.section_name }` : "No Assessment has been uploaded yet."}`}</Text>
+                        <Text style={styles.campusText}>{`${item.assessment ? assessmentHere?.posts?.result?.gradebook?.class_info[0]?.acad_year_title : ''}`}</Text>
                     </View>
 
                     {
@@ -216,10 +232,10 @@ const Assessment = () => {
                         modalVisible={modalVisible}
                         onPressModal={onPressModal}
                         reportQuatar={"Mid Year Report"}
-                        assessmentYear={`${dateFrom} - ${dateTo}`}
+                        assessmentYear={`${dateFrom}`}
                         stdClass={stdSection}
                         campus={campus}
-                        termAttendence={`Term Attendence: 73 / 92`}
+                        termAttendence={`Attendance = ${assessmentHere.posts?.result?.gradebook?.class_info[1]?.terms[0]?.attendance}/${assessmentHere.posts?.result?.gradebook?.class_info[1]?.terms[0]?.days_out_of}`}
                         text1={headRemarksDetails}
                         text2={classRemarksDetails}
                         text3={achievements}
@@ -241,17 +257,14 @@ const Assessment = () => {
         <SafeAreaView style={{ flex: 1, backgroundColor: Platform.OS === "android" ? colors.white : colors.white }}>
             <StatusBar barStyle={'default'} backgroundColor={"#606060"} />
 
-            <MainHeader
-                onPressRightImg={() => navigation.goBack()}
-                topLeftImg={"backarrow"}
-                text={"Assessment"}
-                stuName={"Azaan Ali"}
-                stuNumber={"170838"}
-                campName={"Canal side Campus"}
-                className={"Class 3 - Red"}
-                stuImage={"student"}
-                stuStatus={"On-Roll"}
-            />
+            {childDatahere?.posts?.result?.children.length > 0 && (
+        <MainHeader
+          onPressRightImg={() => navigation.goBack()}
+          topLeftImg={"backarrow"}
+          text={'Assessment'}
+          data={childDatahere?.posts?.result?.children}
+        />
+      )}
 
             <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: colors.white, marginVertical: hp(2) }}
                 refreshControl={
@@ -280,10 +293,10 @@ const Assessment = () => {
                         data={assessmentData}
                         renderItem={renderItem}
                         keyExtractor={(item, index) => index.toString()}
+                        
                     />
 
                 </View>
-
             </ScrollView>
         </SafeAreaView>
     );

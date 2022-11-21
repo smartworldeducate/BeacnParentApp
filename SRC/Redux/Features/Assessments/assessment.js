@@ -7,9 +7,10 @@ var initialState = {
     isLoading: false,
     error: ''
 }
-export const getChild = createAsyncThunk("getChild", async (values) => {
+// sms_number: "03164025665"
+export const getAssessment = createAsyncThunk("getAssessment", async (values) => {
     return axios
-        .post(`${APIS.getChildData}`, { sms_number: values }, {
+        .post(`${APIS.Assessment}`, { system_id: values }, {
             headers: {
                 'api_key': 'X5Ne0km7852Q1ykny9FfcIK5y9kVV5v6',
                 'api_secret': 'Q1X5NeknkyV5v6Vkm78y9FfcI0K5y952',
@@ -19,23 +20,23 @@ export const getChild = createAsyncThunk("getChild", async (values) => {
 })
 
 
-const childSlice = createSlice({
+const assessmentSlice = createSlice({
     name: 'posts',
     initialState,
     extraReducers: {
-        [getChild.pending]: (state, action) => {
+        [getAssessment.pending]: (state, action) => {
             state.isLoading = true;
         },
-        [getChild.fulfilled]: (state, action) => {
+        [getAssessment.fulfilled]: (state, action) => {
             state.isLoading = false;
             state.posts = action.payload;
             state.error = '';
         },
-        [getChild.rejected]: (state, action) => {
+        [getAssessment.rejected]: (state, action) => {
             state.isLoading = false;
             state.error = action.error.message;
         }
     }
 })
 
-export default childSlice.reducer;
+export default assessmentSlice.reducer;

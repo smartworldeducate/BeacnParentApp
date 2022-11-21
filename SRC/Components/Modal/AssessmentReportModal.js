@@ -5,9 +5,15 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import colors from '../../Styles/colors';
 import fontFamily from "../../Styles/fontFamily";
 import FlatListItem from '../FlatList/FlatList';
+import { useDispatch, useSelector } from 'react-redux';
 import MainHeader from '../Header/MainHeader';
+import { useNavigation } from '@react-navigation/native';
+
 
 const AssessmentReportModal = ({ modalVisible, onPressModal, reportQuatar, assessmentYear, stdClass, campus, termAttendence, stdSubjectsResults, renderSubjectsItem, text1, text2, text3, text4 }) => {
+    const childDatahere = useSelector(state =>state.children)
+    const navigation = useNavigation();
+
 
     return (
         <Modal
@@ -20,17 +26,14 @@ const AssessmentReportModal = ({ modalVisible, onPressModal, reportQuatar, asses
 
                 <StatusBar barStyle={'default'} backgroundColor={"#606060"} />
 
-                <MainHeader
-                    onPressRightImg={onPressModal}
-                    topLeftImg={"backarrow"}
-                    text={reportQuatar}
-                    stuName={"Azaan Ali"}
-                    stuNumber={"170838"}
-                    campName={"Canal side Campus"}
-                    className={"Class 3 - Red"}
-                    stuImage={"student"}
-                    stuStatus={"On-Roll"}
-                />
+                {childDatahere?.posts?.result?.children.length > 0 && (
+        <MainHeader
+        onPressRightImg={onPressModal}
+        topLeftImg={"backarrow"}
+          text={'Mid Year Report'}
+          data={childDatahere?.posts?.result?.children}
+        />
+      )}
 
                 <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: colors.white, marginVertical: hp(2) }}>
 
