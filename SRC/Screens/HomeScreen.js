@@ -17,7 +17,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {useNavigation} from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import colors from '../Styles/colors';
 import MainHeader from '../Components/Header/MainHeader';
 import HomeCentralView from '../Components/HomeCentralView/HomeCentralView';
@@ -43,6 +43,7 @@ const HomeScreen = () => {
   const [date, setDate] = useState();
   const [text, setText] = useState();
   const [type, setType] = useState();
+  const [num, setNum] = useState();
   const [to, setTo] = useState();
   const [sentBy, setSentBy] = useState();
   const [details, setDetails] = useState();
@@ -57,7 +58,6 @@ const HomeScreen = () => {
   const onPressModal = () => {
     setModalVisible(!modalVisible);
   };
-
 
   const [notificationData, setNotificationData] = useState([
     {
@@ -185,10 +185,24 @@ const HomeScreen = () => {
   const [timeOut, setTimeOut] = useState(false);
 
   useEffect(() => {
-    if (mobile?.posts?.result?.sms_number != undefined) {
-      dispatch(getChild(mobile?.posts?.result?.sms_number));
+    AsyncStorage.setItem('token', 'token');
+    getNumber();
+    if (mobile?.posts?.result?.sms_number != undefined || num != '') {
+      if (mobile?.posts?.result?.sms_number != undefined) {
+        dispatch(getChild(mobile?.posts?.result?.sms_number));
+      } else {
+        dispatch(getChild(num));
+      }
     }
-  }, [mobile?.posts]);
+  }, [mobile?.posts, num]);
+  const getNumber = async () => {
+    const number = await AsyncStorage.getItem('number');
+    if (number != undefined) {
+      setNum(number);
+    } else {
+      setNum('');
+    }
+  };
 
   const renderItem = ({item, index}) => {
     return (
@@ -247,102 +261,96 @@ const HomeScreen = () => {
       {!childDatahere?.posts?.result?.children.length > 0 ? (
         <Loader></Loader>
       ) : (
-        <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: colors.white, marginVertical: hp(2) }}
-                refreshControl={
-                    <RefreshControl
-                        refreshing={refreshing}
-                        onRefresh={onRefresh}
-                        // we can implement multiple colors in the form of array 
-                        colors={[colors.fbColor, colors.paratGreen, colors.red]}
-                        // background color of the refresh indicator
-                        progressBackgroundColor={colors.silverGrey}
-                        tintColor={colors.appColor}
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            backgroundColor: colors.white,
+            marginVertical: hp(2),
+          }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              colors={[colors.fbColor, colors.paratGreen, colors.red]}
+              progressBackgroundColor={colors.silverGrey}
+              tintColor={colors.appColor}
+            />
+          }>
+          <View style={styles.mainCentral}>
+            <View style={styles.centralView}>
+              <HomeCentralView
+                onPress={() => handleNavigate('Attendance')}
+                img={'attendence'}
+                text={'Attendance'}
+              />
+            </View>
 
-                    // title={"loading"}
-                    // titleColor={colors.white}
+            <View style={styles.centralView}>
+              <HomeCentralView
+                onPress={() => handleNavigate('Assessment')}
+                img={'assesment'}
+                text={'Assessment'}
+              />
+            </View>
 
-                    // size between 0 to 1
-                    // size={"large"}
-                    />
-                }
-            >
+            <View style={styles.centralView}>
+              <HomeCentralView
+                onPress={() => handleNavigate('Challans')}
+                img={'challan'}
+                text={'Challans'}
+              />
+            </View>
+          </View>
+          <LeftRightImgText
+            onPressRight={() =>
+              handleNavigate('ViewAllNotifications', false, {
+                notificationDataParam: notificationData,
+              })
+            }
+            leftText={'Notifications'}
+            rightText={'View All'}
+            img={'rightarrow'}
+            marginHorizontal={wp('8')}
+          />
 
-                <View style={styles.mainCentral}>
-                    <View style={styles.centralView}>
-                        <HomeCentralView
-                            onPress={() => handleNavigate("Attendance")}
-                            img={"attendence"}
-                            text={"Attendance"}
-                        />
-                    </View>
+          <LineSeprator style={styles.lineSeprator} />
+          {/* <Loader ></Loader> */}
+          <FlatListItem
+            data={notificationData}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            ListEmptyComponent={
+              <ListEmptyComponent
+                img={'empty'}
+                styleImg={styles.styleImg}
+                style={styles.listEmptyComponent}
+                text={'Right Now there is no notification'}
+              />
+            }
+            initialNumToRender={8}
+            ItemSeparatorComponent={
+              <LineSeprator style={styles.listSeprator} />
+            }
+          />
 
-                    <View style={styles.centralView}>
-                        <HomeCentralView
-                            onPress={() => handleNavigate("Assessment")}
-                            img={"assesment"}
-                            text={"Assessment"}
-                        />
-                    </View>
+          <View style={styles.bottomView}></View>
 
-                    <View style={styles.centralView}>
-                        <HomeCentralView
-                            onPress={() => handleNavigate("Challans")}
-                            img={"challan"}
-                            text={"Challans"}
-                        />
-                    </View>
-                </View>
+          <ModalNotification
+            modalVisible={modalVisible}
+            onPressModal={onPressModal}
+            modalUpperFlex={0.4}
+            modalLowerFlex={0.6}
+            to={to}
+            details={details}
+            sentBy={sentBy}
+          />
 
-                <LeftRightImgText
-                    onPressRight={() => handleNavigate("ViewAllNotifications", false, { notificationDataParam: notificationData })}
-                    leftText={"Notifications"}
-                    rightText={"View All"}
-                    img={"rightarrow"}
-                    marginHorizontal={wp('8')}
-                />
-
-                <LineSeprator
-                    style={styles.lineSeprator}
-                />
-
-                <FlatListItem
-                    data={notificationData}
-                    renderItem={renderItem}
-                    keyExtractor={(item, index) => index.toString()}
-                    ListEmptyComponent={
-                        <ListEmptyComponent
-                            img={"empty"}
-                            styleImg={styles.styleImg}
-                            style={styles.listEmptyComponent}
-                            text={"Right Now there is no notification"}
-                        />
-                    }
-                    initialNumToRender={8}
-                    ItemSeparatorComponent={<LineSeprator style={styles.listSeprator} />}
-                />
-
-                <View style={styles.bottomView}>
-                </View>
-
-                <ModalNotification
-                    modalVisible={modalVisible}
-                    onPressModal={onPressModal}
-                    modalUpperFlex={0.4}
-                    modalLowerFlex={0.6}
-                    to={to}
-                    details={details}
-                    sentBy={sentBy}
-                />
-
-                <View style={{ marginBottom: hp('5') }}></View>
-
-
-            </ScrollView>
+          <View style={{marginBottom: hp('5')}}></View>
+        </ScrollView>
       )}
-        </SafeAreaView >
-    );
-}
-
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   mainCentral: {

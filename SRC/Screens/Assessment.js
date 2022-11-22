@@ -235,7 +235,7 @@ const Assessment = () => {
                         assessmentYear={`${dateFrom}`}
                         stdClass={stdSection}
                         campus={campus}
-                        termAttendence={`Attendance = ${assessmentHere.posts?.result?.gradebook?.class_info[1]?.terms[0]?.attendance}/${assessmentHere.posts?.result?.gradebook?.class_info[1]?.terms[0]?.days_out_of}`}
+                        termAttendence={`Attendance = ${assessmentHere?.posts?.result?.gradebook?.class_info[1]?.terms[0]?.attendance}/${assessmentHere?.posts?.result?.gradebook?.class_info[1]?.terms[0]?.days_out_of}`}
                         text1={headRemarksDetails}
                         text2={classRemarksDetails}
                         text3={achievements}

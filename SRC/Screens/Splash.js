@@ -1,37 +1,43 @@
-import React from 'react';
-import { StyleSheet, ImageBackground } from 'react-native';
-import { useLinkProps, useNavigation, CommonActions } from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, ImageBackground} from 'react-native';
+import {
+  useLinkProps,
+  useNavigation,
+  CommonActions,
+} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Splash = () => {
-
-    const navigation = useNavigation();
-    const handleNavigate = (routeName, clearStack, params) => {
-        navigation.navigate(routeName, params);
-        if (clearStack) {
-            console.log("Clear")
-        }
-
+  const [intialRoute, setIntialRoute] = useState('');
+  const navigation = useNavigation();
+  useEffect(() => {
+    getToken();
+  }, []);
+  useEffect(() => {
+    if (intialRoute != '') {
+      handleNavigate(intialRoute);
     }
+  }, [intialRoute]);
+  const handleNavigate = routeName => {
+    navigation.navigate(routeName);
+  };
+  const getToken = async () => {
+    const token = await AsyncStorage.getItem('token');
+    console.log(token, 'token');
+    if (token != undefined) {
+      setIntialRoute('HomeScreen');
+    } else {
+      setIntialRoute('MobileNumperEnter');
+    }
+  };
 
-    setTimeout(() => {
-        navigation.dispatch(
-            CommonActions.reset({
-                index: 1,
-                routes: [{ name: 'MobileNumperEnter' }],
-            }),
-        );
-        handleNavigate("MobileNumperEnter")
-    }, 4000)
+  return (
+    <ImageBackground
+      source={{uri: 'mainsplash'}}
+      style={{flex: 1}}
+      resizeMode={'stretch'}></ImageBackground>
+  );
+};
 
-    return (
-        <ImageBackground
-            source={{ uri: "mainsplash" }}
-            style={{ flex: 1 }}
-            resizeMode={"stretch"}>
-        </ImageBackground>
-    );
-}
-
-const styles = StyleSheet.create({
-});
 export default Splash;
+const styles = StyleSheet.create({});
