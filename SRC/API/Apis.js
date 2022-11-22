@@ -19,7 +19,8 @@ export const APIS = {
     OTPCodeSignUpAPI: BASE_URL + 'verify',
     getChildData: BASE_URL + 'children',
     FeeChallan: BASE_URL + 'feechallan',
-    Assessment: BASE_URL + 'gradebook'
+    Assessment: BASE_URL + 'gradebook',
+    CalanderAPI: BASE_URL + 'attendance'
 
 
     // RegisterSignUp: BASE_URL + 'Authenticate/RegisterClient',

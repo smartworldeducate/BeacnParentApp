@@ -18,6 +18,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getChallan} from '../../Redux/Features/getChallans/challans';
 import Loader from '../Loader/Loader';
 import { getAssessment } from '../../Redux/Features/Assessments/assessment';
+import { calanderAction } from "../../Redux/Features/CalanderKit/CalanderKit";
+
 
 const MainHeader = ({
   onPressRightImg,
@@ -127,6 +129,7 @@ const MainHeader = ({
           onIndexChanged={index => {
             dispatch(getChallan(data[index]?.system_id));
             dispatch(getAssessment(data[index]?.system_id))
+            dispatch(calanderAction(data[index]?.system_id))
           }}>
           {data?.length > 0 &&
             data?.map(item => {

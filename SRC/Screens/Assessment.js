@@ -22,6 +22,9 @@ const Assessment = () => {
 
     const dispatch = useDispatch();
     const assessmentHere = useSelector(state => state.assessment);
+    // console.log("assessmentHere", assessmentHere);
+    // console.log("llll", assessmentHere?.posts?.result?.gradebook?.class_info);
+
     const childDatahere = useSelector(state =>state.children)
     const navigation = useNavigation();
     const [refreshing, setRefreshing] = React.useState(false);
@@ -52,6 +55,8 @@ const Assessment = () => {
             console.log("Clear")
         }
     }
+
+    // console.log("assessmentHere", assessmentHere);
 
     useEffect(() => {
         dispatch(getAssessment(childDatahere?.posts?.result?.children[0]?.system_id));
@@ -182,12 +187,13 @@ const Assessment = () => {
     }
 
     const renderItem = ({ item, index }) => {
+        console.log("itemAssessment", item);
         return (
             <View style={styles.renderMainView}>
                 <View View style={styles.mainInnerView}>
 
                     <View style={styles.innerHeaderView}>
-                        <Text style={styles.datesText}>{`${item.class} (${item.dateFrom} - ${item.dateTo})`}</Text>
+                        <Text style={styles.datesText}>{`${item?.class_name} ${item?.acad_year_title}`}</Text>
                     </View>
 
                     {
@@ -208,8 +214,8 @@ const Assessment = () => {
                 <View style={styles.bottomRowView}>
 
                     <View style={{ flex: item.assessment ? 0.65 : 1, justifyContent: 'center', paddingHorizontal: wp('1.5') }}>
-                        <Text style={styles.sectionText}>{`${item.assessment ? `Section: ${assessmentHere?.posts?.result?.gradebook?.class_info[1]?.terms[0]?.section_name }` : "No Assessment has been uploaded yet."}`}</Text>
-                        <Text style={styles.campusText}>{`${item.assessment ? assessmentHere?.posts?.result?.gradebook?.class_info[0]?.acad_year_title : ''}`}</Text>
+                        <Text style={styles.sectionText}>{`${item.assessment ? `Section: ${item?.class_name}` : "No Assessment has been uploaded yet."}`}</Text>
+                        <Text style={styles.campusText}>{`${item.assessment ? item?.acad_year_title : ''}`}</Text>
                     </View>
 
                     {
@@ -290,7 +296,7 @@ const Assessment = () => {
 
                 <View style={{ marginHorizontal: wp('8'), marginVertical: hp('2') }}>
                     <FlatListItem
-                        data={assessmentData}
+                        data={assessmentHere?.posts?.result?.gradebook?.class_info}
                         renderItem={renderItem}
                         keyExtractor={(item, index) => index.toString()}
                         
