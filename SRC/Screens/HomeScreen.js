@@ -35,8 +35,7 @@ import {useDispatch, useSelector} from 'react-redux';
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const childDatahere = useSelector(state => state.children);
-  const mobile = useSelector(state => state.OTPCodeStore);
-
+  const mobile = useSelector(state => state.OTP);
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = React.useState(false);
   const [modalVisible, setModalVisible] = useState(false);
