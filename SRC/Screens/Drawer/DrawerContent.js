@@ -1,100 +1,129 @@
-import React, { useState } from 'react';
-import { SafeAreaView, RefreshControl, StatusBar, StyleSheet, View, Text, Image, TouchableOpacity, Platform } from 'react-native';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import React, {useState} from 'react';
+import {
+  SafeAreaView,
+  RefreshControl,
+  StatusBar,
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import DrawerHeader from '../../Components/Drawer/DrawerHeader';
 import DrawerList from '../../Components/Drawer/DrawerList';
 import colors from '../../Styles/colors';
 
-const DrawerContent = ({ }) => {
+import {useDispatch, useSelector} from 'react-redux';
+import {getNotifications} from '../../Redux/Features/NotificationsKit/NotificationsKit';
 
-    const navigation = useNavigation();
+const DrawerContent = ({}) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const notificationsHere = useSelector(state => state.notifications);
 
-    return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: Platform.OS === "android" ? colors.white : colors.white }}>
-            <View style={{ paddingLeft: wp('3')}}>
+  // console.log('notificationsFromDrawer', notificationsHere);
 
-                <View style={{ marginTop: hp('2') }}>
-                    <DrawerHeader
-                        leftText={"Menu"}
-                        rightImg={"menublue"}
-                    // onPressRightImg={() => navigation.closeDrawer()}
-                    />
-                </View>
+  const handleNavigate = (routeName, clearStack, params) => {
+    navigation.navigate(routeName, params);
+    if (clearStack) {
+      console.log('Clear');
+    }
+  };
 
-                <View style={{ marginVertical: hp('2') }}>
-                    <DrawerList
-                        leftImg={"home"}
-                        rightText={"Home"}
-                        onPress={() => navigation.navigate("HomeDrawer")}
-                    />
+  return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor:
+          Platform.OS === 'android' ? colors.white : colors.white,
+      }}>
+      <View style={{paddingLeft: wp('3')}}>
+        <View style={{marginTop: hp('2')}}>
+          <DrawerHeader
+            leftText={'Menu'}
+            rightImg={'menublue'}
+            // onPressRightImg={() => navigation.closeDrawer()}
+          />
+        </View>
 
-                    <DrawerList
-                        leftImg={"attendancegrey"}
-                        rightText={"Attendance"}
-                        onPress={() => navigation.navigate("AttendanceDrawer")}
-                    />
+        <View style={{marginVertical: hp('2')}}>
+          <DrawerList
+            leftImg={'home'}
+            rightText={'Home'}
+            onPress={() => navigation.navigate('HomeDrawer')}
+          />
 
-                    <DrawerList
-                        leftImg={"attendancegrey"}
-                        rightText={"Assessments"}
-                        onPress={() => navigation.navigate("AssessmentDrawer")}
-                    />
+          <DrawerList
+            leftImg={'attendancegrey'}
+            rightText={'Attendance'}
+            onPress={() => navigation.navigate('AttendanceDrawer')}
+          />
 
-                    <DrawerList
-                        leftImg={"challangrey"}
-                        rightText={"Challans"}
-                        onPress={() => navigation.navigate("ChallansDrawer")}
-                    />
+          <DrawerList
+            leftImg={'attendancegrey'}
+            rightText={'Assessments'}
+            onPress={() => navigation.navigate('AssessmentDrawer')}
+          />
 
-                    <DrawerList
-                        leftImg={"parentsprofile"}
-                        rightText={"Parents Profile"}
-                        onPress={() => navigation.navigate("ParentProfileDrawer")}
-                    />
+          <DrawerList
+            leftImg={'challangrey'}
+            rightText={'Challans'}
+            onPress={() => navigation.navigate('ChallansDrawer')}
+          />
 
-                    <DrawerList
-                        leftImg={"parentsprofile"}
-                        rightText={"Withdrawal Request"}
-                        onPress={() => navigation.navigate("WithdrawlRequestDrawer")}
-                    />
+          <DrawerList
+            leftImg={'parentsprofile'}
+            rightText={'Parents Profile'}
+            onPress={() => navigation.navigate('ParentProfileDrawer')}
+          />
 
-                    {/* <DrawerList
-                    leftImg={"attendancegrey"}
-                    rightText={"Notifications"}
-                    onPress={()=>navigation.navigate("ViewAllNotifications")}
-                /> */}
+          <DrawerList
+            leftImg={'parentsprofile'}
+            rightText={'Withdrawal Request'}
+            onPress={() => navigation.navigate('WithdrawlRequestDrawer')}
+          />
 
-                    <DrawerList
-                        leftImg={"challangrey"}
-                        rightText={"Contact Us"}
-                        onPress={() => navigation.navigate("ContactUsDrawer")}
-                    />
+          <DrawerList
+            leftImg={'attendancegrey'}
+            rightText={'Notifications'}
+            onPress={() =>
+              handleNavigate('ViewAllNotifications', false, {
+                notificationDataParam:
+                  notificationsHere?.notifications?.notifications,
+              })
+            }
+          />
 
-                    <DrawerList
-                        leftImg={"parentsprofile"}
-                        rightText={"Policies"}
-                        onPress={() => navigation.navigate("AllPoliciesDrawer")}
-                    />
+          <DrawerList
+            leftImg={'challangrey'}
+            rightText={'Contact Us'}
+            onPress={() => navigation.navigate('ContactUsDrawer')}
+          />
 
-                    <DrawerList
-                        leftImg={"logoutgrey"}
-                        rightText={"Logout"}
-                    // onPress={()=>navigation.navigate("")}
-                    />
-                </View>
+          <DrawerList
+            leftImg={'parentsprofile'}
+            rightText={'Policies'}
+            onPress={() => navigation.navigate('AllPoliciesDrawer')}
+          />
 
+          <DrawerList
+            leftImg={'logoutgrey'}
+            rightText={'Logout'}
+            // onPress={()=>navigation.navigate("")}
+          />
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-
-            </View>
-        </SafeAreaView >
-    )
-}
-
-
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});
 
 export default DrawerContent;

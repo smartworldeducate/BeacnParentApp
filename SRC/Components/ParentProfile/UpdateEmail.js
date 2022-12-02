@@ -29,6 +29,7 @@ const UpdateEmail = ({
   onChangeEmail,
   text1,
   text2,
+  onPressUpdateBtn,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
   const onPressChecked = () => {
@@ -95,6 +96,7 @@ const UpdateEmail = ({
 
             <View style={styles.textView}>
               <Button
+                onPress={onPressUpdateBtn}
                 height={hp('4.5')}
                 borderRadius={wp('1.5')}
                 text="Update"

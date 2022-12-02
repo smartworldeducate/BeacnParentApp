@@ -6,6 +6,7 @@ var initialState = {
   posts: '',
   isLoading: false,
   error: '',
+  message: '',
 };
 // sms_number: "03164025665"
 export const parentProfileUpdate = createAsyncThunk(
@@ -38,6 +39,7 @@ const parentProfileUpdateSlice = createSlice({
     [parentProfileUpdate.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.error.message;
+      state.message = action.payload.message;
     },
   },
 });

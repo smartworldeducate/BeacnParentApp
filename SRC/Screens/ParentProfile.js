@@ -30,12 +30,18 @@ import UpdateContactNoModal from '../Components/ParentProfile/UpdateContactNoMod
 import UpdateEmail from '../Components/ParentProfile/UpdateEmail';
 import {useDispatch, useSelector} from 'react-redux';
 import {getGuardian} from '../Redux/Features/StudentGuardian/StudentGuardian';
+import {parentProfileUpdate} from '../Redux/Features/ParentProfileUpdate/ParentProfileUpdate';
 import Loader from '../Components/Loader/Loader';
 
 const ParentProfile = () => {
   const dispatch = useDispatch();
   const gurdians = useSelector(state => state.guardian);
+  console.log(gurdians, 'uamrbhadsadsa');
   const childDatahere = useSelector(state => state.children);
+  const parentProfileUpdateHere = useSelector(
+    state => state.UpdateParentsStore,
+  );
+  console.log('parentProfileUpdateHere', parentProfileUpdateHere.posts.message);
   //   console.log(
   //     childDatahere?.posts?.result?.children[0]?.guardians[0]?.NIC_NUMBER,
   //     'sdsdsddsds',
@@ -62,6 +68,10 @@ const ParentProfile = () => {
       ?.MOBILE_PHONE,
   );
 
+  const [fatherEmail, setFatherEmail] = useState(
+    gurdians?.posts?.result?.guardians[0]?.primary_e_mail,
+  );
+
   const onChangeName = val => {
     setInputName(val);
   };
@@ -70,16 +80,38 @@ const ParentProfile = () => {
     setInputCNIC(val);
   };
 
-  const [inputContact, setInputContact] = useState('');
+  // liveWorking
 
   const onChangeContact = val => {
     setCheckContact(val);
   };
 
-  const [inputEmail, setInputEmail] = useState('');
-  const onChangeEmail = val => {
-    setInputEmail(val);
+  // APIImpliments
+
+  const [fatherEmailValues, setFatherEmailValues] = useState({
+    system_id: '146660',
+    sms_number: '03046121456',
+    field_value: '',
+    field_name: '3',
+  });
+
+  const onChangeFatherEmail = val => {
+    setFatherEmailValues({...fatherEmailValues, field_value: val});
+    // console.log('inside', fatherEmailValues.field_value);
   };
+
+  // console.log('outside', fatherEmailValues.field_value);
+
+  const onPressUpdateFatherEmailBtn = () => {
+    console.log('myObj', fatherEmailValues);
+    dispatch(parentProfileUpdate(fatherEmailValues));
+    console.log('i will be here');
+  };
+
+  // const [inputEmail, setInputEmail] = useState('');
+  // const onChangeEmail = val => {
+  //   setInputEmail(val);
+  // };
 
   const [inputAddress, setInputAddress] = useState('');
 
@@ -326,14 +358,15 @@ const ParentProfile = () => {
           <UpdateEmail
             modalUpperFlex={0.3}
             modalLowerFlex={0.7}
-            inputEmail={gurdians?.posts?.result?.guardians[0]?.primary_e_mail}
-            onChangeEmail={onChangeEmail}
+            inputEmail={fatherEmailValues.field_value}
+            onChangeEmail={onChangeFatherEmail}
             text1={'Father Email Address'}
             text2={'Qasim.ali@bh.edu.pk'}
             modalVisible={emailAddressModal}
             headerTitle={"Update Father's Email Address"}
             onPressRightImg={onPressEmailAddressModal}
             onPressModal={onPressEmailAddressModal}
+            onPressUpdateBtn={onPressUpdateFatherEmailBtn}
           />
         )}
 

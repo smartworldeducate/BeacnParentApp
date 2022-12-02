@@ -8,6 +8,12 @@ import OTPSlice from './Features/PhoneNumberSignUp/EnterOTPSignUpKit';
 import assessmentReducer from './Features/Assessments/assessment';
 import guardianReducer from './Features/StudentGuardian/StudentGuardian';
 import ParentProfileUpdateReducer from './Features/ParentProfileUpdate/ParentProfileUpdate';
+import NotificationsReducer from './Features/NotificationsKit/NotificationsKit';
+import withDrawlReasonReducer from './Features/WithdrawlRequestKit/WithdrawalReasonKit';
+import withDrawlRequestReducer from './Features/WithdrawlRequestKit/WithdrawlRequest';
+import imageUploadReducer from './Features/ImageUploadKit/ImageUploadKit';
+import contactReducer from './Features/ContactKit/ContactKit';
+
 export const store = configureStore({
   reducer: {
     post: postSlice,
@@ -17,6 +23,11 @@ export const store = configureStore({
     calander: CalanderReducer,
     assessment: assessmentReducer,
     guardian: guardianReducer,
-    UpdateParentsInfo: ParentProfileUpdateReducer,
+    notifications: NotificationsReducer,
+    UpdateParentsStore: ParentProfileUpdateReducer,
+    imageUpload: imageUploadReducer,
+    withDrawlReasonStore: withDrawlReasonReducer,
+    withDrawlRequestStore: withDrawlRequestReducer,
+    contactStore: contactReducer,
   },
 });

@@ -34,8 +34,6 @@ const Assessment = () => {
   const dispatch = useDispatch();
   const assessmentHere = useSelector(state => state.assessment);
 
-  // console.log("llll", assessmentHere?.posts?.result?.gradebook?.class_info);
-
   const childDatahere = useSelector(state => state.children);
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = React.useState(false);

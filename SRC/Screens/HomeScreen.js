@@ -32,10 +32,20 @@ import Loader from '../Components/Loader/Loader';
 import {getChild} from '../Redux/Features/getChildData/children';
 import {useDispatch, useSelector} from 'react-redux';
 
+import {getNotifications} from '../Redux/Features/NotificationsKit/NotificationsKit';
+import moment from 'moment';
+import RenderHtml from 'react-native-render-html';
+import {useWindowDimensions} from 'react-native';
+import SingleLine from '../Components/SingleLine/SingleLine';
+
 const HomeScreen = () => {
+  const {width} = useWindowDimensions();
+
   const dispatch = useDispatch();
   const childDatahere = useSelector(state => state.children);
-  const mobile = useSelector(state => state.OTP);
+  const mobile = useSelector(state => state.OTPCodeStore);
+  const notificationsHere = useSelector(state => state.notifications);
+
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = React.useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -57,6 +67,16 @@ const HomeScreen = () => {
   const onPressModal = () => {
     setModalVisible(!modalVisible);
   };
+
+  useEffect(() => {
+    dispatch(
+      getNotifications(childDatahere?.posts?.result?.children[0]?.system_id),
+    );
+  }, [childDatahere]);
+
+  // console.log("notificationsHere", notificationsHere);
+  // console.log("notificationsHere", notificationsHere?.notifications?.notifications);
+  // console.log("childDataHere", childDatahere);
 
   const [notificationData, setNotificationData] = useState([
     {
@@ -204,14 +224,45 @@ const HomeScreen = () => {
   };
 
   const renderItem = ({item, index}) => {
+    // console.log("item", item);
+    var myDate1 = moment(item.date).format('D');
+    var myDate2 = moment(item.date).format('MMM');
     return (
       <View style={styles.listMainView}>
         <View style={styles.listLeftView}>
-          <Text>{item.date}</Text>
+          <Text
+            style={{
+              fontSize: hp('1.8'),
+              fontFamily: fontFamily.bold,
+              textAlign: 'center',
+              color: colors.grey,
+            }}>{`${myDate1}\n${myDate2}`}</Text>
         </View>
         <View style={styles.listCentralView}>
-          <Text style={styles.centalUpperText}>{item.text}</Text>
-          <Text style={styles.centalLowerText}>{item.type}</Text>
+          <SingleLine
+            text1={
+              item.title.includes(
+                '<br />',
+                '\n',
+                '\r',
+                '<a href="https://bit.ly/3Su5JMP" >https://bit.ly/3Su5JMP</a>',
+              ) ? (
+                <RenderHtml
+                  contentWidth={width}
+                  source={{html: index != 0 ? item.body : item.title}}
+                  defaultTextProps={
+                    {
+                      // numberOfLines: 1, ellipsizeMode: 'tail'
+                    }
+                  }
+                />
+              ) : (
+                item.title
+              )
+            }
+          />
+
+          <Text style={styles.centalLowerText}>{item.notification_type}</Text>
         </View>
         <TouchableOpacity
           onPress={() => onPressRightImg({item})}
@@ -227,12 +278,13 @@ const HomeScreen = () => {
   };
 
   const onPressRightImg = ({item}) => {
-    setDate(item.date);
-    setText(item.text);
-    setType(item.type);
-    setTo(item.to);
-    setSentBy(item.sentBy);
-    setDetails(item.details);
+    // setDate(item.date);
+    // setText(item.text);
+    // setType(item.type);
+    // setTo(item.to);
+    // setSentBy(item.sentBy);
+    // setDetails(item.details);
+    setDetails(item.body);
     onPressModal();
   };
 
@@ -303,7 +355,8 @@ const HomeScreen = () => {
           <LeftRightImgText
             onPressRight={() =>
               handleNavigate('ViewAllNotifications', false, {
-                notificationDataParam: notificationData,
+                notificationDataParam:
+                  notificationsHere?.notifications?.notifications,
               })
             }
             leftText={'Notifications'}
@@ -315,17 +368,17 @@ const HomeScreen = () => {
           <LineSeprator style={styles.lineSeprator} />
           {/* <Loader ></Loader> */}
           <FlatListItem
-            data={notificationData}
+            data={notificationsHere?.notifications?.notifications}
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}
-            ListEmptyComponent={
-              <ListEmptyComponent
-                img={'empty'}
-                styleImg={styles.styleImg}
-                style={styles.listEmptyComponent}
-                text={'Right Now there is no notification'}
-              />
-            }
+            // ListEmptyComponent={
+            //   <ListEmptyComponent
+            //     img={'empty'}
+            //     styleImg={styles.styleImg}
+            //     style={styles.listEmptyComponent}
+            //     text={'Right Now there is no notification'}
+            //   />
+            // }
             initialNumToRender={8}
             ItemSeparatorComponent={
               <LineSeprator style={styles.listSeprator} />
@@ -337,8 +390,8 @@ const HomeScreen = () => {
           <ModalNotification
             modalVisible={modalVisible}
             onPressModal={onPressModal}
-            modalUpperFlex={0.4}
-            modalLowerFlex={0.6}
+            modalUpperFlex={0.3}
+            modalLowerFlex={0.7}
             to={to}
             details={details}
             sentBy={sentBy}
@@ -392,13 +445,13 @@ const styles = StyleSheet.create({
     paddingLeft: wp('3'),
   },
   centalUpperText: {
-    fontSize: hp('1.6'),
+    fontSize: hp('1.85'),
     fontFamily: fontFamily.regular,
     color: colors.grey,
     lineHeight: hp('2.5'),
   },
   centalLowerText: {
-    fontSize: hp('1.6'),
+    fontSize: hp('2'),
     fontFamily: fontFamily.regular,
     color: colors.lightBlack,
     lineHeight: hp('2.5'),
@@ -406,7 +459,7 @@ const styles = StyleSheet.create({
   listRightView: {
     flex: 0.1,
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   listRightImg: {
     height: hp('1.5'),

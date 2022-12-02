@@ -27,11 +27,12 @@ import {
   createPost,
 } from '../Redux/Features/PhoneNumberSignUp/PhoneNumberSignUp';
 import Toast from 'react-native-toast-message';
+import Loader from '../Components/Loader/Loader';
 
 const MobileNumperEnter = () => {
   const dispatch = useDispatch();
   const post = useSelector(state => state.post);
-  console.log(post,'post')
+  console.log(post, 'post');
   const [inputContactState, setInputContactState] = useState('');
   const [values, setValues] = useState({sms_number: ''});
   const [deviceType, setDeviceType] = useState('android');
@@ -90,6 +91,7 @@ const MobileNumperEnter = () => {
       style={{flex: 1}}
       resizeMode={'stretch'}>
       <Toast />
+      {post?.isLoading && <Loader></Loader>}
       <View style={styles.mainTopView}></View>
       <View style={styles.contactNumberMainView}>
         <View style={styles.contactTextInputView}>
@@ -114,7 +116,7 @@ const MobileNumperEnter = () => {
 
         <View style={styles.textView}>
           <Button
-            // disabled={buttonState}
+            // disabled={buttwithDrawlRequestHereonState}
             onPress={onPressSendCode}
             height={hp('4.5')}
             borderRadius={wp('1.5')}
