@@ -119,7 +119,7 @@ const Step3 = ({onPressBack, onPressNext}) => {
     //     console.log("e", e.question_id);
     // }));
     // console.log("itemReasonId", item.reason_id);
-    setDisableBtn(false);
+    // setDisableBtn(false);
     setWdraw_reason_id(item.reason_id);
     setSelectReason(item.reason_name);
     setWithdrawReasonModal(!withdrawReasonModal);
@@ -130,10 +130,11 @@ const Step3 = ({onPressBack, onPressNext}) => {
   };
 
   // console.log("questions", questions);
-  console.log('disableBtn', disableBtn);
+  // console.log("disableBtn", disableBtn);
 
   const questionsRenderInput = ({item, index}) => {
     // console.log("itemQuestionsId's", item);
+    // console.log("questionsIndex", index);
 
     return (
       <View
@@ -155,21 +156,10 @@ const Step3 = ({onPressBack, onPressNext}) => {
           {item.question_name}
         </Text>
 
-        {questions?.length === 1 && (
-          <TextInputCustom
-            value={question1}
-            onChangeText={onChangeQuestion1}
-            keyboardType={'default'}
-            textColor={colors.appColor}
-            multiline={true}
-            returnKeyType={'go'}
-            style={styles.textInputCustomStyle}
-          />
-        )}
-
         {/* {
-                    questions?.length === 2 &&
-                    <>
+                    questions?.length === 0 ?
+
+
                         <TextInputCustom
                             value={question1}
                             onChangeText={onChangeQuestion1}
@@ -179,19 +169,31 @@ const Step3 = ({onPressBack, onPressNext}) => {
                             returnKeyType={"go"}
                             style={styles.textInputCustomStyle}
                         />
+                        :
 
+                        questions?.length > 0 && */}
+        <>
+          <TextInputCustom
+            value={question1}
+            onChangeText={onChangeQuestion1}
+            keyboardType={'default'}
+            textColor={colors.appColor}
+            multiline={true}
+            returnKeyType={'go'}
+            style={styles.textInputCustomStyle}
+          />
 
-                        <TextInputCustom
-                            value={question2}
-                            onChangeText={onChangeQuestion2}
-                            keyboardType={"default"}
-                            textColor={colors.appColor}
-                            multiline={true}
-                            returnKeyType={"go"}
-                            style={styles.textInputCustomStyle}
-                        />
-                    </>
-                } */}
+          <TextInputCustom
+            value={question2}
+            onChangeText={onChangeQuestion2}
+            keyboardType={'default'}
+            textColor={colors.appColor}
+            multiline={true}
+            returnKeyType={'go'}
+            style={styles.textInputCustomStyle}
+          />
+        </>
+        {/* } */}
       </View>
     );
   };
@@ -282,12 +284,9 @@ const Step3 = ({onPressBack, onPressNext}) => {
             text="Next"
             textColor={colors.white}
             textSize={hp('1.75')}
-            disabled={question1?.length > 0 ? false : true}
-            bgColor={
-              question1?.length > 0 && disableBtn == false
-                ? colors.appColor
-                : colors.grey
-            }
+            // disabled={question1?.length > 0 ? false : true}
+            // bgColor={question1?.length > 0 && disableBtn == false ? colors.appColor : colors.grey}
+            bgColor={colors.appColor}
           />
         </View>
       </View>
