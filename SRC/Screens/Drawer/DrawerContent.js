@@ -22,6 +22,7 @@ import colors from '../../Styles/colors';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {getNotifications} from '../../Redux/Features/NotificationsKit/NotificationsKit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DrawerContent = ({}) => {
   const navigation = useNavigation();
@@ -35,6 +36,12 @@ const DrawerContent = ({}) => {
     if (clearStack) {
       console.log('Clear');
     }
+  };
+
+  const onPressLogout = async () => {
+    await AsyncStorage.removeItem('token');
+    await AsyncStorage.removeItem('number');
+    handleNavigate('MobileNumperEnter', true);
   };
 
   return (
@@ -116,6 +123,7 @@ const DrawerContent = ({}) => {
           <DrawerList
             leftImg={'logoutgrey'}
             rightText={'Logout'}
+            onPress={onPressLogout}
             // onPress={()=>navigation.navigate("")}
           />
         </View>

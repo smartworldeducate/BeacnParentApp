@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   textInputCustomStyle: {
     marginHorizontal: wp('5'),
     fontSize: hp('1.75'),
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.semiBold,
     height: hp('5'),
     borderBottomColor: colors.grey,
     borderBottomWidth: wp('0.5'),

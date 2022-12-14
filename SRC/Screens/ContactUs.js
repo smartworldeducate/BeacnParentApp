@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -24,34 +24,46 @@ import TextInputCustom from '../Components/TextInput/TextInput';
 import FlatListItem from '../Components/FlatList/FlatList';
 import LineSeprator from '../Components/LineSeprator/LineSeprator';
 import {useDispatch, useSelector} from 'react-redux';
+import {contactAction} from '../Redux/Features/ContactKit/ContactKit';
+import {
+  contactComplaintAction,
+  clearState,
+} from '../Redux/Features/ContactKit/ContactComplaintKit';
+import Loader from '../Components/Loader/Loader';
+import Toast from 'react-native-toast-message';
 
 const ContactUs = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const childDatahere = useSelector(state => state.children);
+
+  const contactDatahere = useSelector(state => state.contactStore);
+  const contactComplaintDatahere = useSelector(
+    state => state.contactComplaintStore,
+  );
+  // console.log("contactDatahere", contactDatahere);
+  const [contactData, setContactData] = useState('');
+
+  useEffect(() => {
+    dispatch(contactAction());
+  }, []);
+
+  const [selectedIssue, setSelectedIssue] = useState('');
+
+  // console.log("contactDatahere", contactDatahere);
+  // console.log("contactComplaintDatahere", contactComplaintDatahere);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [innerModalVisible, setInnerModalVisible] = useState(false);
 
-  const [inputContactState, setInputContactState] = useState('');
-  const [selectedRec, setSelectedRec] = useState('');
-
   const [selectedCompl, setSelectedCompl] = useState('');
-
-  const [recommendations, setRecommendations] = useState([
-    {id: 1, recName: 'Suggestion', byDefault: true},
-    {id: 2, recName: 'Complaint', byDefault: false},
-  ]);
-
-  const [allComplaints, setAllComplaints] = useState([
-    {id: 1, complainTitle: 'Fee Challan Issue', byDefaultValue: true},
-    {id: 2, complainTitle: 'School Adminstration', byDefaultValue: false},
-    {id: 3, complainTitle: 'Teaching Staff', byDefaultValue: false},
-    {id: 4, complainTitle: 'Student Well Being', byDefaultValue: false},
-    {id: 5, complainTitle: 'Others', byDefaultValue: false},
-  ]);
-
-  const [suggestion, setSuggestion] = useState(true);
+  const [allComplaints, setAllComplaints] = useState(null);
   const [Complaint, setComplaint] = useState(false);
+
+  // sendingValues on post API
+  const [categoryId, setCategoryId] = useState(null);
+  const [typeId, setTypeId] = useState(null);
+  const [inputContactState, setInputContactState] = useState(null);
 
   const handleNavigate = (routeName, clearStack, params) => {
     navigation.navigate(routeName, params);
@@ -76,40 +88,61 @@ const ContactUs = () => {
     setInputContactState(val);
   };
 
-  const onPressSelected = ({item}) => {
-    // console.log("realVal", item.byDefault);
-    // console.log("changeVal", item.byDefault = true ? true : false);
-    setSelectedRec(item.recName);
-    setModalVisible(!modalVisible);
-    // console.log("recommendations", recommendations);
+  const onPressSelected = ({item, index}) => {
+    // console.log("indexSelected", index);
+    // console.log("itemSelected", item);
 
-    if (item.id == 1) {
-      setSuggestion(true);
-      setComplaint(false);
-    } else {
-      setSuggestion(false);
-      setComplaint(true);
+    setCategoryId(item?.cat_id);
+    setModalVisible(!modalVisible);
+    setSelectedIssue(item.cat_desc);
+
+    let ourGettingValue = [
+      ...JSON.parse(JSON.stringify(contactDatahere?.posts?.result?.categories)),
+    ];
+    console.log('ourGettingValue', ourGettingValue);
+
+    for (let i = 0; i < ourGettingValue.length; i++) {
+      if (index === i) {
+        ourGettingValue[i].checked = true;
+      } else {
+        ourGettingValue[i].checked = false;
+      }
     }
 
-    // console.log("suggestion", suggestion);
-    // console.log("Complaint", Complaint);
-
-    // setRecommendations(recommendations.byDefault = item.byDefault = true ? true : false)
+    // console.log("selectedLength", item?.types?.length);
+    if (item?.types?.length > 0) {
+      setAllComplaints(item?.types);
+      setComplaint(true);
+    } else {
+      setComplaint(false);
+    }
   };
 
-  const onPressSelectedComplain = ({item}) => {
-    setSelectedCompl(item.complainTitle);
+  const onPressSelectedComplain = ({item, index}) => {
+    console.log('selectedComplaintIndex', index);
+    console.log('selectedComplaintItem', item);
+
+    if (categoryId == 3) {
+      setTypeId(null);
+    } else {
+      setTypeId(item?.type_id);
+    }
+
     setInnerModalVisible(!innerModalVisible);
+    setSelectedCompl(item?.type_desc);
   };
+  // console.log("categoryId", categoryId);
+  // console.log("typeId", typeId);
+  // console.log("inputContactState", inputContactState);
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item, index}) => {
     return (
       <View>
         <TouchableOpacity
-          onPress={() => onPressSelected({item})}
+          onPress={() => onPressSelected({item, index})}
           style={{flexDirection: 'row', marginHorizontal: wp('3')}}>
           <View style={{flex: 0.85, justifyContent: 'center'}}>
-            <Text style={styles.modalText}>{item.recName}</Text>
+            <Text style={styles.modalText}>{item.cat_desc}</Text>
           </View>
           <View
             style={{
@@ -119,7 +152,7 @@ const ContactUs = () => {
               marginVertical: hp('2'),
             }}>
             <Image
-              source={{uri: 'circleselect'}}
+              source={{uri: item.checked ? 'addlocation' : 'circleselect'}}
               style={{height: hp('2'), width: wp('4')}}
               resizeMode={'contain'}
             />
@@ -131,15 +164,15 @@ const ContactUs = () => {
     );
   };
 
-  const renderItemComplaints = ({item}) => {
-    console.log('itemComplaints', item);
+  const renderItemComplaints = ({item, index}) => {
+    // console.log('itemComplaints', item);
     return (
       <View style={{}}>
         <TouchableOpacity
-          onPress={() => onPressSelectedComplain({item})}
+          onPress={() => onPressSelectedComplain({item, index})}
           style={{flexDirection: 'row', marginHorizontal: wp('3')}}>
           <View style={{flex: 0.85, justifyContent: 'center'}}>
-            <Text style={styles.modalText}>{item.complainTitle}</Text>
+            <Text style={styles.modalText}>{item.type_desc}</Text>
           </View>
           <View
             style={{
@@ -157,6 +190,18 @@ const ContactUs = () => {
         </TouchableOpacity>
         <View style={{height: hp('0.1'), backgroundColor: colors.grey}}></View>
       </View>
+    );
+  };
+
+  const onPressSubmit = () => {
+    dispatch(
+      contactComplaintAction({
+        system_id: '170838',
+        parent_mobile: '03164025665',
+        remarks: inputContactState,
+        category_id: categoryId,
+        type_id: typeId,
+      }),
     );
   };
 
@@ -184,6 +229,9 @@ const ContactUs = () => {
           backgroundColor: colors.white,
           marginVertical: hp(2),
         }}>
+        {contactDatahere?.isLoading && <Loader></Loader>}
+        {contactComplaintDatahere?.isLoading && <Loader></Loader>}
+
         <TouchableOpacity
           onPress={onPressDropDown}
           style={{
@@ -203,7 +251,13 @@ const ContactUs = () => {
                 fontFamily: fontFamily.regularAlatsi,
                 color: colors.appColor,
               }}>
-              {selectedRec.length > 0 ? selectedRec : 'Suggestion'}
+              {selectedIssue.length > 0 ? selectedIssue : 'Suggestion'}
+              {/* {contactDatahere?.posts?.result?.categories.map((e) => {
+                console.log("e", e.cat_desc[0]);
+                return e.cat_desc
+              }
+              )} */}
+              {/* {contactDatahere?.posts?.result?.categories[1]?.cat_desc} */}
             </Text>
           </View>
 
@@ -220,7 +274,10 @@ const ContactUs = () => {
                 onPress={onPressModal}
                 style={{flex: 0.4}}></TouchableOpacity>
               <View style={styles.modalView}>
-                <FlatListItem data={recommendations} renderItem={renderItem} />
+                <FlatListItem
+                  data={contactDatahere?.posts?.result?.categories}
+                  renderItem={renderItem}
+                />
               </View>
               <TouchableOpacity
                 onPress={onPressModal}
@@ -333,7 +390,8 @@ const ContactUs = () => {
 
         <View style={{alignItems: 'center', marginVertical: hp('3')}}>
           <Button
-            onPress={() => navigation.navigate('HomeDrawer')}
+            // onPress={() => navigation.navigate('HomeDrawer')}
+            onPress={onPressSubmit}
             height={hp('4.5')}
             width={wp('25')}
             borderRadius={wp('1.5')}

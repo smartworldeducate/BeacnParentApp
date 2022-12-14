@@ -9,7 +9,7 @@ const initialState = {
 };
 // sms_number: "03164025665"
 export const contactAction = createAsyncThunk('contact', async values => {
-  console.log('valuesApi', values);
+  // console.log('valuesApi', values);
   return await axios
     .post(`${APIS.ContactAPI}`, values, {
       headers: {
@@ -32,7 +32,7 @@ const ContactSlice = createSlice({
       state.posts = action.payload;
       state.error = '';
 
-      console.log('OTPKitPayload', action.payload);
+      // console.log('OTPKitPayload', action.payload);
     },
     [contactAction.rejected]: (state, action) => {
       state.isLoading = false;

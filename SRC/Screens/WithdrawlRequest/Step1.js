@@ -24,7 +24,7 @@ const Step1 = ({step1Text, onPressStep1Btn}) => {
     <View style={{}}>
       <LeftRightImgText
         leftText={'Parent Profile'}
-        onPressRight={() => handleNavigate('ParentProfile')}
+        onPressRight={() => handleNavigate('ParentProfileDrawer')}
         rightText={'Edit'}
         img={'rightarrow'}
         marginHorizontal={wp('5')}

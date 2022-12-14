@@ -13,6 +13,7 @@ import withDrawlReasonReducer from './Features/WithdrawlRequestKit/WithdrawalRea
 import withDrawlRequestReducer from './Features/WithdrawlRequestKit/WithdrawlRequest';
 import imageUploadReducer from './Features/ImageUploadKit/ImageUploadKit';
 import contactReducer from './Features/ContactKit/ContactKit';
+import contactComplaintReducer from './Features/ContactKit/ContactComplaintKit';
 
 export const store = configureStore({
   reducer: {
@@ -29,5 +30,6 @@ export const store = configureStore({
     withDrawlReasonStore: withDrawlReasonReducer,
     withDrawlRequestStore: withDrawlRequestReducer,
     contactStore: contactReducer,
+    contactComplaintStore: contactComplaintReducer,
   },
 });

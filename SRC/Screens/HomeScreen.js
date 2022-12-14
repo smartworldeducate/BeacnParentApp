@@ -233,7 +233,7 @@ const HomeScreen = () => {
           <Text
             style={{
               fontSize: hp('1.8'),
-              fontFamily: fontFamily.bold,
+              fontFamily: fontFamily.semiBold,
               textAlign: 'center',
               color: colors.grey,
             }}>{`${myDate1}\n${myDate2}`}</Text>
@@ -362,7 +362,7 @@ const HomeScreen = () => {
             leftText={'Notifications'}
             rightText={'View All'}
             img={'rightarrow'}
-            marginHorizontal={wp('8')}
+            marginHorizontal={wp('6')}
           />
 
           <LineSeprator style={styles.lineSeprator} />
@@ -420,26 +420,26 @@ const styles = StyleSheet.create({
   lineSeprator: {
     height: hp('0.2'),
     backgroundColor: colors.appColor,
-    marginHorizontal: wp('8'),
+    marginHorizontal: wp('6'),
     marginTop: hp('1'),
     marginBottom: hp('2'),
   },
   listMainView: {
     flexDirection: 'row',
-    marginHorizontal: wp('6'),
+    marginHorizontal: wp('8'),
   },
   listLeftView: {
-    flex: 0.2,
+    flex: 0.15,
     justifyContent: 'center',
     alignItems: 'center',
     height: hp('6'),
-    width: wp('6'),
+    width: wp('3'),
     borderRadius: wp('3'),
     borderWidth: wp('0.15'),
-    borderColor: colors.appColor,
+    borderColor: colors.grey,
   },
   listCentralView: {
-    flex: 0.7,
+    flex: 0.75,
     flexDirection: 'column',
     justifyContent: 'center',
     paddingLeft: wp('3'),
