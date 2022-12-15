@@ -21,6 +21,7 @@ import {getAssessment} from '../../Redux/Features/Assessments/assessment';
 import {calanderAction} from '../../Redux/Features/CalanderKit/CalanderKit';
 import {getNotifications} from '../../Redux/Features/NotificationsKit/NotificationsKit';
 import {imageUpload} from '../../Redux/Features/ImageUploadKit/ImageUploadKit';
+import {contactComplaintAction} from '../../Redux/Features/ContactKit/ContactComplaintKit';
 
 const MainHeader = ({
   onPressRightImg,
@@ -182,6 +183,11 @@ const MainHeader = ({
             dispatch(getAssessment(data[index]?.system_id));
             dispatch(calanderAction(data[index]?.system_id));
             dispatch(getNotifications(data[index]?.system_id));
+            dispatch(
+              contactComplaintAction(
+                data[index]?.system_id && data[index]?.sms_number,
+              ),
+            );
           }}>
           {data?.length > 0 &&
             data?.map(item => {

@@ -155,7 +155,7 @@ const Attendance = () => {
           <MainHeader
             onPressRightImg={() => navigation.goBack()}
             topLeftImg={'backarrow'}
-            text={'Assessment'}
+            text={'Attendance'}
             data={childDatahere?.posts?.result?.children}
           />
         )}
@@ -182,6 +182,7 @@ const Attendance = () => {
             theme={{
               // backgroundColor: '#ffffff',
               calendarBackground: '#ffffff',
+              markSunday: 'red',
 
               // textSectionTitleColor: '#b6c1cd',
               // textSectionTitleDisabledColor: '#d9e1e8',

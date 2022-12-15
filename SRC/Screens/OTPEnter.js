@@ -30,7 +30,6 @@ import {
   MaskSymbol,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
-import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -103,8 +102,8 @@ const OTPEnter = ({route}) => {
     const otp = /(\d{4})/g.exec(message)[1];
     console.log('otp<<', otp);
     setValue(otp);
+    handleNavigate('HomeScreen');
     setValuesObj({...valuesObj, pin_code_sms: otp});
-
     // setOtpCode(otp);
     removeListener();
     Keyboard.dismiss();
