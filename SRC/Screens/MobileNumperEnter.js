@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Text, ImageBackground} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, ImageBackground, Appearance } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -13,7 +13,7 @@ import DeviceInfo from 'react-native-device-info';
 
 // or ES6+ destructured imports
 
-import {getUniqueId, getManufacturer} from 'react-native-device-info';
+import { getUniqueId, getManufacturer } from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import colors from '../Styles/colors';
@@ -21,7 +21,7 @@ import fontFamily from '../Styles/fontFamily';
 import Button from '../Components/Button/Button';
 import TextInputCustom from '../Components/TextInput/TextInput';
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   clearState,
   createPost,
@@ -30,11 +30,24 @@ import Toast from 'react-native-toast-message';
 import Loader from '../Components/Loader/Loader';
 
 const MobileNumperEnter = () => {
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+
+  Appearance.addChangeListener((scheme) => {
+    // console.log("scheme", scheme.colorScheme);
+    setTheme(scheme.colorScheme);
+  })
+
+  useEffect(() => {
+
+  }, [theme])
+
+  console.log("theme", theme);
+
   const dispatch = useDispatch();
   const post = useSelector(state => state.post);
   console.log(post, 'post');
   const [inputContactState, setInputContactState] = useState('');
-  const [values, setValues] = useState({sms_number: ''});
+  const [values, setValues] = useState({ sms_number: '' });
   const [deviceType, setDeviceType] = useState('android');
   const [deviceIdentifier, setDeviceIdentifier] = useState('asdf');
   const [deviceToken, setDeviceToken] = useState('asdf');
@@ -48,7 +61,7 @@ const MobileNumperEnter = () => {
 
   const onChangeContact = val => {
     setInputContactState(val);
-    setValues({...values, sms_number: val});
+    setValues({ ...values, sms_number: val });
   };
 
   const validateField = () => {
@@ -87,8 +100,8 @@ const MobileNumperEnter = () => {
   }, [post]);
   return (
     <ImageBackground
-      source={{uri: 'mainsplash'}}
-      style={{flex: 1}}
+      source={{ uri: 'mainsplash' }}
+      style={{ flex: 1 }}
       resizeMode={'stretch'}>
       <Toast />
       {post?.isLoading && <Loader></Loader>}

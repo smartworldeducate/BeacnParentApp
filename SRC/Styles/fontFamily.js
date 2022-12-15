@@ -10,6 +10,13 @@ const fontFamily = {
 
   regularAlatsi: Platform.OS === "android" ? "Alatsi-Regular" : "Alatsi-Regular",
 
+
+  helvetica: Platform.OS === "android" ? "Helvetica" : "Helvetica",
+  helveticaLight: Platform.OS === "android" ? "helvetica-light" : "helvetica-light",
+  helveticaBold: Platform.OS === "android" ? "Helvetica-Bold" : "Helvetica-Bold",
+
+  helveticaRegular: Platform.OS === "android" ? "NewHelvetica-Regular" : "NewHelvetica-Regular",
+
 };
 
 export default fontFamily;

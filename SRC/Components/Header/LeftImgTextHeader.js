@@ -35,7 +35,7 @@ const LeftImgTextHeader = ({ onPressLeftImg, leftImg, text }) => {
 
 const styles = StyleSheet.create({
     mainView: {
-        height: hp("6"),
+        height: hp("7"),
         justifyContent: 'center',
     },
     linearGradient: {
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     centralText: {
-        fontFamily: fontFamily.semiBold,
-        fontSize: hp('1.75'),
+        fontFamily: fontFamily.helveticaBold,
+        fontSize: hp('1.7'),
         color: colors.white
     }
 });

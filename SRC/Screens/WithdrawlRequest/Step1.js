@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Button from '../../Components/Button/Button';
 import LeftRightImgText from '../../Components/LeftRightImgText/LeftRightImgText';
 import LineSeprator from '../../Components/LineSeprator/LineSeprator';
 import colors from '../../Styles/colors';
 import fontFamily from '../../Styles/fontFamily';
 
-const Step1 = ({step1Text, onPressStep1Btn}) => {
+const Step1 = ({ step1Text, onPressStep1Btn }) => {
   const navigation = useNavigation();
   const handleNavigate = (routeName, clearStack, params) => {
     navigation.navigate(routeName, params);
@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
     marginHorizontal: wp('5'),
   },
   text1Style: {
-    fontSize: hp('2'),
-    fontFamily: fontFamily.regular,
-    lineHeight: hp('2.5'),
+    fontSize: hp('1.75'),
+    fontFamily: fontFamily.helvetica,
+    lineHeight: hp('2'),
     color: colors.lightBlack,
     textAlign: 'justify',
     marginHorizontal: wp('5'),

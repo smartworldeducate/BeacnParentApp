@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   RefreshControl,
@@ -15,16 +15,16 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import DrawerHeader from '../../Components/Drawer/DrawerHeader';
 import DrawerList from '../../Components/Drawer/DrawerList';
 import colors from '../../Styles/colors';
 
-import {useDispatch, useSelector} from 'react-redux';
-import {getNotifications} from '../../Redux/Features/NotificationsKit/NotificationsKit';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNotifications } from '../../Redux/Features/NotificationsKit/NotificationsKit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const DrawerContent = ({}) => {
+const DrawerContent = ({ }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const notificationsHere = useSelector(state => state.notifications);
@@ -51,16 +51,16 @@ const DrawerContent = ({}) => {
         backgroundColor:
           Platform.OS === 'android' ? colors.white : colors.white,
       }}>
-      <View style={{paddingLeft: wp('3')}}>
-        <View style={{marginTop: hp('2')}}>
+      <View style={{ paddingLeft: wp('3') }}>
+        <View style={{ marginTop: hp('2') }}>
           <DrawerHeader
             leftText={'Menu'}
             rightImg={'menublue'}
-            // onPressRightImg={() => navigation.closeDrawer()}
+          // onPressRightImg={() => navigation.closeDrawer()}
           />
         </View>
 
-        <View style={{marginVertical: hp('2')}}>
+        <View style={{ marginVertical: hp('2') }}>
           <DrawerList
             leftImg={'home'}
             rightText={'Home'}
@@ -98,7 +98,7 @@ const DrawerContent = ({}) => {
           />
 
           <DrawerList
-            leftImg={'attendancegrey'}
+            leftImg={'notificationsgrey'}
             rightText={'Notifications'}
             onPress={() =>
               handleNavigate('ViewAllNotifications', false, {
@@ -109,13 +109,13 @@ const DrawerContent = ({}) => {
           />
 
           <DrawerList
-            leftImg={'challangrey'}
+            leftImg={'contactgrey'}
             rightText={'Contact Us'}
             onPress={() => navigation.navigate('ContactUsDrawer')}
           />
 
           <DrawerList
-            leftImg={'parentsprofile'}
+            leftImg={'home'}
             rightText={'Policies'}
             onPress={() => navigation.navigate('AllPoliciesDrawer')}
           />
@@ -124,7 +124,7 @@ const DrawerContent = ({}) => {
             leftImg={'logoutgrey'}
             rightText={'Logout'}
             onPress={onPressLogout}
-            // onPress={()=>navigation.navigate("")}
+          // onPress={()=>navigation.navigate("")}
           />
         </View>
       </View>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -15,7 +15,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import fontFamily from '../Styles/fontFamily';
 import colors from '../Styles/colors';
 import MainHeader from '../Components/Header/MainHeader';
@@ -23,8 +23,8 @@ import Button from '../Components/Button/Button';
 import TextInputCustom from '../Components/TextInput/TextInput';
 import FlatListItem from '../Components/FlatList/FlatList';
 import LineSeprator from '../Components/LineSeprator/LineSeprator';
-import {useDispatch, useSelector} from 'react-redux';
-import {contactAction} from '../Redux/Features/ContactKit/ContactKit';
+import { useDispatch, useSelector } from 'react-redux';
+import { contactAction } from '../Redux/Features/ContactKit/ContactKit';
 import {
   contactComplaintAction,
   clearState,
@@ -88,7 +88,7 @@ const ContactUs = () => {
     setInputContactState(val);
   };
 
-  const onPressSelected = ({item, index}) => {
+  const onPressSelected = ({ item, index }) => {
     // console.log("indexSelected", index);
     // console.log("itemSelected", item);
 
@@ -118,7 +118,7 @@ const ContactUs = () => {
     }
   };
 
-  const onPressSelectedComplain = ({item, index}) => {
+  const onPressSelectedComplain = ({ item, index }) => {
     console.log('selectedComplaintIndex', index);
     console.log('selectedComplaintItem', item);
 
@@ -135,13 +135,13 @@ const ContactUs = () => {
   // console.log("typeId", typeId);
   // console.log("inputContactState", inputContactState);
 
-  const renderItem = ({item, index}) => {
+  const renderItem = ({ item, index }) => {
     return (
       <View>
         <TouchableOpacity
-          onPress={() => onPressSelected({item, index})}
-          style={{flexDirection: 'row', marginHorizontal: wp('3')}}>
-          <View style={{flex: 0.85, justifyContent: 'center'}}>
+          onPress={() => onPressSelected({ item, index })}
+          style={{ flexDirection: 'row', marginHorizontal: wp('3') }}>
+          <View style={{ flex: 0.85, justifyContent: 'center' }}>
             <Text style={styles.modalText}>{item.cat_desc}</Text>
           </View>
           <View
@@ -152,8 +152,8 @@ const ContactUs = () => {
               marginVertical: hp('2'),
             }}>
             <Image
-              source={{uri: item.checked ? 'addlocation' : 'circleselect'}}
-              style={{height: hp('2'), width: wp('4')}}
+              source={{ uri: item.checked ? 'addlocation' : 'circleselect' }}
+              style={{ height: hp('2'), width: wp('4') }}
               resizeMode={'contain'}
             />
           </View>
@@ -164,14 +164,14 @@ const ContactUs = () => {
     );
   };
 
-  const renderItemComplaints = ({item, index}) => {
+  const renderItemComplaints = ({ item, index }) => {
     // console.log('itemComplaints', item);
     return (
       <View style={{}}>
         <TouchableOpacity
-          onPress={() => onPressSelectedComplain({item, index})}
-          style={{flexDirection: 'row', marginHorizontal: wp('3')}}>
-          <View style={{flex: 0.85, justifyContent: 'center'}}>
+          onPress={() => onPressSelectedComplain({ item, index })}
+          style={{ flexDirection: 'row', marginHorizontal: wp('3') }}>
+          <View style={{ flex: 0.85, justifyContent: 'center' }}>
             <Text style={styles.modalText}>{item.type_desc}</Text>
           </View>
           <View
@@ -182,13 +182,13 @@ const ContactUs = () => {
               marginVertical: hp('2'),
             }}>
             <Image
-              source={{uri: 'circleselect'}}
-              style={{height: hp('2'), width: wp('4')}}
+              source={{ uri: 'circleselect' }}
+              style={{ height: hp('2'), width: wp('4') }}
               resizeMode={'contain'}
             />
           </View>
         </TouchableOpacity>
-        <View style={{height: hp('0.1'), backgroundColor: colors.grey}}></View>
+        <View style={{ height: hp('0.1'), backgroundColor: colors.grey }}></View>
       </View>
     );
   };
@@ -243,12 +243,12 @@ const ContactUs = () => {
             borderRadius: wp('3'),
             marginTop: hp('7'),
           }}>
-          <View style={{flex: 0.85, justifyContent: 'center'}}>
+          <View style={{ flex: 0.85, justifyContent: 'center' }}>
             <Text
               style={{
                 marginLeft: hp('2'),
-                fontSize: hp('1.75'),
-                fontFamily: fontFamily.regularAlatsi,
+                fontSize: hp('1.5'),
+                fontFamily: fontFamily.helveticaBold,
                 color: colors.appColor,
               }}>
               {selectedIssue.length > 0 ? selectedIssue : 'Suggestion'}
@@ -272,7 +272,7 @@ const ContactUs = () => {
             <View style={styles.modalMainView}>
               <TouchableOpacity
                 onPress={onPressModal}
-                style={{flex: 0.4}}></TouchableOpacity>
+                style={{ flex: 0.4 }}></TouchableOpacity>
               <View style={styles.modalView}>
                 <FlatListItem
                   data={contactDatahere?.posts?.result?.categories}
@@ -281,7 +281,7 @@ const ContactUs = () => {
               </View>
               <TouchableOpacity
                 onPress={onPressModal}
-                style={{flex: 0.45}}></TouchableOpacity>
+                style={{ flex: 0.45 }}></TouchableOpacity>
             </View>
           </Modal>
 
@@ -292,8 +292,8 @@ const ContactUs = () => {
               alignItems: 'center',
             }}>
             <Image
-              source={{uri: 'arrowdown'}}
-              style={{height: hp('2'), width: wp('4')}}
+              source={{ uri: 'arrowdown' }}
+              style={{ height: hp('1.5'), width: wp('3') }}
               resizeMode={'contain'}
             />
           </View>
@@ -313,12 +313,12 @@ const ContactUs = () => {
               borderRadius: wp('3'),
               marginTop: hp('3'),
             }}>
-            <View style={{flex: 0.85, justifyContent: 'center'}}>
+            <View style={{ flex: 0.85, justifyContent: 'center' }}>
               <Text
                 style={{
                   marginLeft: hp('2'),
-                  fontSize: hp('1.75'),
-                  fontFamily: fontFamily.regularAlatsi,
+                  fontSize: hp('1.5'),
+                  fontFamily: fontFamily.helveticaBold,
                   color: colors.appColor,
                 }}>
                 {selectedCompl.length > 0 ? selectedCompl : 'Others'}
@@ -336,7 +336,7 @@ const ContactUs = () => {
               <View style={styles.modalMainView}>
                 <TouchableOpacity
                   onPress={onPressLowerModal}
-                  style={{flex: 0.4}}></TouchableOpacity>
+                  style={{ flex: 0.4 }}></TouchableOpacity>
                 <View style={styles.lowerModalView}>
                   <FlatListItem
                     data={allComplaints}
@@ -345,7 +345,7 @@ const ContactUs = () => {
                 </View>
                 <TouchableOpacity
                   onPress={onPressLowerModal}
-                  style={{flex: 0.45}}></TouchableOpacity>
+                  style={{ flex: 0.45 }}></TouchableOpacity>
               </View>
             </Modal>
 
@@ -356,8 +356,8 @@ const ContactUs = () => {
                 alignItems: 'center',
               }}>
               <Image
-                source={{uri: 'arrowdown'}}
-                style={{height: hp('2'), width: wp('4')}}
+                source={{ uri: 'arrowdown' }}
+                style={{ height: hp('1.5'), width: wp('3') }}
                 resizeMode={'contain'}
               />
             </View>
@@ -388,7 +388,7 @@ const ContactUs = () => {
           />
         </View>
 
-        <View style={{alignItems: 'center', marginVertical: hp('3')}}>
+        <View style={{ alignItems: 'center', marginVertical: hp('3') }}>
           <Button
             // onPress={() => navigation.navigate('HomeDrawer')}
             onPress={onPressSubmit}
@@ -432,16 +432,16 @@ const styles = StyleSheet.create({
   textInputCustomStyle: {
     paddingLeft: wp('4'),
     paddingVertical: hp('1'),
-    fontSize: hp('1.65'),
-    fontFamily: fontFamily.regular,
+    fontSize: hp('1.5'),
+    fontFamily: fontFamily.helveticaBold,
     color: colors.appColor,
     // fontWeight:"bold"
     // backgroundColor:"red"
   },
   modalText: {
     color: colors.lightBlack,
-    fontFamily: fontFamily.regular,
-    fontSize: hp('1.65'),
+    fontFamily: fontFamily.helveticaRegular,
+    fontSize: hp('1.5'),
   },
   lineSeprator: {
     height: hp('0.05'),

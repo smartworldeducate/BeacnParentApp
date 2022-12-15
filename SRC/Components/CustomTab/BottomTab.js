@@ -118,9 +118,9 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         alignItems: "center",
-        fontSize: hp('1.65'),
-        fontFamily: fontFamily.bold,
-        color: colors.grey,
+        fontSize: hp('1.5'),
+        fontFamily: fontFamily.helveticaBold,
+        color: colors.lightGrey,
         fontWeight: "bold",
         paddingHorizontal: wp('2')
     }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,7 +16,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import colors from '../Styles/colors';
 import MainHeader from '../Components/Header/MainHeader';
@@ -29,17 +29,17 @@ import ModalNotification from '../Components/Modal/ModalNotification';
 import ListEmptyComponent from '../Components/FlatList/ListemptyComponent';
 import Loader from '../Components/Loader/Loader';
 
-import {getChild} from '../Redux/Features/getChildData/children';
-import {useDispatch, useSelector} from 'react-redux';
+import { getChild } from '../Redux/Features/getChildData/children';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {getNotifications} from '../Redux/Features/NotificationsKit/NotificationsKit';
+import { getNotifications } from '../Redux/Features/NotificationsKit/NotificationsKit';
 import moment from 'moment';
 import RenderHtml from 'react-native-render-html';
-import {useWindowDimensions} from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import SingleLine from '../Components/SingleLine/SingleLine';
 
 const HomeScreen = () => {
-  const {width} = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   const dispatch = useDispatch();
   const childDatahere = useSelector(state => state.children);
@@ -78,130 +78,6 @@ const HomeScreen = () => {
   // console.log("notificationsHere", notificationsHere?.notifications?.notifications);
   // console.log("childDataHere", childDatahere);
 
-  const [notificationData, setNotificationData] = useState([
-    {
-      id: 1,
-      date: '03 Oct',
-      text: 'Dispatch SMS',
-      type: 'Notification',
-      to: 'Dear Parents',
-      sentBy: 'School Office',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort. A parent alert is a text or call notification that goes out in bulk to your contacts. Schools employ such methods to ensure no delay in delivering the message to parents. First, let’s consider texts. Say your K-12 school has about 650 students. It can take anywhere between 10-30 minutes to create a group or broadcast list manually. This depends on the length of the list and also on the speed of the person in charge. We haven’t even considered the obstacle posed by your tool (like group strength limits). Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort. A parent alert is a text or call notification that goes out in bulk to your contacts. Schools employ such methods to ensure no delay in delivering the message to parents. First, let’s consider texts. Say your K-12 school has about 650 students. It can take anywhere between 10-30 minutes to create a group or broadcast list manually. This depends on the length of the list and also on the speed of the person in charge. We haven’t even considered the obstacle posed by your tool (like group strength limits).',
-    },
-    {
-      id: 2,
-      date: '05 Oct',
-      text: 'Dispatch SMS ',
-      type: 'Notification',
-      to: 'Dear Parents',
-      sentBy: 'Beaconhouse',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort.',
-    },
-    {
-      id: 3,
-      date: '18 Aug',
-      text: 'Dispatch SMS ',
-      type: 'Notification',
-      to: 'Dear Parents',
-      sentBy: 'School Office',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort.',
-    },
-    {
-      id: 4,
-      date: '2 Aug',
-      text: 'Dispatch SMS ',
-      type: 'SMS',
-      to: 'Dear Parents',
-      sentBy: 'School Office',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort.',
-    },
-    {
-      id: 5,
-      date: '29 Apr',
-      text: 'Dispatch SMS ',
-      type: 'SMS',
-      to: 'Dear Parents',
-      sentBy: 'Adminstration Beacohouse School System',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort.',
-    },
-    {
-      id: 6,
-      date: '23 Apr',
-      text: 'Dispatch SMS ',
-      type: 'SMS',
-      to: 'Dear Parents',
-      sentBy: 'School Office',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort.',
-    },
-    {
-      id: 7,
-      date: '03 Oct',
-      text: 'Dispatch SMS ',
-      type: 'Notification',
-      to: 'Dear Parents',
-      sentBy: 'School Office',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort.',
-    },
-    {
-      id: 8,
-      date: '05 Oct',
-      text: 'Dispatch SMS ',
-      type: 'Notification',
-      to: 'Dear Parents',
-      sentBy: 'School Office',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort.',
-    },
-    {
-      id: 9,
-      date: '18 Aug',
-      text: 'Dispatch SMS ',
-      type: 'Notification',
-      to: 'Dear Parents',
-      sentBy: 'School Office',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort.',
-    },
-    {
-      id: 10,
-      date: '2 Aug',
-      text: 'Dispatch SMS ',
-      type: 'SMS',
-      to: 'Dear Parents',
-      sentBy: 'School Office',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort.',
-    },
-    {
-      id: 11,
-      date: '29 Apr',
-      text: 'Dispatch SMS ',
-      type: 'SMS',
-      to: 'Dear Parents',
-      sentBy: 'School Office',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort.',
-    },
-    {
-      id: 12,
-      date: '23 Apr',
-      text: 'Dispatch SMS ',
-      type: 'SMS',
-      to: 'Dear Parents',
-      sentBy: 'School Office',
-      details:
-        'Employing a parent notification system can ensure all your communications are streamlined and timely. When done manually, it can demand substantial effort.',
-    },
-  ]);
-
-  const [timeOut, setTimeOut] = useState(false);
 
   useEffect(() => {
     AsyncStorage.setItem('token', 'token');
@@ -223,20 +99,44 @@ const HomeScreen = () => {
     }
   };
 
-  const renderItem = ({item, index}) => {
+  const renderItem = ({ item, index }) => {
     // console.log("item", item);
     var myDate1 = moment(item.date).format('D');
     var myDate2 = moment(item.date).format('MMM');
+
+
+    var splitDate = item.date.split(" ");
+    // console.log("date333", splitDate[1]);
+
+    var splitFirst = splitDate[1].split(" ");
+    // console.log("splitFirst", splitFirst);
+
+    var splitSecond = splitFirst[0].split(" ");
+    // console.log("splitSecond", splitSecond);
+
+    var splitThird = splitSecond[0].split("-")
+    // console.log("splitThird", splitThird);
+
+    // console.log("splitLast1", splitThird[0]);
+    // console.log("splitLast2", splitThird[1]);
+
+    var splitFinal = splitSecond[0].split(" ");
+    // console.log("splitFinal", splitFinal);
+
+
     return (
       <View style={styles.listMainView}>
         <View style={styles.listLeftView}>
           <Text
             style={{
-              fontSize: hp('1.8'),
+              fontSize: hp('1.7'),
               fontFamily: fontFamily.semiBold,
               textAlign: 'center',
               color: colors.grey,
-            }}>{`${myDate1}\n${myDate2}`}</Text>
+            }}>
+            {/* {`${myDate1}\n${myDate2}`} */}
+            {`${splitThird[0]}\n${splitThird[1]}`}
+          </Text>
         </View>
         <View style={styles.listCentralView}>
           <SingleLine
@@ -249,7 +149,8 @@ const HomeScreen = () => {
               ) ? (
                 <RenderHtml
                   contentWidth={width}
-                  source={{html: index != 0 ? item.body : item.title}}
+                  source={{ html: index != 0 ? item.body : item.title }}
+                  tagsStyles={tagsStyles}
                   defaultTextProps={
                     {
                       // numberOfLines: 1, ellipsizeMode: 'tail'
@@ -265,10 +166,10 @@ const HomeScreen = () => {
           <Text style={styles.centalLowerText}>{item.notification_type}</Text>
         </View>
         <TouchableOpacity
-          onPress={() => onPressRightImg({item})}
+          onPress={() => onPressRightImg({ item })}
           style={styles.listRightView}>
           <Image
-            source={{uri: 'forwardarrow'}}
+            source={{ uri: 'forwardarrow' }}
             style={styles.listRightImg}
             resizeMode={'contain'}
           />
@@ -277,7 +178,7 @@ const HomeScreen = () => {
     );
   };
 
-  const onPressRightImg = ({item}) => {
+  const onPressRightImg = ({ item }) => {
     // setDate(item.date);
     // setText(item.text);
     // setType(item.type);
@@ -397,7 +298,7 @@ const HomeScreen = () => {
             sentBy={sentBy}
           />
 
-          <View style={{marginBottom: hp('5')}}></View>
+          <View style={{ marginBottom: hp('5') }}></View>
         </ScrollView>
       )}
     </SafeAreaView>
@@ -429,7 +330,7 @@ const styles = StyleSheet.create({
     marginHorizontal: wp('8'),
   },
   listLeftView: {
-    flex: 0.15,
+    flex: 0.2,
     justifyContent: 'center',
     alignItems: 'center',
     height: hp('6'),
@@ -439,7 +340,7 @@ const styles = StyleSheet.create({
     borderColor: colors.grey,
   },
   listCentralView: {
-    flex: 0.75,
+    flex: 0.5,
     flexDirection: 'column',
     justifyContent: 'center',
     paddingLeft: wp('3'),
@@ -450,20 +351,22 @@ const styles = StyleSheet.create({
     color: colors.grey,
     lineHeight: hp('2.5'),
   },
+
+
   centalLowerText: {
-    fontSize: hp('2'),
-    fontFamily: fontFamily.regular,
+    fontSize: hp('1.7'),
+    fontFamily: fontFamily.helveticaRegular,
     color: colors.lightBlack,
     lineHeight: hp('2.5'),
   },
   listRightView: {
-    flex: 0.1,
+    flex: 0.3,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   listRightImg: {
-    height: hp('1.5'),
-    width: wp('3'),
+    height: hp('1.75'),
+    width: wp('3.5'),
   },
   styleImg: {
     height: hp('15'),
@@ -495,4 +398,14 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+const tagsStyles = {
+  body: {
+    whiteSpace: 'normal',
+    color: 'red'
+  },
+  a: {
+    color: 'green'
+  }
+};
 export default HomeScreen;

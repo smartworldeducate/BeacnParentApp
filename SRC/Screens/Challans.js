@@ -178,14 +178,14 @@ const Challans = () => {
 
             <StatusBar barStyle={'default'} backgroundColor={"#606060"} />
 
-{childDatahere?.posts?.result?.children.length > 0 && (
-        <MainHeader
-          onPressRightImg={() => navigation.goBack()}
-          topLeftImg={'menu'}
-          text={'Student Profile'}
-          data={childDatahere?.posts?.result?.children}
-        />
-      )}
+            {childDatahere?.posts?.result?.children.length > 0 && (
+                <MainHeader
+                    onPressRightImg={() => navigation.goBack()}
+                    topLeftImg={'backarrow'}
+                    text={'Challans'}
+                    data={childDatahere?.posts?.result?.children}
+                />
+            )}
 
             <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: colors.white, marginVertical: hp(2) }}
                 refreshControl={

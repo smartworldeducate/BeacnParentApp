@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -14,7 +14,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import colors from '../../Styles/colors';
 import MainHeader from '../../Components/Header/MainHeader';
 import WithdrawlCentral from '../../Components/Withdrawl/WithdrawlCentral';
@@ -22,9 +22,9 @@ import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
-import {withdrawlRequestAction} from '../../Redux/Features/WithdrawlRequestKit/WithdrawlRequest';
+import { withdrawlRequestAction } from '../../Redux/Features/WithdrawlRequestKit/WithdrawlRequest';
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../Components/Loader/Loader';
 
 const WithdrawlRequest = () => {
@@ -211,24 +211,12 @@ const WithdrawlRequest = () => {
         <MainHeader
           onPressRightImg={() => navigation.goBack()}
           topLeftImg={'backarrow'}
-          text={'Withdrawl Request'}
+          text={'Withdrawal Request'}
           data={childDatahere?.posts?.result?.children}
         />
       )}
 
       {withdrawalRequestHere?.isLoading && <Loader></Loader>}
-
-      {/* <MainHeader
-                onPressRightImg={() => navigation.goBack()}
-                topLeftImg={"backarrow"}
-                text={"Withdrawl Request"}
-                stuName={"Azaan Ali"}
-                stuNumber={"170838"}
-                campName={"Canal side Campus"}
-                className={"Class 3 - Red"}
-                stuImage={"student"}
-                stuStatus={"On-Roll"}
-            /> */}
 
       <ScrollView
         contentContainerStyle={{
@@ -243,6 +231,7 @@ const WithdrawlRequest = () => {
               text1={1}
               text1Color={step1 ? colors.grey : colors.black}
               text2={'Step 1'}
+              text2Color={step1 ? colors.appColor : colors.lightGrey}
             />
           </View>
 
@@ -254,6 +243,7 @@ const WithdrawlRequest = () => {
               text1={2}
               text1Color={step2 ? colors.grey : colors.black}
               text2={'Step 2'}
+              text2Color={step2 ? colors.appColor : colors.lightGrey}
             />
           </View>
 
@@ -265,6 +255,7 @@ const WithdrawlRequest = () => {
               text1={3}
               text1Color={step3 ? colors.grey : colors.black}
               text2={'Step 3'}
+              text2Color={step3 ? colors.appColor : colors.lightGrey}
             />
           </View>
 
@@ -276,6 +267,7 @@ const WithdrawlRequest = () => {
               text1={4}
               text1Color={step4 ? colors.grey : colors.black}
               text2={'Step 4'}
+              text2Color={step4 ? colors.appColor : colors.lightGrey}
             />
           </View>
         </View>
@@ -284,7 +276,7 @@ const WithdrawlRequest = () => {
           <Step1
             onPressStep1Btn={onPressStep1Btn}
             step1Text={
-              'Click on the Parent Profile Section and review your personal information before proceeding with this withdrawl application. If the information is incorrect, please update it and return to the form for withdrawl processing.'
+              'Click on the Parent Profile Section and review your personal information before proceeding with this withdrawal application. If the information is incorrect, please update it and return to the form for withdrawal processing.'
             }
           />
         )}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -9,7 +9,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -20,6 +20,7 @@ import colors from '../../Styles/colors';
 import FlatListItem from '../../Components/FlatList/FlatList';
 import LineSeprator from '../../Components/LineSeprator/LineSeprator';
 import PolicyModal from '../../Components/Modal/PolicyModal';
+import fontFamily from '../../Styles/fontFamily';
 
 const AllPolicies = () => {
   const navigation = useNavigation();
@@ -43,36 +44,36 @@ const AllPolicies = () => {
     {
       id: 1,
       policyName: 'Discipline Policy',
-      description: 'Discipline Policy Comming soon',
+      description: 'Comming Soon',
       url: 'https://www.beaconhouse.net/',
     },
     {
       id: 2,
       policyName: 'Assessment Policy',
-      description: 'Assessment Policy Comming soon',
+      description: 'Comming Soon',
       url: 'https://www.beaconhouse.net/',
     },
     {
       id: 3,
       policyName: 'Student Protection Policy',
-      description: 'Student Protection Policy Comming soon',
+      description: 'Comming Soon',
       url: 'https://www.beaconhouse.net/',
     },
     {
       id: 4,
       policyName: 'Attendence Policy',
-      description: 'Attendence Policy Comming soon',
+      description: 'Comming Soon',
       url: 'https://www.beaconhouse.net/',
     },
     {
       id: 5,
       policyName: 'Digital Responsibility',
-      description: 'Digital Responsibility Comming soon',
+      description: 'Comming Soon',
       url: 'https://www.beaconhouse.net/',
     },
   ]);
 
-  const renderItem = ({item, index}) => {
+  const renderItem = ({ item, index }) => {
     return (
       <>
         <View style={styles.renderItemView}>
@@ -80,10 +81,10 @@ const AllPolicies = () => {
             <Text style={styles.leftText}>{item.policyName}</Text>
           </View>
           <TouchableOpacity
-            onPress={() => onPressPolicy({item})}
+            onPress={() => onPressPolicy({ item })}
             style={styles.rightTouchable}>
             <Image
-              source={{uri: 'forwardarrow'}}
+              source={{ uri: 'forwardarrow' }}
               style={styles.listRightImg}
               resizeMode={'contain'}
             />
@@ -95,7 +96,7 @@ const AllPolicies = () => {
     );
   };
 
-  const onPressPolicy = ({item}) => {
+  const onPressPolicy = ({ item }) => {
     setPolicyHeader(item.policyName);
     setDetails(item.description);
     setUrl(item.url);
@@ -103,9 +104,9 @@ const AllPolicies = () => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#606060'}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#606060' }}>
       <ScrollView
-        contentContainerStyle={{flexGrow: 1, backgroundColor: colors.white}}>
+        contentContainerStyle={{ flexGrow: 1, backgroundColor: colors.white }}>
         <StatusBar barStyle={'default'} backgroundColor={'#606060'} />
 
         <LeftImgTextHeader
@@ -125,7 +126,7 @@ const AllPolicies = () => {
             modalVisible={modalVisible}
             onPressModal={onPressModal}
             textHeader={policyHeader}
-            text={url}
+            text={details}
           />
         </View>
       </ScrollView>
@@ -149,8 +150,9 @@ const styles = StyleSheet.create({
   },
   leftText: {
     paddingVertical: hp('1'),
-    fontSize: hp('1.75'),
+    fontSize: hp('1.8'),
     color: colors.lightBlack,
+    fontFamily: fontFamily.helveticaRegular
   },
   rightTouchable: {
     flex: 0.15,
@@ -159,8 +161,8 @@ const styles = StyleSheet.create({
   },
 
   listRightImg: {
-    height: hp('1.5'),
-    width: wp('3'),
+    height: hp('2'),
+    width: wp('4'),
   },
   listSeprator: {
     height: hp('0.08'),

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -19,16 +19,16 @@ import colors from '../../Styles/colors';
 import fontFamily from '../../Styles/fontFamily';
 import LeftImgTextHeader from '../Header/LeftImgTextHeader';
 
-const PolicyModal = ({modalVisible, onPressModal, textHeader, text}) => {
+const PolicyModal = ({ modalVisible, onPressModal, textHeader, text }) => {
   return (
     <Modal
       animationType="fade"
       transparent={true}
       visible={modalVisible}
       onRequestClose={null}>
-      <SafeAreaView style={{flex: 1, backgroundColor: '#606060'}}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#606060' }}>
         <ScrollView
-          contentContainerStyle={{flexGrow: 1, backgroundColor: colors.white}}>
+          contentContainerStyle={{ flexGrow: 1, backgroundColor: colors.white }}>
           <StatusBar barStyle={'light-content'} backgroundColor={'#606060'} />
 
           <LeftImgTextHeader
@@ -40,18 +40,18 @@ const PolicyModal = ({modalVisible, onPressModal, textHeader, text}) => {
           <View
             style={{
               flex: 1,
-              justifyContent: 'center',
-              marginHorizontal: wp('6'),
-              marginVertical: hp('1.5'),
-              alignItems: 'center',
+              marginLeft: wp('8'),
+              marginRight: wp('3'),
+              // marginVertical: hp('1.5'),
+              marginTop: hp("2"),
+              marginBottom: hp("1")
             }}>
             <Text
               onPress={() => Linking.openURL(text)}
               style={{
-                fontSize: hp('1.75'),
-                fontFamily: fontFamily.regular,
-                color: colors.appColor,
-                fontWeight: 'bold',
+                fontSize: hp('1.7'),
+                fontFamily: fontFamily.helveticaRegular,
+                color: colors.black,
               }}>
               {text}
             </Text>
