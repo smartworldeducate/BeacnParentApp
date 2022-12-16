@@ -123,7 +123,7 @@ const Step4 = ({
               flex: 0.15,
               justifyContent: 'center',
               alignItems: 'flex-end',
-              marginVertical: hp('2'),
+              marginVertical: hp('1'),
             }}>
             <Image
               source={{ uri: item.checked ? 'addlocation' : 'circleselect' }}
@@ -287,16 +287,15 @@ const Step4 = ({
           <View style={styles.modalMainView}>
             <TouchableOpacity
               onPress={onPressModal}
-              style={{ flex: 0.4 }}></TouchableOpacity>
+              style={{ flex: 0.5 }}></TouchableOpacity>
             <View style={styles.modalView}>
               <FlatListItem
-                data={parentsListFromStep2}
-                renderItem={renderItem}
+                data={parentsListFromStep2} renderItem={renderItem}
               />
             </View>
             <TouchableOpacity
               onPress={onPressModal}
-              style={{ flex: 0.4 }}></TouchableOpacity>
+              style={{ flex: 0.35 }}></TouchableOpacity>
           </View>
         </Modal>
 
@@ -306,8 +305,8 @@ const Step4 = ({
 
         <View style={styles.selectValueRightView}>
           <Image
-            source={{ uri: 'arrowdown' }}
-            style={{ height: hp('1.5'), width: wp('3') }}
+            source={{ uri: 'dropdowngrey' }}
+            style={{ height: hp('3.5'), width: wp('7') }}
             resizeMode={'contain'}
           />
         </View>
@@ -546,16 +545,15 @@ const styles = StyleSheet.create({
   modalMainView: {
     flex: 1,
     flexDirection: 'column',
-    margin: hp('5'),
+    paddingHorizontal: hp('5'),
     justifyContent: 'center',
   },
 
   modalView: {
-    flex: 0.2,
+    flex: 0.15,
     justifyContent: 'center',
-
     backgroundColor: 'white',
-    padding: hp('1'),
+    paddingVertical: hp('1'),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -566,12 +564,18 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
 
+  modalText: {
+    color: colors.lightBlack,
+    fontFamily: fontFamily.helveticaRegular,
+    fontSize: hp('1.5'),
+  },
+
   lineSeprator: {
     height: hp('0.1'),
     backgroundColor: colors.grey,
     marginTop: hp('1'),
     marginBottom: hp('1'),
-    marginLeft: wp('5'),
+    marginLeft: wp('3'),
   },
 
   parentDetailsView: {

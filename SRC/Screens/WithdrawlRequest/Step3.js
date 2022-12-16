@@ -284,9 +284,9 @@ const Step3 = ({ onPressBack, onPressNext }) => {
             text="Next"
             textColor={colors.white}
             textSize={hp('1.75')}
-            // disabled={question1?.length > 0 ? false : true}
-            // bgColor={question1?.length > 0 && disableBtn == false ? colors.appColor : colors.grey}
-            bgColor={colors.appColor}
+            disabled={question1?.length || question2?.length > 0 ? false : true}
+            bgColor={question1?.length > 0 || question2?.length ? colors.appColor : colors.grey}
+          // bgColor={colors.appColor}
           />
         </View>
       </View>

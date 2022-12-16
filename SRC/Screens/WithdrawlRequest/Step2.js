@@ -119,7 +119,7 @@ const Step2 = ({ onPressBack, onPressNext, disabled }) => {
               flex: 0.15,
               justifyContent: 'center',
               alignItems: 'flex-end',
-              marginVertical: hp('2'),
+              marginVertical: hp('1'),
             }}>
             <Image
               source={{ uri: item.checked ? 'addlocation' : 'circleselect' }}
@@ -160,7 +160,7 @@ const Step2 = ({ onPressBack, onPressNext, disabled }) => {
             </View>
             <TouchableOpacity
               onPress={onPressModal}
-              style={{ flex: 0.25 }}></TouchableOpacity>
+              style={{ flex: 0.3 }}></TouchableOpacity>
           </View>
         </Modal>
 
@@ -170,8 +170,8 @@ const Step2 = ({ onPressBack, onPressNext, disabled }) => {
 
         <View style={styles.selectValueRightView}>
           <Image
-            source={{ uri: 'arrowdown' }}
-            style={{ height: hp('1.5'), width: wp('3') }}
+            source={{ uri: 'dropdowngrey' }}
+            style={{ height: hp('3.5'), width: wp('7') }}
             resizeMode={'contain'}
           />
         </View>
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
   },
   selectValueText: {
     marginLeft: hp('1.5'),
-    fontSize: hp('1.7'),
+    fontSize: hp('1.6'),
     fontFamily: fontFamily.helveticaRegular,
     color: colors.appColor,
   },
@@ -283,7 +283,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.grey,
     marginTop: hp('1'),
     marginBottom: hp('1'),
-    marginLeft: wp('5'),
+    marginLeft: wp('3'),
+
   },
   modalMainView: {
     flex: 1,
@@ -302,11 +303,10 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.helveticaRegular,
   },
   modalView: {
-    flex: 0.2,
+    flex: 0.15,
     justifyContent: 'center',
-
     backgroundColor: 'white',
-    padding: hp('1'),
+    paddingVertical: hp('1'),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -318,8 +318,8 @@ const styles = StyleSheet.create({
   },
   modalText: {
     color: colors.lightBlack,
-    fontFamily: fontFamily.regular,
-    fontSize: hp('1.8'),
+    fontFamily: fontFamily.helveticaRegular,
+    fontSize: hp('1.5'),
   },
   parentDetailsView: {
     flexDirection: 'column',
