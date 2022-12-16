@@ -113,9 +113,6 @@ const MobileNumperEnter = () => {
             onChangeText={onChangeContact}
             keyboardType={'numeric'}
             maxLength={11}
-            placeholder={'Phone Number'}
-            placeholderColor={colors.grey}
-            textColor={colors.fbColor}
             returnKeyType={'go'}
             style={styles.textInputCustomStyle}
           />
@@ -151,11 +148,12 @@ const styles = StyleSheet.create({
 
   textInputCustomStyle: {
     marginHorizontal: wp('5'),
-    fontSize: hp('1.75'),
-    fontFamily: fontFamily.semiBold,
+    fontSize: hp('1.6'),
+    fontFamily: fontFamily.helveticaBold,
     height: hp('5'),
-    borderBottomColor: colors.grey,
-    borderBottomWidth: wp('0.5'),
+    borderBottomColor: colors.lightGrey,
+    borderBottomWidth: wp('0.25'),
+    color: colors.lightGrey
   },
   contactNumberMainView: {
     // flex: 1,
@@ -175,8 +173,8 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: hp('1.4'),
-    fontFamily: fontFamily.regular,
-    color: colors.fbColor,
+    fontFamily: fontFamily.helvetica,
+    color: colors.lightGrey,
   },
 });
 export default MobileNumperEnter;
