@@ -48,7 +48,7 @@ const ContactUs = () => {
     dispatch(contactAction());
   }, []);
 
-  const [selectedIssue, setSelectedIssue] = useState('');
+  const [selectedIssue, setSelectedIssue] = useState(contactDatahere?.posts?.result?.categories[0].cat_desc);
 
   // console.log("contactDatahere", contactDatahere);
   // console.log("contactComplaintDatahere", contactComplaintDatahere);
@@ -59,10 +59,11 @@ const ContactUs = () => {
   const [selectedCompl, setSelectedCompl] = useState('');
   const [allComplaints, setAllComplaints] = useState(null);
   const [Complaint, setComplaint] = useState(false);
+  const [complaintInitialValue, setComplaintInitialValue] = useState(null);
 
   // sendingValues on post API
-  const [categoryId, setCategoryId] = useState(null);
-  const [typeId, setTypeId] = useState(null);
+  const [categoryId, setCategoryId] = useState(3);
+  const [typeId, setTypeId] = useState(categoryId === 3 ? null : 34);
   const [inputContactState, setInputContactState] = useState(null);
 
   const handleNavigate = (routeName, clearStack, params) => {
@@ -71,6 +72,7 @@ const ContactUs = () => {
       console.log('Clear');
     }
   };
+
 
   const onPressDropDown = () => {
     setModalVisible(!modalVisible);
@@ -99,7 +101,7 @@ const ContactUs = () => {
     let ourGettingValue = [
       ...JSON.parse(JSON.stringify(contactDatahere?.posts?.result?.categories)),
     ];
-    console.log('ourGettingValue', ourGettingValue);
+    // console.log('ourGettingValue', ourGettingValue);
 
     for (let i = 0; i < ourGettingValue.length; i++) {
       if (index === i) {
@@ -113,14 +115,17 @@ const ContactUs = () => {
     if (item?.types?.length > 0) {
       setAllComplaints(item?.types);
       setComplaint(true);
+      // let last = item[item?.length - 1];
+      // console.log("last", last);
+      // setComplaintInitialValue()
     } else {
       setComplaint(false);
     }
   };
 
   const onPressSelectedComplain = ({ item, index }) => {
-    console.log('selectedComplaintIndex', index);
-    console.log('selectedComplaintItem', item);
+    // console.log('selectedComplaintIndex', index);
+    // console.log('selectedComplaintItem', item);
 
     if (categoryId == 3) {
       setTypeId(null);
@@ -197,16 +202,44 @@ const ContactUs = () => {
   };
 
   const onPressSubmit = () => {
-    dispatch(
-      contactComplaintAction({
-        system_id: '170838',
-        parent_mobile: '03164025665',
-        remarks: inputContactState,
-        category_id: categoryId,
-        type_id: typeId,
-      }),
-    );
+    // dispatch(
+    //   contactComplaintAction({
+    //     system_id: '170838',
+    //     parent_mobile: '03164025665',
+    //     remarks: inputContactState,
+    //     category_id: categoryId,
+    //     type_id: typeId,
+    //   }),
+    // );
+
+    // const funHere = () => {
+    // if (contactComplaintDatahere?.reasons?.message.length > 0) {
+    Toast.show({
+      type: 'success',
+      text2: `${"contactComplaintDatahere?.reasons?.message"}`,
+      visibilityTime: 4000,
+      position: 'top',
+    });
+    // }
+    // }
+    // dispatch(clearState());
+    // funHere();
+    // handleNavigate("HomeScreen")
+
+
   };
+
+  // console.log("contactComplaintDatahere", contactComplaintDatahere?.reasons?.message);
+
+  // console.log("111", contactDatahere?.posts?.result?.categories[0]);
+
+  const toastConfig = {
+    success: internalState => (
+      <View style={{ height: hp('8'), width: wp('90'), marginHorizontal: wp('5'), backgroundColor: "#333333", borderRadius: wp('1.5'), justifyContent: "center" }}>
+        <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helveticaLight, color: colors.white, paddingHorizontal: wp('3'), paddingVertical: hp('1.5'), lineHeight: hp('2.5') }}>{internalState.text2}</Text>
+      </View>
+    )
+  }
 
   return (
     <SafeAreaView
@@ -216,6 +249,7 @@ const ContactUs = () => {
           Platform.OS === 'android' ? colors.white : colors.white,
       }}>
       <StatusBar barStyle={'default'} backgroundColor={colors.lightBlack} />
+      <Toast />
 
       {childDatahere?.posts?.result?.children.length > 0 && (
         <MainHeader
@@ -254,7 +288,9 @@ const ContactUs = () => {
                 fontFamily: fontFamily.helveticaBold,
                 color: colors.appColor,
               }}>
-              {selectedIssue.length > 0 ? selectedIssue : 'Suggestion'}
+              {/* {contactDatahere?.posts?.result?.categories[0].cat_desc} */}
+              {selectedIssue?.length > 0 ? selectedIssue : 'Suggestion'}
+              {/* {selectedIssue} */}
               {/* {contactDatahere?.posts?.result?.categories.map((e) => {
                 console.log("e", e.cat_desc[0]);
                 return e.cat_desc
@@ -324,7 +360,8 @@ const ContactUs = () => {
                   fontFamily: fontFamily.helveticaBold,
                   color: colors.appColor,
                 }}>
-                {selectedCompl.length > 0 ? selectedCompl : 'Others'}
+                { }
+                {selectedCompl.length > 0 ? selectedCompl : 'Fee Challan'}
               </Text>
             </View>
 
@@ -406,6 +443,17 @@ const ContactUs = () => {
             textWeight={'bold'}
           />
         </View>
+
+        <TouchableOpacity onPress={() => {
+          Toast.show({
+            type: 'success',
+            text2: `${"contactComplaintDatahere?.reasons?.message"}`,
+            visibilityTime: 4000,
+            position: 'top',
+          });
+        }}><Text>KKKKK</Text>
+
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

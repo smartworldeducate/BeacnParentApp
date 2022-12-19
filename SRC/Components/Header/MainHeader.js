@@ -264,7 +264,7 @@ const MainHeader = ({
                         </View>
                         <View style={{ flex: 0.7, justifyContent: 'center' }}>
                           <Text style={styles.textStatus}>
-                            {`${item.std_status}`}
+                            {`${item.std_status && item.wdraw_req_count > 0 ? "Pending" : "On-Roll"}`}
                           </Text>
                         </View>
                       </View>
