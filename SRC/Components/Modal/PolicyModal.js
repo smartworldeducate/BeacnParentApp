@@ -50,7 +50,7 @@ const PolicyModal = ({ modalVisible, onPressModal, textHeader, text }) => {
               onPress={() => Linking.openURL(text)}
               style={{
                 fontSize: hp('1.7'),
-                fontFamily: fontFamily.helveticaRegular,
+                fontFamily: fontFamily.helveticaLight,
                 color: colors.black,
               }}>
               {text}

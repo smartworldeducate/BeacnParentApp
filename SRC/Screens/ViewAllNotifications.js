@@ -268,13 +268,13 @@ const styles = StyleSheet.create({
   },
   centalUpperText: {
     fontSize: hp('1.6'),
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.helveticaLight,
     color: colors.grey,
     lineHeight: hp('2.5'),
   },
   centalLowerText: {
     fontSize: hp('1.7'),
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.helveticaLight,
     color: colors.lightBlack,
     lineHeight: hp('2.5'),
   },

@@ -322,18 +322,18 @@ const Step4 = ({
 
         <View style={styles.selectedRelationLowerView}>
           <Text style={styles.selectedRelatioDetailsText}>
-            CNIC: <Text style={{ fontFamily: fontFamily.helveticaRegular }}>{CNIC}</Text>
+            CNIC: <Text style={{ fontFamily: fontFamily.helveticaLight }}>{CNIC}</Text>
           </Text>
           <Text style={styles.selectedRelatioDetailsText}>
-            Email: <Text style={{ fontFamily: fontFamily.helveticaRegular }}>{email}</Text>
+            Email: <Text style={{ fontFamily: fontFamily.helveticaLight }}>{email}</Text>
           </Text>
           <Text style={styles.selectedRelatioDetailsText}>
             Contact Number:{' '}
-            <Text style={{ fontFamily: fontFamily.helveticaRegular }}>{contact}</Text>
+            <Text style={{ fontFamily: fontFamily.helveticaLight }}>{contact}</Text>
           </Text>
           <Text style={styles.selectedRelatioDetailsText}>
             Correspondance Address:{' '}
-            <Text style={{ fontFamily: fontFamily.helveticaRegular }}>{address}</Text>
+            <Text style={{ fontFamily: fontFamily.helveticaLight }}>{address}</Text>
           </Text>
         </View>
       </View>
@@ -371,7 +371,7 @@ const Step4 = ({
         <Text
           style={{
             marginHorizontal: wp('3'),
-            fontFamily: fontFamily.helveticaRegular,
+            fontFamily: fontFamily.helveticaLight,
             fontSize: hp('1.6'),
             color: colors.grey,
             textAlign: 'justify',
@@ -414,9 +414,9 @@ const Step4 = ({
           <Text
             style={{
 
-              fontFamily: fontFamily.helveticaRegular,
+              fontFamily: fontFamily.helveticaLight,
               fontSize: hp('1.6'),
-              color: colors.lightBlack,
+              color: colors.black,
               textAlign: 'left',
               lineHeight: hp('2.75'),
             }}>
@@ -439,7 +439,8 @@ const Step4 = ({
             height={hp('4.5')}
             borderRadius={wp('1.5')}
             text="Back"
-            bgColor={colors.appColor}
+            colorsArray={['#296cb1', '#2760a7', '#203d88']}
+            // bgColor={colors.appColor}
             textColor={colors.white}
             textSize={hp('1.75')}
           />
@@ -464,8 +465,10 @@ const Step4 = ({
             text="Submit Application"
             textColor={colors.white}
             textSize={hp('1.75')}
-            bgColor={disableBtn ? colors.grey : colors.appColor}
             disabled={disableBtn}
+            colorsArray={disableBtn ? ['#888888', '#cccccc'] : ['#296cb1', '#2760a7', '#203d88']}
+          // bgColor={disableBtn ? colors.grey : colors.appColor}
+
           />
         </View>
       </View>
@@ -516,7 +519,7 @@ const styles = StyleSheet.create({
   selectValueText: {
     marginLeft: hp('2'),
     fontSize: hp('1.7'),
-    fontFamily: fontFamily.helveticaRegular,
+    fontFamily: fontFamily.helveticaLight,
     color: colors.appColor,
   },
 
@@ -528,13 +531,13 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     color: colors.appColor,
     fontSize: hp('1.6'),
-    fontFamily: fontFamily.helveticaRegular,
+    fontFamily: fontFamily.helveticaLight,
   },
   selectDateText: {
     textAlign: 'center',
     color: colors.appColor,
     fontSize: hp('1.6'),
-    fontFamily: fontFamily.helveticaRegular,
+    fontFamily: fontFamily.helveticaLight,
   },
   selectValueRightView: {
     flex: 0.15,
@@ -566,7 +569,7 @@ const styles = StyleSheet.create({
 
   modalText: {
     color: colors.lightBlack,
-    fontFamily: fontFamily.helveticaRegular,
+    fontFamily: fontFamily.helveticaLight,
     fontSize: hp('1.5'),
   },
 

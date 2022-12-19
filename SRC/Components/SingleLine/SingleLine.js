@@ -17,7 +17,7 @@ const SingleLine = ({ text1, text2 }) => {
         numberOfLines={1}
         ellipsizeMode="tail"
         style={{
-          fontFamily: fontFamily.regular,
+          fontFamily: fontFamily.helveticaLight,
           fontSize: hp('1.9'),
           color: colors.grey,
         }}>

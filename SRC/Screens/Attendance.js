@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.lightGreen,
         borderRadius: wp('1.2'),
     },
-    textStyle: { marginLeft: wp(1.5), color: colors.lightBlack, fontSize: hp('1.6'), fontFamily: fontFamily.helveticaRegular },
+    textStyle: { marginLeft: wp(1.5), color: colors.lightBlack, fontSize: hp('1.6'), fontFamily: fontFamily.helveticaLight },
     calendarHeader: {
         backgroundColor: colors.appColor,
         borderRadius: 0,

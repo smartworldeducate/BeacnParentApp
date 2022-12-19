@@ -141,12 +141,21 @@ const OTPEnter = ({ route }) => {
   //     }
   //   }, []);
 
+  const toastConfig = {
+    success: internalState => (
+      <View style={{ height: hp('8'), width: wp('90'), marginHorizontal: wp('5'), backgroundColor: "#333333", borderRadius: wp('1.5'), justifyContent: "center" }}>
+        <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helveticaLight, color: colors.white, paddingHorizontal: wp('3'), paddingVertical: hp('1.5'), lineHeight: hp('2.5') }}>{internalState.text1}</Text>
+      </View>
+    )
+  }
+
   return (
     <ImageBackground
       source={{ uri: 'mainsplash' }}
       style={{ flex: 1 }}
       resizeMode={'stretch'}>
-      <Toast />
+      {/* <Toast /> */}
+      <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
       {OTPCodeHere?.isLoading && <Loader></Loader>}
       <View style={{ flex: 3.5 }}></View>
 
@@ -236,7 +245,8 @@ const OTPEnter = ({ route }) => {
             height={hp('4.5')}
             borderRadius={wp('1.5')}
             text={'Submit OTP'}
-            bgColor={colors.appColor}
+            colorsArray={['#296cb1', '#2760a7', '#203d88']}
+            // bgColor={colors.appColor}
             textColor={colors.white}
             textSize={hp('1.75')}
           />
@@ -248,15 +258,15 @@ const OTPEnter = ({ route }) => {
         <Text
           style={{
             color: colors.solidAppColor,
-            fontFamily: fontFamily.helveticaRegular,
+            fontFamily: fontFamily.helveticaLight,
             fontSize: hp('1.6'),
             lineHeight: hp('2')
           }}>
           Didn't receive the code?
-          <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helvetica, color: colors.white, lineHeight: hp('3') }}> Tap here </Text>
+          <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helveticaLight, color: colors.white, lineHeight: hp('3') }}> Tap here </Text>
           to {`\n`}resend. Having trouble with the authentication? {`\n`}
 
-          <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helvetica, color: colors.white, lineHeight: hp('3') }}>Raise a support request ticket</Text>
+          <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helveticaLight, color: colors.white, lineHeight: hp('3') }}>Raise a support request ticket</Text>
 
         </Text>
       </View>

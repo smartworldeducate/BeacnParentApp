@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -38,9 +38,9 @@ const WithDrawlReasonsModal = ({
       <View style={styles.modalView}>
         <TouchableOpacity
           onPress={onPressModal}
-          style={{flex: modalUpperFlex}}></TouchableOpacity>
+          style={{ flex: modalUpperFlex }}></TouchableOpacity>
 
-        <View style={{flex: modalLowerFlex, backgroundColor: colors.white}}>
+        <View style={{ flex: modalLowerFlex, backgroundColor: colors.white }}>
           <NotificationHeader
             text={'Withdrawl Request Detail'}
             rightImg={'crosscircle'}
@@ -59,7 +59,7 @@ const WithDrawlReasonsModal = ({
           </ScrollView>
         </View>
       </View>
-      <View style={{marginBottom: hp('2')}}></View>
+      <View style={{ marginBottom: hp('2') }}></View>
     </Modal>
   );
 };
@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
   },
   sentToText: {
     fontSize: hp('1.85'),
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.helveticaLight,
     color: colors.lightBlack,
     paddingVertical: hp('1'),
   },
   lowerText: {
     fontSize: hp('1.75'),
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.helveticaLight,
     color: colors.lightBlack,
     paddingVertical: hp('1.5'),
   },

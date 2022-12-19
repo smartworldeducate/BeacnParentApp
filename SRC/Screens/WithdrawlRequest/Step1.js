@@ -40,7 +40,8 @@ const Step1 = ({ step1Text, onPressStep1Btn }) => {
           height={hp('4.5')}
           borderRadius={wp('1.5')}
           text="Next"
-          bgColor={colors.appColor}
+          colorsArray={['#296cb1', '#2760a7', '#203d88']}
+          // bgColor={colors.appColor}
           textColor={colors.white}
           textSize={hp('1.75')}
         />
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
   },
   text1Style: {
     fontSize: hp('1.75'),
-    fontFamily: fontFamily.helvetica,
+    fontFamily: fontFamily.helveticaLight,
     lineHeight: hp('2'),
     color: colors.lightBlack,
     textAlign: 'justify',

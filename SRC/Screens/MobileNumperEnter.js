@@ -74,7 +74,7 @@ const MobileNumperEnter = () => {
   };
 
   const onPressSendCode = () => {
-    validateField();
+    // validateField();
     dispatch(createPost(inputContactState.toString()));
     dispatch(clearState());
   };
@@ -91,19 +91,28 @@ const MobileNumperEnter = () => {
     }
     if (post.message) {
       Toast.show({
-        type: 'success',
+        // type: 'success',
         text2: `${post.message}`,
         visibilityTime: 4000,
         position: 'top',
       });
     }
   }, [post]);
+
+  const toastConfig = {
+    success: internalState => (
+      <View style={{ height: hp('8'), width: wp('90'), marginHorizontal: wp('5'), backgroundColor: "#333333", borderRadius: wp('1.5'), justifyContent: "center" }}>
+        <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helveticaLight, color: colors.white, paddingHorizontal: wp('3'), paddingVertical: hp('1.5'), lineHeight: hp('2.5') }}>{internalState.text2}</Text>
+      </View>
+    )
+  }
+
   return (
     <ImageBackground
       source={{ uri: 'mainsplash' }}
       style={{ flex: 1 }}
       resizeMode={'stretch'}>
-      <Toast />
+      <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
       {post?.isLoading && <Loader></Loader>}
       <View style={styles.mainTopView}></View>
       <View style={styles.contactNumberMainView}>
@@ -131,7 +140,8 @@ const MobileNumperEnter = () => {
             height={hp('4.5')}
             borderRadius={wp('1.5')}
             text="Send Code"
-            bgColor={colors.appColor}
+            colorsArray={['#296cb1', '#2760a7', '#203d88']}
+            // bgColor={colors.appColor}
             textColor={colors.white}
             textSize={hp('1.75')}
           />
@@ -173,7 +183,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: hp('1.4'),
-    fontFamily: fontFamily.helvetica,
+    fontFamily: fontFamily.helveticaLight,
     color: colors.lightGrey,
   },
 });

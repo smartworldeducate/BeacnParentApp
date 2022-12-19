@@ -130,7 +130,7 @@ const HomeScreen = () => {
           <Text
             style={{
               fontSize: hp('1.7'),
-              fontFamily: fontFamily.semiBold,
+              fontFamily: fontFamily.helveticaBold,
               textAlign: 'center',
               color: colors.grey,
             }}>
@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
   },
   centalUpperText: {
     fontSize: hp('1.85'),
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.helveticaLight,
     color: colors.grey,
     lineHeight: hp('2.5'),
   },
@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
 
   centalLowerText: {
     fontSize: hp('1.7'),
-    fontFamily: fontFamily.helveticaRegular,
+    fontFamily: fontFamily.helveticaLight,
     color: colors.lightBlack,
     lineHeight: hp('2.5'),
   },
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
   },
   listEmptyComponent: {
     color: colors.appColor,
-    fontFamily: fontFamily.semiBold,
+    fontFamily: fontFamily.helveticaBold,
     fontSize: hp('1.5'),
     paddingVertical: wp('2'),
     textAlign: 'center',

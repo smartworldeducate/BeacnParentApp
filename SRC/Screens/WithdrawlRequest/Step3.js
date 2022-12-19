@@ -93,7 +93,7 @@ const Step3 = ({ onPressBack, onPressNext }) => {
             style={{
               fontSize: hp('1.7'),
               textAlign: 'left',
-              fontFamily: fontFamily.helveticaRegular,
+              fontFamily: fontFamily.helveticaLight,
               color: colors.lightBlack,
               lineHeight: hp('2.5'),
             }}>
@@ -150,7 +150,7 @@ const Step3 = ({ onPressBack, onPressNext }) => {
           style={{
             padding: hp('2'),
             color: colors.appColor,
-            fontFamily: fontFamily.helveticaRegular,
+            fontFamily: fontFamily.helveticaLight,
             fontSize: hp('1.7'),
           }}>
           {item.question_name}
@@ -211,7 +211,7 @@ const Step3 = ({ onPressBack, onPressNext }) => {
             style={{
               marginLeft: hp('2'),
               fontSize: hp('1.7'),
-              fontFamily: fontFamily.regular,
+              fontFamily: fontFamily.helveticaLight,
               color: colors.appColor,
             }}>
             {selectReason?.length > 0
@@ -262,7 +262,8 @@ const Step3 = ({ onPressBack, onPressNext }) => {
             height={hp('4.5')}
             borderRadius={wp('1.5')}
             text="Back"
-            bgColor={colors.appColor}
+            colorsArray={['#296cb1', '#2760a7', '#203d88']}
+            // bgColor={colors.appColor}
             textColor={colors.white}
             textSize={hp('1.75')}
           />
@@ -285,8 +286,9 @@ const Step3 = ({ onPressBack, onPressNext }) => {
             textColor={colors.white}
             textSize={hp('1.75')}
             disabled={question1?.length || question2?.length > 0 ? false : true}
-            bgColor={question1?.length > 0 || question2?.length ? colors.appColor : colors.grey}
-          // bgColor={colors.appColor}
+            colorsArray={question1?.length > 0 || question2?.length ? ['#296cb1', '#2760a7', '#203d88'] : ['#888888', '#cccccc']}
+
+          // bgColor={question1?.length > 0 || question2?.length ? colors.appColor : colors.grey}
           />
         </View>
       </View>

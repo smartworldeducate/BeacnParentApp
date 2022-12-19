@@ -152,7 +152,10 @@ const ContactUs = () => {
               marginVertical: hp('2'),
             }}>
             <Image
-              source={{ uri: item.checked ? 'addlocation' : 'circleselect' }}
+              source={{
+                uri: item.checked
+                  ? 'addlocation' : 'circleselect'
+              }}
               style={{ height: hp('2'), width: wp('4') }}
               resizeMode={'contain'}
             />
@@ -396,7 +399,8 @@ const ContactUs = () => {
             width={wp('25')}
             borderRadius={wp('1.5')}
             text="Submit"
-            bgColor={colors.appColor}
+            colorsArray={['#296cb1', '#2760a7', '#203d88']}
+            // bgColor={colors.appColor}
             textColor={colors.white}
             textSize={hp('1.55')}
             textWeight={'bold'}
@@ -440,7 +444,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     color: colors.lightBlack,
-    fontFamily: fontFamily.helveticaRegular,
+    fontFamily: fontFamily.helveticaLight,
     fontSize: hp('1.5'),
   },
   lineSeprator: {

@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     paddingVertical: hp('1'),
     fontSize: hp('1.8'),
     color: colors.lightBlack,
-    fontFamily: fontFamily.helveticaRegular
+    fontFamily: fontFamily.helveticaLight
   },
   rightTouchable: {
     flex: 0.15,

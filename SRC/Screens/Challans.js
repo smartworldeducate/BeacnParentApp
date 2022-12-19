@@ -78,63 +78,66 @@ const Challans = () => {
     const renderItem = ({ item, index }) => {
 
         setPayOnlineState(item.status == 0 ? true : false);
+        console.log("item", item);
 
         return (
             <>
-                {
-                    item.status == 0 ?
-                        <View style={styles.challansMainView}>
-                            <LeftRightImgText
-                                leftText={item.fee_period}
-                            />
-                            <LineSeprator style={styles.listSeprator} />
+                {/* {
+                    item.status == 0 ? */}
+                <View style={styles.challansMainView}>
+                    <LeftRightImgText
+                        leftText={item.fee_period}
+                    />
+                    <LineSeprator style={styles.listSeprator} />
 
 
-                            <View style={styles.challanUpperMainView}>
-                                <View style={styles.challanUpperView}>
-                                    <Text style={styles.challanUpperText1}>{`Rs ${item.net_payable}/-`}</Text>
-                                    <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
-                                </View>
-                                <View style={styles.challanUpperRightView}>
-                                    <Button
-                                        onPress={() => Linking.openURL('http://b2training.beaconhouse.net/students/ism/ism_report_invoice_printed_n.php?company_id=1&from_date=01/02/2019&app=Y&invoice_num=2140005127671')}
-                                        height={hp('4.5')}
-                                        width={wp('25')}
-                                        borderRadius={wp('1.5')}
-                                        text="View Challan"
-                                        bgColor={colors.appColor}
-                                        textColor={colors.white}
-                                        textSize={hp('1.3')}
-                                        textWeight={"bold"}
-                                    />
-                                </View>
-                            </View>
-
-                            <LineSeprator style={styles.listSecondSeprator} />
-
-                            <View style={styles.challanUpperMainView}>
-                                <View style={{ flex: 0.5, justifyContent: 'center' }}>
-                                    <Text style={styles.challanUpperText1}>{`Rs ${item.net_payable}/-`}</Text>
-                                    <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
-                                </View>
-                                <View style={styles.challanLowerRightView}>
-                                    <Button
-                                        height={hp('4.5')}
-                                        width={wp('38')}
-                                        borderRadius={wp('1.5')}
-                                        text="Get Challan Via Email"
-                                        bgColor={colors.appColor}
-                                        textColor={colors.white}
-                                        textSize={hp('1.3')}
-                                        textWeight={"bold"}
-                                    />
-                                </View>
-                            </View>
-
+                    <View style={styles.challanUpperMainView}>
+                        <View style={styles.challanUpperView}>
+                            <Text style={styles.challanUpperText1}>{`Rs ${item.net_payable}/-`}</Text>
+                            <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
                         </View>
-                        :
+                        <View style={styles.challanUpperRightView}>
+                            <Button
+                                onPress={() => Linking.openURL('http://b2training.beaconhouse.net/students/ism/ism_report_invoice_printed_n.php?company_id=1&from_date=01/02/2019&app=Y&invoice_num=2140005127671')}
+                                height={hp('4.5')}
+                                width={wp('25')}
+                                borderRadius={wp('1.5')}
+                                text="View Challan"
+                                // bgColor={colors.appColor}
+                                colorsArray={['#296cb1', '#2760a7', '#203d88']}
+                                textColor={colors.white}
+                                textSize={hp('1.3')}
+                                textWeight={"bold"}
+                            />
+                        </View>
+                    </View>
+
+                    <LineSeprator style={styles.listSecondSeprator} />
+
+                    <View style={styles.challanUpperMainView}>
+                        <View style={{ flex: 0.5, justifyContent: 'center' }}>
+                            <Text style={styles.challanUpperText1}>{`Rs ${item.net_payable}/-`}</Text>
+                            <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
+                        </View>
+                        <View style={styles.challanLowerRightView}>
+                            <Button
+                                height={hp('4.5')}
+                                width={wp('38')}
+                                borderRadius={wp('1.5')}
+                                text="Get Challan Via Email"
+                                // bgColor={colors.appColor}
+                                colorsArray={['#296cb1', '#2760a7', '#203d88']}
+                                textColor={colors.white}
+                                textSize={hp('1.3')}
+                                textWeight={"bold"}
+                            />
+                        </View>
+                    </View>
+
+                </View>
+                {/* :
                         null
-                }
+                } */}
 
             </>
         );
@@ -227,7 +230,8 @@ const Challans = () => {
                                 width={wp('35')}
                                 borderRadius={wp('1.5')}
                                 text="Pay Online"
-                                bgColor={colors.appColor}
+                                // bgColor={colors.appColor}
+                                colorsArray={['#296cb1', '#2760a7', '#203d88']}
                                 textColor={colors.white}
                                 textSize={hp('1.5')}
                                 textWeight={"bold"}

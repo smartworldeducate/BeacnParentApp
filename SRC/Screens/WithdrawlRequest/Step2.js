@@ -185,18 +185,18 @@ const Step2 = ({ onPressBack, onPressNext, disabled }) => {
 
           <View style={styles.selectedRelationLowerView}>
             <Text style={styles.selectedRelatioDetailsText}>
-              CNIC: <Text style={{ fontFamily: fontFamily.helveticaRegular }}>{CNIC}</Text>
+              CNIC: <Text style={{ fontFamily: fontFamily.helveticaLight }}>{CNIC}</Text>
             </Text>
             <Text style={styles.selectedRelatioDetailsText}>
-              Email: <Text style={{ fontFamily: fontFamily.helveticaRegular }}>{email}</Text>
+              Email: <Text style={{ fontFamily: fontFamily.helveticaLight }}>{email}</Text>
             </Text>
             <Text style={styles.selectedRelatioDetailsText}>
               Contact Number:{' '}
-              <Text style={{ fontFamily: fontFamily.helveticaRegular }}>{contact}</Text>
+              <Text style={{ fontFamily: fontFamily.helveticaLight }}>{contact}</Text>
             </Text>
             <Text style={styles.selectedRelatioDetailsText}>
               Correspondance Address:{' '}
-              <Text style={{ fontFamily: fontFamily.helveticaRegular }}>
+              <Text style={{ fontFamily: fontFamily.helveticaLight }}>
                 {childDatahere?.posts?.result.children[0].complete_address}
               </Text>
             </Text>
@@ -211,7 +211,8 @@ const Step2 = ({ onPressBack, onPressNext, disabled }) => {
             height={hp('4.5')}
             borderRadius={wp('1.5')}
             text="Back"
-            bgColor={colors.appColor}
+            colorsArray={['#296cb1', '#2760a7', '#203d88']}
+            // bgColor={colors.appColor}
             textColor={colors.white}
             textSize={hp('1.75')}
           />
@@ -236,8 +237,11 @@ const Step2 = ({ onPressBack, onPressNext, disabled }) => {
             textColor={colors.white}
             textSize={hp('1.75')}
             disabled={disableBtn ? false : true}
-            // bgColor={selectRelation.length > 0 ? colors.appColor : colors.grey}
-            bgColor={disableBtn ? colors.appColor : colors.grey}
+            colorsArray={disableBtn ? ['#296cb1', '#2760a7', '#203d88'] : ['#888888', '#cccccc']}
+          // bgColor={selectRelation.length > 0 ? colors.appColor : colors.grey}
+
+          // below working line
+          // bgColor={disableBtn ? colors.appColor : colors.grey}
           />
         </View>
       </View>
@@ -262,7 +266,7 @@ const styles = StyleSheet.create({
   selectValueText: {
     marginLeft: hp('1.5'),
     fontSize: hp('1.6'),
-    fontFamily: fontFamily.helveticaRegular,
+    fontFamily: fontFamily.helveticaLight,
     color: colors.appColor,
   },
 
@@ -300,7 +304,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     color: colors.appColor,
     fontSize: hp('1.4'),
-    fontFamily: fontFamily.helveticaRegular,
+    fontFamily: fontFamily.helveticaLight,
   },
   modalView: {
     flex: 0.15,
@@ -318,7 +322,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     color: colors.lightBlack,
-    fontFamily: fontFamily.helveticaRegular,
+    fontFamily: fontFamily.helveticaLight,
     fontSize: hp('1.5'),
   },
   parentDetailsView: {
@@ -342,7 +346,7 @@ const styles = StyleSheet.create({
   },
   selectedRelationHeaderText: {
     fontSize: hp('1.7'),
-    fontFamily: fontFamily.helveticaRegular,
+    fontFamily: fontFamily.helveticaLight,
     color: colors.silverGrey,
   },
   selectedRelationLowerView: {
