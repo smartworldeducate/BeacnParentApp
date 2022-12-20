@@ -58,6 +58,9 @@ const Assessment = () => {
 
   const [className, setClassName] = useState();
   const [attendencePercentage, setAttendencePercentage] = useState();
+  const [inititalData, setInitialData] = useState(
+    assessmentHere?.posts?.result?.gradebook?.class_info,
+  );
 
   const handleNavigate = (routeName, clearStack, params) => {
     navigation.navigate(routeName, params);
@@ -78,110 +81,6 @@ const Assessment = () => {
     //     setPayablesChallans(feeChallanHere)
     // }
   }, []);
-
-  // const [assessmentData, setAssessmentData] = useState([
-  //   {
-  //     id: 1,
-  //     class: 'Class 1',
-  //     dateFrom: 'Aug, 19',
-  //     dateTo: 'Jul, - 20',
-  //     assessment: true,
-  //     assessmentReport: {
-  //       section: 'Pink',
-  //       campus: 'Waltion Campus, Lahore',
-  //       schoolHeadRemarks:
-  //         "You've reached the end of another grading period, and what could be more daunting than the task of composing insightful, original, and unique comments about every child in your class? The following positive statements will help you tailor your comments to specific children and highlight their strengths",
-  //       classTeacherRemarks:
-  //         'Just about every teacher agrees: report card comments are important to provide insights and next steps to students and families. But there are few who actually look forward to writing them.',
-  //       achievements:
-  //         'Achieve and achievement often imply the completion of something important or difficult—a lofty goal or a great feat. Graduating high school is an achievement. Learning a new language is an achievement. An award is an achievement.',
-  //       selfAssessment:
-  //         'Self Assessment is a system HM Revenue and Customs (HMRC) uses to collect Income Tax.',
-  //     },
-  //   },
-  //   {
-  //     id: 2,
-  //     class: 'Class 2',
-  //     dateFrom: 'Aug, 20 ',
-  //     dateTo: 'Jul, - 21',
-  //     assessment: true,
-  //     assessmentReport: {
-  //       section: 'Green',
-  //       campus: 'Waltion Campus, Lahore',
-  //       schoolHeadRemarks:
-  //         'Whether you are tweaking statements from this page or creating original ones, check out our Report Card Thesaurus [see bottom of the page] that contains a list of appropriate adjectives and adverbs. There you will find the right words to keep your comments fresh and accurate.',
-  //       classTeacherRemarks:
-  //         "Because every instructor knows working under tight deadlines to create upwards of 20 unique and detailed reports at the end of the year or term isn’t exactly straightforward (or particularly fun). That's especially true in the era of distance learning.",
-  //       achievements:
-  //         'Achievement can also refer to the act of achieving, as in We need to focus on the achievement of these goals. This sense of the word doesn’t always imply impressiveness by itself—it often means the same thing as completion.',
-  //       selfAssessment:
-  //         'Tax is usually deducted automatically from wages, pensions and savings. People and businesses with other income (including COVID-19 grants and support payments) must report it in a tax return.',
-  //     },
-  //   },
-
-  //   {
-  //     id: 3,
-  //     class: 'Class 3',
-  //     dateFrom: 'Aug, 21',
-  //     dateTo: ' Jul, - 22',
-  //     assessment: false,
-  //   },
-  // ]);
-
-  // const [stdSubjectsResults, setStdSubjectsResults] = useState([
-  //   {
-  //     id: 1,
-  //     subName: 'English',
-  //     obtainMarks: 23,
-  //     totalMarks: 50,
-  //     remarks:
-  //       'Azaan has improved her participation throughout this year, and now participates with increased frequency and less support. {firstname} participates by locating facts and details, making inferences about texts, and asking relevant questions. Azaan has improved her participation throughout this year, and now participates with increased frequency and less support. {firstname} participates by locating facts and details, making inferences about texts, and asking relevant questions. Azaan has improved her participation throughout this year, and now participates with increased frequency and less support. {firstname} participates by locating facts and details, making inferences about texts, and asking relevant questions. Azaan has improved her participation throughout this year, and now participates with increased frequency and less support. {firstname} participates by locating facts and details, making inferences about texts, and asking relevant questions.',
-  //   },
-  //   {
-  //     id: 2,
-  //     subName: 'General Science',
-  //     obtainMarks: 26,
-  //     totalMarks: 50,
-  //     remarks:
-  //       "Report cards provide parents and guardians with essential information regarding their child's progress in school. Besides a letter grade, parents are given a brief descriptive comment that elaborates the student's strengths or what the student needs to improve upon. Finding the exact words to describe a meaningful comment takes effort. Feedback also may vary by subject. What applies in math does not always apply in science.",
-  //   },
-  //   {
-  //     id: 3,
-  //     subName: 'Islamiyat',
-  //     obtainMarks: 46,
-  //     totalMarks: 50,
-  //     remarks:
-  //       'Hanafi bin Masdi MasyaAllah, Adam got an A for Maths. He exhibits a positive outlook and attitude in the classroom. He is learning tooccupy his time constructively. When he is able to settle down, he does much betterwork. He needs to be more methodical in his approach to the Science subjects and Arabic. May Allah grant him happiness and success! Ameen .',
-  //   },
-  //   {
-  //     id: 4,
-  //     subName: 'Mathematics',
-  //     obtainMarks: 17,
-  //     totalMarks: 50,
-  //     remarks: 'Need highly improvements',
-  //   },
-  //   {
-  //     id: 5,
-  //     subName: 'Urdu',
-  //     obtainMarks: 33,
-  //     totalMarks: 50,
-  //     remarks: 'Not bad but still need some improvements',
-  //   },
-  //   {
-  //     id: 6,
-  //     subName: 'Music',
-  //     obtainMarks: 46,
-  //     totalMarks: 50,
-  //     remarks: 'Very good improvements',
-  //   },
-  //   {
-  //     id: 7,
-  //     subName: 'Visual Arts',
-  //     obtainMarks: 17,
-  //     totalMarks: 50,
-  //     remarks: 'Need highly improvements',
-  //   },
-  // ]);
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -248,6 +147,27 @@ const Assessment = () => {
       </View>
     );
   };
+  const onPressSelected = ({item, index}) => {
+    let ourGettingValue = [
+      ...JSON.parse(
+        JSON.stringify(assessmentHere?.posts?.result?.gradebook?.class_info),
+      ),
+    ];
+    for (let i = 0; i < ourGettingValue.length; i++) {
+      if (index === i) {
+        ourGettingValue[i].checked = !ourGettingValue[i].checked;
+        setInitialData(ourGettingValue);
+      } else {
+        ourGettingValue[i].checked = false;
+      }
+      // const element = ourGettingValue[i];
+      // console.log("element", element);
+      setInitialData(ourGettingValue);
+    }
+
+    // ourGettingValue.checked = true;
+    // console.log("ourGettingValue", ourGettingValue);
+  };
 
   const onPressViewModal = () => {
     setViewModalVisible(!viewModalVisible);
@@ -265,43 +185,67 @@ const Assessment = () => {
   const renderItem = ({item, index}) => {
     // console.log('itemLength', item);
     return (
-      <View style={styles.renderMainView}>
-        <View View style={styles.mainInnerView}>
-          <View style={styles.innerHeaderView}>
-            <Text style={styles.datesText}>
-              {`${item?.class_name} ${item?.acad_year_title}`}
-            </Text>
-            {item.terms.length === 0 && (
-              <Text>{'No assessment uploaded yet'}</Text>
-            )}
+      <View>
+        <View style={styles.renderMainView}>
+          <View View style={styles.mainInnerView}>
+            <View style={styles.innerHeaderView}>
+              <View
+                style={{
+                  flex: 0.85,
+                  justifyContent: 'center',
+                  // backgroundColor: 'green',
+                }}>
+                <Text style={styles.datesText}>
+                  {`${item?.class_name} ${item?.acad_year_title}`}
+                </Text>
+                {item.terms.length === 0 && (
+                  <Text>{'No assessment uploaded yet'}</Text>
+                )}
+              </View>
+              <TouchableOpacity
+                onPress={() => onPressSelected({item, index})}
+                style={{
+                  flex: 0.15,
+                  justifyContent: 'center',
+                  // backgroundColor: 'red',
+                }}>
+                <Image
+                  source={{uri: 'arrowdown'}}
+                  style={{height: hp('2'), width: wp('4')}}
+                  resizeMode={'contain'}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        {item.terms.length > 0 && <LineSeprator style={styles.lineSeprator} />}
+          {item.terms.length > 0 && (
+            <LineSeprator style={styles.lineSeprator} />
+          )}
 
-        <View style={styles.bottomRowView}>
-          <View style={{}}>
-            <FlatListItem
-              data={item?.terms}
-              renderItem={renderItemAssessmentReports}
-              keyExtractor={(item, index) => index.toString()}
+          <View style={styles.bottomRowView}>
+            <View style={{}}>
+              <FlatListItem
+                data={item?.terms}
+                renderItem={renderItemAssessmentReports}
+                keyExtractor={(item, index) => index.toString()}
+              />
+            </View>
+
+            <AssessmentReportModal
+              modalVisible={modalVisible}
+              onPressModal={onPressModal}
+              reportQuatar={'Mid Year Report'}
+              assessmentYear={`${dateFrom}`}
+              stdClass={` ${className} - ${stdSection}`}
+              campus={campus}
+              termAttendence={`Term Attendance ${attendencePercentage}`}
+              text1={headRemarksDetails}
+              text2={classRemarksDetails}
+              text3={achievements}
+              text4={selfAssessment}
+              stdSubjectsResults={item?.terms}
+              renderSubjectsItem={renderSubjectsItem}
             />
           </View>
-
-          <AssessmentReportModal
-            modalVisible={modalVisible}
-            onPressModal={onPressModal}
-            reportQuatar={'Mid Year Report'}
-            assessmentYear={`${dateFrom}`}
-            stdClass={` ${className} - ${stdSection}`}
-            campus={campus}
-            termAttendence={`Term Attendance ${attendencePercentage}`}
-            text1={headRemarksDetails}
-            text2={classRemarksDetails}
-            text3={achievements}
-            text4={selfAssessment}
-            stdSubjectsResults={item?.terms}
-            renderSubjectsItem={renderSubjectsItem}
-          />
         </View>
       </View>
     );
@@ -438,6 +382,7 @@ const styles = StyleSheet.create({
   innerHeaderView: {
     flex: 0.85,
     justifyContent: 'center',
+    flexDirection: 'row',
   },
 
   datesText: {

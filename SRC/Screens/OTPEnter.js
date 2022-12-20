@@ -30,6 +30,7 @@ import {
   MaskSymbol,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
+import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {

@@ -98,8 +98,7 @@ const Challans = () => {
   // console.log("paidChallansHere11", paidChallans);
 
   const renderItem = ({item, index}) => {
-    setPayOnlineState(item.status == 0 ? true : false);
-
+    setPayOnlineState(item.status == 1 ? false : true);
     return (
       <>
         {item.status == 0 ? (
@@ -117,11 +116,7 @@ const Challans = () => {
               </View>
               <View style={styles.challanUpperRightView}>
                 <Button
-                  onPress={() =>
-                    Linking.openURL(
-                      'http://b2training.beaconhouse.net/students/ism/ism_report_invoice_printed_n.php?company_id=1&from_date=01/02/2019&app=Y&invoice_num=2140005127671',
-                    )
-                  }
+                  onPress={() => Linking.openURL(item.invoice_pdf)}
                   height={hp('4.5')}
                   width={wp('25')}
                   borderRadius={wp('1.5')}
