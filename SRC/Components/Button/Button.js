@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Text, StyleSheet, Image, View, TouchableOpacity } from 'react-native';
+import React, {Component} from 'react';
+import {Text, StyleSheet, Image, View, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import colors from '../../Styles/colors';
 import fontFamily from "../../Styles/fontFamily";
@@ -34,8 +34,8 @@ const Button = ({ colorsArray, disabled, onPress, borderRadius, bgColor, borderC
 }
 
 const styles = StyleSheet.create({
-    // linearGradient: {
-    //     flex: 1
-    // },
+  // linearGradient: {
+  //     flex: 1
+  // },
 });
 export default Button;

@@ -1,7 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View, Text, Image, TouchableOpacity, Platform, RefreshControl } from 'react-native';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import React, {useState, useEffect} from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Platform,
+  RefreshControl,
+} from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
 import colors from '../Styles/colors';
 import MainHeader from '../Components/Header/MainHeader';
@@ -10,27 +24,24 @@ import LineSeprator from '../Components/LineSeprator/LineSeprator';
 import LeftRightImgText from '../Components/LeftRightImgText/LeftRightImgText';
 import Button from '../Components/Button/Button';
 import fontFamily from '../Styles/fontFamily';
-import { Linking } from 'react-native';
+import {Linking} from 'react-native';
 
-import { getChallan } from '../Redux/Features/getChallans/challans';
+import {getChallan} from '../Redux/Features/getChallans/challans';
 
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Challans = () => {
+  const dispatch = useDispatch();
+  const feeChallanHere = useSelector(state => state.feeChallan);
+  const childDatahere = useSelector(state => state.children);
 
-    const dispatch = useDispatch();
-    const feeChallanHere = useSelector((state) => state.feeChallan);
-    const childDatahere = useSelector(state => state.children);
+  const navigation = useNavigation();
+  const [refreshing, setRefreshing] = React.useState(false);
 
-
-    const navigation = useNavigation();
-    const [refreshing, setRefreshing] = React.useState(false);
-
-    const handleNavigate = (routeName, clearStack, params) => {
-        navigation.navigate(routeName, params);
-        if (clearStack) {
-            console.log("Clear")
-        }
+  const handleNavigate = (routeName, clearStack, params) => {
+    navigation.navigate(routeName, params);
+    if (clearStack) {
+      console.log('Clear');
     }
 
     const [payOnlineState, setPayOnlineState] = useState(false);
@@ -145,37 +156,22 @@ const Challans = () => {
     // const renderItemStatus  = ({item, index}) =>{
     //     return()
     // }
-    const renderItemPastChallan = ({ item, index }) => {
-        console.log("itemHere", item);
-        // console.log("itemStatus", item.status);
-        return (
-            <>
-                {
-                    item.status == 1 ?
-                        <View style={styles.pastChallanMainView}>
+  }, []);
+  // console.log(paidChallans, "paid")
+  // console.log(payableChallans, "payable")
 
-                            <View style={styles.pastChallanView}>
-                                <View style={styles.pastChallanUpperView}>
-                                    <Text style={styles.pastChallanUpperText}>{`${item.paid_date}`}</Text>
-                                </View>
-                                <View style={styles.pastChallanLowerView}>
-                                    <Text style={styles.pastChallanLowerText1}>{`Rs ${item.net_payable}`}</Text>
-                                    <Text style={styles.pastChallanLowerText2}>{`${item.paid_date} - ${item.paid_date}`}</Text>
-                                    <Text style={styles.pastChallanLowerText2}>{`Paid on ${item.paid_date}`}</Text>
-                                </View>
-                            </View>
+  const onRefresh = () => {
+    setRefreshing(true);
+    // initialCall();
+    console.log('add', 2 + 2);
+    setRefreshing(false);
+    // console.log("calling again", initialCall());
+  };
 
-                            <LineSeprator style={styles.listSecondSeprator} />
-                        </View>
-                        :
-                        null
-                }
-            </>
+  // console.log("paidChallansHere11", paidChallans);
 
-        );
-    }
-
-
+  const renderItem = ({item, index}) => {
+    setPayOnlineState(item.status == 1 ? false : true);
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Platform.OS === "android" ? colors.white : colors.white }}>
 
@@ -274,96 +270,96 @@ const Challans = () => {
 }
 
 const styles = StyleSheet.create({
-    listSeprator: {
-        height: hp('0.15'),
-        backgroundColor: colors.appColor,
-        marginVertical: hp('0.85')
-    },
-    listSecondSeprator: {
-        height: hp('0.085'),
-        backgroundColor: colors.grey,
-        marginVertical: hp('0.85')
-    },
-    listSepratorPast: {
-        height: hp('0.15'),
-        backgroundColor: colors.appColor,
-        marginVertical: hp('0.85'),
-        marginHorizontal: wp('8')
-    },
-    challansMainView: {
-        marginHorizontal: wp('8'),
-        borderRadius: wp('4'),
-        borderColor: colors.grey,
-        borderWidth: wp('0.15'),
-        paddingHorizontal: wp('2'),
-        paddingVertical: hp('1.5'),
-        marginBottom: hp('1')
-    },
-    challanUpperMainView: {
-        flexDirection: 'row',
-        paddingVertical: hp('0.5'),
-        paddingHorizontal: wp('2')
-    },
-    challanUpperView: {
-        flex: 0.6,
-        justifyContent: 'center'
-    },
-    challanUpperText1: {
-        fontFamily: fontFamily.semiBold,
-        color: colors.lightBlack,
-        fontSize: hp('1.7')
-    },
-    challanUpperText2: {
-        fontFamily: fontFamily.regular,
-        color: colors.grey,
-        fontSize: hp('1.55')
-    },
-    challanUpperRightView: {
-        flex: 0.4,
-        justifyContent: 'center',
-        alignItems: 'flex-end'
-    },
-    challanLowerRightView: {
-        flex: 0.5,
-        justifyContent: 'center',
-        alignItems: 'flex-end'
-    },
-    pastChallanMainView: {
-        marginHorizontal: wp('8')
-    },
-    pastChallanView: {
-        flexDirection: "row"
-    },
-    pastChallanUpperView: {
-        flex: 0.15,
-        justifyContent: 'center',
-        alignItems: "center",
-        borderRadius: wp('4'),
-        borderColor: colors.grey,
-        borderWidth: wp('0.15'),
-        height: hp('7'),
-        width: wp('8'),
-        paddingHorizontal: wp('1.5')
-    },
-    pastChallanUpperText: {
-        fontFamily: fontFamily.semiBold,
-        color: colors.lightBlack,
-        fontSize: hp('1.5')
-    },
-    pastChallanLowerView: {
-        flex: 0.85,
-        justifyContent: 'center',
-        paddingHorizontal: wp('3')
-    },
-    pastChallanLowerText1: {
-        fontFamily: fontFamily.semiBold,
-        color: colors.lightBlack,
-        fontSize: hp('1.75')
-    },
-    pastChallanLowerText2: {
-        fontFamily: fontFamily.regular,
-        color: colors.lightBlack,
-        fontSize: hp('1.5')
-    }
+  listSeprator: {
+    height: hp('0.15'),
+    backgroundColor: colors.appColor,
+    marginVertical: hp('0.85'),
+  },
+  listSecondSeprator: {
+    height: hp('0.085'),
+    backgroundColor: colors.grey,
+    marginVertical: hp('0.85'),
+  },
+  listSepratorPast: {
+    height: hp('0.15'),
+    backgroundColor: colors.appColor,
+    marginVertical: hp('0.85'),
+    marginHorizontal: wp('8'),
+  },
+  challansMainView: {
+    marginHorizontal: wp('8'),
+    borderRadius: wp('4'),
+    borderColor: colors.grey,
+    borderWidth: wp('0.15'),
+    paddingHorizontal: wp('2'),
+    paddingVertical: hp('1.5'),
+    marginBottom: hp('1'),
+  },
+  challanUpperMainView: {
+    flexDirection: 'row',
+    paddingVertical: hp('0.5'),
+    paddingHorizontal: wp('2'),
+  },
+  challanUpperView: {
+    flex: 0.6,
+    justifyContent: 'center',
+  },
+  challanUpperText1: {
+    fontFamily: fontFamily.semiBold,
+    color: colors.lightBlack,
+    fontSize: hp('1.7'),
+  },
+  challanUpperText2: {
+    fontFamily: fontFamily.regular,
+    color: colors.grey,
+    fontSize: hp('1.55'),
+  },
+  challanUpperRightView: {
+    flex: 0.4,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  challanLowerRightView: {
+    flex: 0.5,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  pastChallanMainView: {
+    marginHorizontal: wp('8'),
+  },
+  pastChallanView: {
+    flexDirection: 'row',
+  },
+  pastChallanUpperView: {
+    flex: 0.15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: wp('4'),
+    borderColor: colors.grey,
+    borderWidth: wp('0.15'),
+    height: hp('7'),
+    width: wp('8'),
+    paddingHorizontal: wp('1.5'),
+  },
+  pastChallanUpperText: {
+    fontFamily: fontFamily.semiBold,
+    color: colors.lightBlack,
+    fontSize: hp('1.5'),
+  },
+  pastChallanLowerView: {
+    flex: 0.85,
+    justifyContent: 'center',
+    paddingHorizontal: wp('3'),
+  },
+  pastChallanLowerText1: {
+    fontFamily: fontFamily.semiBold,
+    color: colors.lightBlack,
+    fontSize: hp('1.75'),
+  },
+  pastChallanLowerText2: {
+    fontFamily: fontFamily.regular,
+    color: colors.lightBlack,
+    fontSize: hp('1.5'),
+  },
 });
 export default Challans;

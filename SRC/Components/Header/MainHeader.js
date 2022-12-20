@@ -174,8 +174,8 @@ const MainHeader = ({
           loop={false}
           index={0}
           style={styles.wrapper}
-          paginationStyle={{ bottom: -19 }}
-          containerStyle={{ borderRadius: wp('4') }}
+          paginationStyle={{bottom: -16}}
+          containerStyle={{borderRadius: wp('4')}}
           showsButtons={false}
           showsPagination={true}
           onIndexChanged={index => {
@@ -188,7 +188,6 @@ const MainHeader = ({
                 data[index]?.system_id && data[index]?.sms_number,
               ),
             );
-            // console.log("data[index]?.system_id", data[index]?.system_id);
           }}>
 
           {data?.length > 0 &&

@@ -103,8 +103,8 @@ const OTPEnter = ({ route }) => {
     const otp = /(\d{4})/g.exec(message)[1];
     console.log('otp<<', otp);
     setValue(otp);
-    setValuesObj({ ...valuesObj, pin_code_sms: otp });
-
+    handleNavigate('HomeScreen');
+    setValuesObj({...valuesObj, pin_code_sms: otp});
     // setOtpCode(otp);
     removeListener();
     Keyboard.dismiss();

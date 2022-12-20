@@ -95,8 +95,20 @@ const ParentProfile = () => {
     field_name: '3',
   });
 
+  const [motherEmailValues, setMotherEmailValues] = useState({
+    system_id: '146660',
+    sms_number: '03046121456',
+    field_value: '',
+    field_name: '3',
+  });
+
   const onChangeFatherEmail = val => {
     setFatherEmailValues({...fatherEmailValues, field_value: val});
+    // console.log('inside', fatherEmailValues.field_value);
+  };
+
+  const onChangeMotherEmail = val => {
+    setMotherEmailValues({...motherEmailValues, field_value: val});
     // console.log('inside', fatherEmailValues.field_value);
   };
 
@@ -105,7 +117,6 @@ const ParentProfile = () => {
   const onPressUpdateFatherEmailBtn = () => {
     console.log('myObj', fatherEmailValues);
     dispatch(parentProfileUpdate(fatherEmailValues));
-    console.log('i will be here');
   };
 
   // const [inputEmail, setInputEmail] = useState('');
@@ -414,7 +425,7 @@ const ParentProfile = () => {
             modalUpperFlex={0.3}
             modalLowerFlex={0.7}
             inputEmail={gurdians?.posts?.result?.guardians[1]?.primary_e_mail}
-            onChangeEmail={onChangeEmail}
+            onChangeEmail={onChangeMotherEmail}
             text1={'Mother Email Address'}
             text2={'Ayeshakhan@bh.edu.pk'}
             modalVisible={emailAddressModalMother}
