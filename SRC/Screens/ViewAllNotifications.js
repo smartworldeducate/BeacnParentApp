@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,7 +16,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import fontFamily from '../Styles/fontFamily';
 
 import colors from '../Styles/colors';
@@ -28,12 +28,12 @@ import ModalNotification from '../Components/Modal/ModalNotification';
 import Loader from '../Components/Loader/Loader';
 import moment from 'moment';
 import RenderHtml from 'react-native-render-html';
-import {useWindowDimensions} from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import SingleLine from '../Components/SingleLine/SingleLine';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-const ViewAllNotifications = ({route}) => {
-  const {width} = useWindowDimensions();
+const ViewAllNotifications = ({ route }) => {
+  const { width } = useWindowDimensions();
   const childDatahere = useSelector(state => state.children);
   const notificationsHere = useSelector(state => state.notifications);
 
@@ -69,7 +69,7 @@ const ViewAllNotifications = ({route}) => {
     // console.log("calling again", initialCall());
   };
 
-  const onPressRightImg = ({item}) => {
+  const onPressRightImg = ({ item }) => {
     // setDate(item.date);
     // setText(item.text);
     // setType(item.type);
@@ -79,19 +79,39 @@ const ViewAllNotifications = ({route}) => {
     onPressModal();
   };
 
-  const renderItem = ({item, index}) => {
+  const renderItem = ({ item, index }) => {
+
+    var splitDate = item.date.split(" ");
+    // console.log("date333", splitDate[1]);
+
+    var splitFirst = splitDate[1].split(" ");
+    // console.log("splitFirst", splitFirst);
+
+    var splitSecond = splitFirst[0].split(" ");
+    // console.log("splitSecond", splitSecond);
+
+    var splitThird = splitSecond[0].split("-")
+    // console.log("splitThird", splitThird);
+
+    // console.log("splitLast1", splitThird[0]);
+    // console.log("splitLast2", splitThird[1]);
+
+    var splitFinal = splitSecond[0].split(" ");
+    // console.log("splitFinal", splitFinal);
+
     return (
       <View style={styles.listMainView}>
         <View style={styles.listLeftView}>
           <Text
             style={{
-              fontSize: hp('1.8'),
+              fontSize: hp('1.7'),
               fontFamily: fontFamily.semiBold,
               textAlign: 'center',
               color: colors.grey,
-            }}>{`${moment(item.date).format('D')}\n${moment(item.date).format(
-            'MMM',
-          )}`}</Text>
+            }}>
+            {/* {`${moment(item.date).format('D')}\n${moment(item.date).format('MMM')}`} */}
+            {`${splitThird[0]}\n${splitThird[1]}`}
+          </Text>
         </View>
         <View style={styles.listCentralView}>
           {/* <Text numberOfLines={1} ellipsizeMode='tail' style={styles.centalUpperText}>{item.body}</Text> */}
@@ -105,7 +125,7 @@ const ViewAllNotifications = ({route}) => {
               ) ? (
                 <RenderHtml
                   contentWidth={width}
-                  source={{html: index != 0 ? item.body : item.title}}
+                  source={{ html: index != 0 ? item.body : item.title }}
                   defaultTextProps={
                     {
                       // numberOfLines: 1, ellipsizeMode: 'tail'
@@ -120,10 +140,10 @@ const ViewAllNotifications = ({route}) => {
           <Text style={styles.centalLowerText}>{item.notification_type}</Text>
         </View>
         <TouchableOpacity
-          onPress={() => onPressRightImg({item})}
+          onPress={() => onPressRightImg({ item })}
           style={styles.listRightView}>
           <Image
-            source={{uri: 'forwardarrow'}}
+            source={{ uri: 'forwardarrow' }}
             style={styles.listRightImg}
             resizeMode={'contain'}
           />
@@ -167,11 +187,11 @@ const ViewAllNotifications = ({route}) => {
             progressBackgroundColor={colors.silverGrey}
             tintColor={colors.appColor}
 
-            // title={"loading"}
-            // titleColor={colors.white}
+          // title={"loading"}
+          // titleColor={colors.white}
 
-            // size between 0 to 1
-            // size={"large"}
+          // size between 0 to 1
+          // size={"large"}
           />
         }>
         <View style={styles.notificationView}>
@@ -203,7 +223,7 @@ const ViewAllNotifications = ({route}) => {
           sentBy={sentBy}
         />
 
-        <View style={{marginBottom: hp('5')}}></View>
+        <View style={{ marginBottom: hp('5') }}></View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -231,40 +251,40 @@ const styles = StyleSheet.create({
     marginHorizontal: wp('8'),
   },
   listLeftView: {
-    flex: 0.15,
+    flex: 0.2,
     justifyContent: 'center',
     alignItems: 'center',
     height: hp('6'),
-    width: wp('6'),
+    width: wp('3'),
     borderRadius: wp('3'),
     borderWidth: wp('0.15'),
     borderColor: colors.grey,
   },
   listCentralView: {
-    flex: 0.75,
+    flex: 0.5,
     flexDirection: 'column',
     justifyContent: 'center',
     paddingLeft: wp('3'),
   },
   centalUpperText: {
     fontSize: hp('1.6'),
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.helveticaLight,
     color: colors.grey,
     lineHeight: hp('2.5'),
   },
   centalLowerText: {
-    fontSize: hp('2'),
-    fontFamily: fontFamily.regular,
+    fontSize: hp('1.7'),
+    fontFamily: fontFamily.helveticaLight,
     color: colors.lightBlack,
     lineHeight: hp('2.5'),
   },
   listRightView: {
-    flex: 0.1,
+    flex: 0.3,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   listRightImg: {
-    height: hp('1.5'),
+    height: hp('1.75'),
     width: wp('3'),
   },
   bottomView: {

@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import RenderHtml from 'react-native-render-html';
-import {useWindowDimensions} from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import fontFamily from '../../Styles/fontFamily';
 import {
   widthPercentageToDP as wp,
@@ -9,16 +9,16 @@ import {
 } from 'react-native-responsive-screen';
 import colors from '../../Styles/colors';
 
-const SingleLine = ({text1, text2}) => {
-  const {width} = useWindowDimensions();
+const SingleLine = ({ text1, text2 }) => {
+  const { width } = useWindowDimensions();
   return (
     <View style={{}}>
       <Text
         numberOfLines={1}
         ellipsizeMode="tail"
         style={{
-          fontFamily: fontFamily.regular,
-          fontSize: hp('2'),
+          fontFamily: fontFamily.helveticaLight,
+          fontSize: hp('1.9'),
           color: colors.grey,
         }}>
         {text1}

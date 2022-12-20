@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,7 +7,7 @@ import {
 import colors from '../../Styles/colors';
 import fontFamily from '../../Styles/fontFamily';
 
-const WithdrawlCentral = ({backgroundColor, text1, text1Color, text2}) => {
+const WithdrawlCentral = ({ backgroundColor, text1, text1Color, text2, text2Color }) => {
   return (
     <View style={{}}>
       <View
@@ -22,14 +22,24 @@ const WithdrawlCentral = ({backgroundColor, text1, text1Color, text2}) => {
         <Text
           style={{
             color: text1Color,
-            fontFamily: fontFamily.regular,
-            fontSize: hp('1.5'),
+            fontFamily: fontFamily.helvetica,
+            fontSize: hp('1.8'),
+            fontWeight: "600"
           }}>
           {text1}
         </Text>
       </View>
       <View style={styles.text2ViewStyle}>
-        <Text style={styles.text2Stle}>{text2}</Text>
+        <Text
+          style={{
+            color: text2Color,
+            fontFamily: fontFamily.helveticaRegular,
+            fontSize: hp('1.75'),
+            textAlign: "center",
+            fontWeight: "600"
+          }}>
+          {text2}
+        </Text>
       </View>
     </View>
   );
@@ -45,11 +55,6 @@ const styles = StyleSheet.create({
     marginVertical: hp('1.5'),
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  text2Stle: {
-    color: colors.appDarkColor,
-    fontFamily: fontFamily.semiBold,
-    fontSize: hp('1.85'),
-  },
+  }
 });
 export default WithdrawlCentral;

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -11,16 +11,16 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Button from '../../Components/Button/Button';
 import colors from '../../Styles/colors';
 import fontFamily from '../../Styles/fontFamily';
 import FlatListItem from '../../Components/FlatList/FlatList';
 import LineSeprator from '../../Components/LineSeprator/LineSeprator';
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Step2 = ({onPressBack, onPressNext, disabled}) => {
+const Step2 = ({ onPressBack, onPressNext, disabled }) => {
   const childDatahere = useSelector(state => state.children);
   // console.log("childDatahereStep2", childDatahere?.posts?.result);
 
@@ -57,7 +57,7 @@ const Step2 = ({onPressBack, onPressNext, disabled}) => {
     setModalVisible(!modalVisible);
   };
 
-  const onPressSelected = ({item, index}) => {
+  const onPressSelected = ({ item, index }) => {
     // console.log("selectedGuardianIndex", index);
     // console.log("selectedGuardian", item);
 
@@ -105,13 +105,13 @@ const Step2 = ({onPressBack, onPressNext, disabled}) => {
 
   // console.log("applicant_relation_id", applicant_relation_id);
 
-  const renderItem = ({item, index}) => {
+  const renderItem = ({ item, index }) => {
     return (
       <View>
         <TouchableOpacity
-          onPress={() => onPressSelected({item, index})}
-          style={{flexDirection: 'row', marginHorizontal: wp('3')}}>
-          <View style={{flex: 0.85, justifyContent: 'center'}}>
+          onPress={() => onPressSelected({ item, index })}
+          style={{ flexDirection: 'row', marginHorizontal: wp('3') }}>
+          <View style={{ flex: 0.85, justifyContent: 'center' }}>
             <Text style={styles.modalText}>{item.RELATION_DESC}</Text>
           </View>
           <View
@@ -119,11 +119,11 @@ const Step2 = ({onPressBack, onPressNext, disabled}) => {
               flex: 0.15,
               justifyContent: 'center',
               alignItems: 'flex-end',
-              marginVertical: hp('2'),
+              marginVertical: hp('1'),
             }}>
             <Image
-              source={{uri: item.checked ? 'addlocation' : 'circleselect'}}
-              style={{height: hp('2'), width: wp('4')}}
+              source={{ uri: item.checked ? 'addlocation' : 'circleselect' }}
+              style={{ height: hp('2'), width: wp('4') }}
               resizeMode={'contain'}
             />
           </View>
@@ -154,13 +154,13 @@ const Step2 = ({onPressBack, onPressNext, disabled}) => {
           <View style={styles.modalMainView}>
             <TouchableOpacity
               onPress={onPressModal}
-              style={{flex: 0.55}}></TouchableOpacity>
+              style={{ flex: 0.55 }}></TouchableOpacity>
             <View style={styles.modalView}>
               <FlatListItem data={parentsList} renderItem={renderItem} />
             </View>
             <TouchableOpacity
               onPress={onPressModal}
-              style={{flex: 0.25}}></TouchableOpacity>
+              style={{ flex: 0.3 }}></TouchableOpacity>
           </View>
         </Modal>
 
@@ -170,8 +170,8 @@ const Step2 = ({onPressBack, onPressNext, disabled}) => {
 
         <View style={styles.selectValueRightView}>
           <Image
-            source={{uri: 'arrowdown'}}
-            style={{height: hp('2'), width: wp('4')}}
+            source={{ uri: 'dropdowngrey' }}
+            style={{ height: hp('3.5'), width: wp('7') }}
             resizeMode={'contain'}
           />
         </View>
@@ -185,18 +185,18 @@ const Step2 = ({onPressBack, onPressNext, disabled}) => {
 
           <View style={styles.selectedRelationLowerView}>
             <Text style={styles.selectedRelatioDetailsText}>
-              CNIC: <Text style={{fontWeight: 'normal'}}>{CNIC}</Text>
+              CNIC: <Text style={{ fontFamily: fontFamily.helveticaLight }}>{CNIC}</Text>
             </Text>
             <Text style={styles.selectedRelatioDetailsText}>
-              Email: <Text style={{fontWeight: 'normal'}}>{email}</Text>
+              Email: <Text style={{ fontFamily: fontFamily.helveticaLight }}>{email}</Text>
             </Text>
             <Text style={styles.selectedRelatioDetailsText}>
               Contact Number:{' '}
-              <Text style={{fontWeight: 'normal'}}>{contact}</Text>
+              <Text style={{ fontFamily: fontFamily.helveticaLight }}>{contact}</Text>
             </Text>
             <Text style={styles.selectedRelatioDetailsText}>
               Correspondance Address:{' '}
-              <Text style={{fontWeight: 'normal'}}>
+              <Text style={{ fontFamily: fontFamily.helveticaLight }}>
                 {childDatahere?.posts?.result.children[0].complete_address}
               </Text>
             </Text>
@@ -205,19 +205,20 @@ const Step2 = ({onPressBack, onPressNext, disabled}) => {
       )}
 
       <View style={styles.btnMainView}>
-        <View style={{flex: 0.47}}>
+        <View style={{ flex: 0.47 }}>
           <Button
             onPress={onPressBack}
             height={hp('4.5')}
             borderRadius={wp('1.5')}
             text="Back"
-            bgColor={colors.appColor}
+            colorsArray={['#296cb1', '#2760a7', '#203d88']}
+            // bgColor={colors.appColor}
             textColor={colors.white}
             textSize={hp('1.75')}
           />
         </View>
-        <View style={{flex: 0.04}}></View>
-        <View style={{flex: 0.47}}>
+        <View style={{ flex: 0.04 }}></View>
+        <View style={{ flex: 0.47 }}>
           <Button
             onPress={() =>
               onPressNext(
@@ -236,8 +237,11 @@ const Step2 = ({onPressBack, onPressNext, disabled}) => {
             textColor={colors.white}
             textSize={hp('1.75')}
             disabled={disableBtn ? false : true}
-            // bgColor={selectRelation.length > 0 ? colors.appColor : colors.grey}
-            bgColor={disableBtn ? colors.appColor : colors.grey}
+            colorsArray={disableBtn ? ['#296cb1', '#2760a7', '#203d88'] : ['#888888', '#cccccc']}
+          // bgColor={selectRelation.length > 0 ? colors.appColor : colors.grey}
+
+          // below working line
+          // bgColor={disableBtn ? colors.appColor : colors.grey}
           />
         </View>
       </View>
@@ -256,13 +260,13 @@ const styles = StyleSheet.create({
   },
 
   selectValueLeftView: {
-    flex: 0.6,
+    flex: 0.65,
     justifyContent: 'center',
   },
   selectValueText: {
-    marginLeft: hp('2'),
-    fontSize: hp('1.8'),
-    fontFamily: fontFamily.regular,
+    marginLeft: hp('1.5'),
+    fontSize: hp('1.6'),
+    fontFamily: fontFamily.helveticaLight,
     color: colors.appColor,
   },
 
@@ -283,7 +287,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.grey,
     marginTop: hp('1'),
     marginBottom: hp('1'),
-    marginLeft: wp('5'),
+    marginLeft: wp('3'),
+
   },
   modalMainView: {
     flex: 1,
@@ -292,21 +297,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   selectRelationImgView: {
-    flex: 0.25,
+    flex: 0.2,
     justifyContent: 'center',
   },
   selectRelationText: {
     textAlign: 'right',
     color: colors.appColor,
-    fontSize: hp('1.75'),
-    fontFamily: fontFamily.regular,
+    fontSize: hp('1.4'),
+    fontFamily: fontFamily.helveticaLight,
   },
   modalView: {
-    flex: 0.2,
+    flex: 0.15,
     justifyContent: 'center',
-
     backgroundColor: 'white',
-    padding: hp('1'),
+    paddingVertical: hp('1'),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -318,8 +322,8 @@ const styles = StyleSheet.create({
   },
   modalText: {
     color: colors.lightBlack,
-    fontFamily: fontFamily.regular,
-    fontSize: hp('1.8'),
+    fontFamily: fontFamily.helveticaLight,
+    fontSize: hp('1.5'),
   },
   parentDetailsView: {
     flexDirection: 'column',
@@ -329,7 +333,7 @@ const styles = StyleSheet.create({
 
     elevation: 10,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 3},
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
     borderRadius: wp('2'),
   },
@@ -341,8 +345,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: wp('1'),
   },
   selectedRelationHeaderText: {
-    fontSize: hp('2'),
-    fontFamily: fontFamily.regular,
+    fontSize: hp('1.7'),
+    fontFamily: fontFamily.helveticaLight,
     color: colors.silverGrey,
   },
   selectedRelationLowerView: {
@@ -351,11 +355,10 @@ const styles = StyleSheet.create({
     paddingBottom: hp('2'),
   },
   selectedRelatioDetailsText: {
-    fontSize: hp('2'),
-    fontFamily: fontFamily.regular,
+    fontSize: hp('1.7'),
+    fontFamily: fontFamily.helveticaBold,
     color: colors.grey,
-    fontWeight: 'bold',
-    lineHeight: hp('3.5'),
+    lineHeight: hp('3'),
   },
 });
 export default Step2;

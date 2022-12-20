@@ -20,7 +20,7 @@ const HomeCentralView = ({ onPress, img, text }) => {
                 />
             </TouchableOpacity>
 
-            <View>
+            <View style={{ marginBottom: hp('1') }}>
                 <Text style={styles.textStyle}>{text}</Text>
             </View>
         </View>
@@ -43,9 +43,9 @@ const styles = StyleSheet.create({
         borderWidth: wp('0.2')
     },
     textStyle: {
-        fontSize: hp('1.65'),
-        fontFamily: fontFamily.regularAlatsi,
-        paddingVertical: hp('1'),
+        fontSize: hp('1.8'),
+        fontFamily: fontFamily.helveticaBold,
+        paddingVertical: hp('0.5'),
         color: colors.grey,
         textAlign: 'center'
     }

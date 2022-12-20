@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -32,7 +32,7 @@ import {
 } from 'react-native-confirmation-code-field';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   clearState,
   OTPCodeAction,
@@ -51,7 +51,7 @@ import {
   useOtpVerify,
 } from 'react-native-otp-verify';
 const CELL_COUNT = 4;
-const OTPEnter = ({route}) => {
+const OTPEnter = ({ route }) => {
   const [firstOTP, setFirstOTP] = useState('');
   const [otpCode, setOtpCode] = useState('');
   // const onChangeFirstOTP = val => {
@@ -59,7 +59,7 @@ const OTPEnter = ({route}) => {
   //   setValuesObj({...valuesObj, pin_code_sms: val});
   // };
   const [value, setValue] = useState('');
-  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
+  const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
@@ -91,8 +91,8 @@ const OTPEnter = ({route}) => {
 
   // console.log('valuesObj', valuesObj);
 
-  const {hash, otp, message, timeoutError, stopListener, startListener} =
-    useOtpVerify({numberOfDigits: 4});
+  const { hash, otp, message, timeoutError, stopListener, startListener } =
+    useOtpVerify({ numberOfDigits: 4 });
   useEffect(() => {
     getHash().then(console.log).catch(console.log);
     getOtp()
@@ -141,17 +141,26 @@ const OTPEnter = ({route}) => {
   //     }
   //   }, []);
 
+  const toastConfig = {
+    success: internalState => (
+      <View style={{ height: hp('8'), width: wp('90'), marginHorizontal: wp('5'), backgroundColor: "#333333", borderRadius: wp('1.5'), justifyContent: "center" }}>
+        <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helveticaLight, color: colors.white, paddingHorizontal: wp('3'), paddingVertical: hp('1.5'), lineHeight: hp('2.5') }}>{internalState.text1}</Text>
+      </View>
+    )
+  }
+
   return (
     <ImageBackground
-      source={{uri: 'mainsplash'}}
-      style={{flex: 1}}
+      source={{ uri: 'mainsplash' }}
+      style={{ flex: 1 }}
       resizeMode={'stretch'}>
-      <Toast />
+      {/* <Toast /> */}
+      <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
       {OTPCodeHere?.isLoading && <Loader></Loader>}
-      <View style={{flex: 3.5}}></View>
+      <View style={{ flex: 3.5 }}></View>
 
-      <View style={{marginBottom: hp('1.5'), marginHorizontal: wp('5')}}>
-        <Text style={{color: colors.white}}>
+      <View style={{ marginBottom: hp('1.5'), marginHorizontal: wp('5') }}>
+        <Text style={{ color: colors.solidAppColor, fontFamily: fontFamily.helvetica, fontSize: hp('1.5') }}>
           {`Enter the 4-digit OTP sent to ${route.params.contactNumberParam}`}
         </Text>
       </View>
@@ -209,7 +218,7 @@ const OTPEnter = ({route}) => {
                 rootStyle={styles.codeFieldRoot}
                 keyboardType="number-pad"
                 // textContentType="oneTimeCode"
-                renderCell={({index, symbol, isFocused}) => (
+                renderCell={({ index, symbol, isFocused }) => (
                   <View
                     // Make sure that you pass onLayout={getCellOnLayoutHandler(index)} prop to root component of "Cell"
                     onLayout={getCellOnLayoutHandler(index)}
@@ -236,7 +245,8 @@ const OTPEnter = ({route}) => {
             height={hp('4.5')}
             borderRadius={wp('1.5')}
             text={'Submit OTP'}
-            bgColor={colors.appColor}
+            colorsArray={['#296cb1', '#2760a7', '#203d88']}
+            // bgColor={colors.appColor}
             textColor={colors.white}
             textSize={hp('1.75')}
           />
@@ -244,24 +254,20 @@ const OTPEnter = ({route}) => {
       </View>
 
       <View
-        style={{flex: 0.5, marginVertical: hp('3'), marginHorizontal: wp('5')}}>
+        style={{ flex: 0.5, marginVertical: hp('3'), marginLeft: wp('6'), marginRight: wp('3') }}>
         <Text
           style={{
-            color: colors.white,
-            fontFamily: fontFamily.regular,
-            fontSize: hp('1.5'),
+            color: colors.solidAppColor,
+            fontFamily: fontFamily.helveticaLight,
+            fontSize: hp('1.6'),
+            lineHeight: hp('2')
           }}>
-          Didn't receive the code? Tap here to{' '}
-          <Text
-            style={{
-              fontSize: hp('1.55'),
-              fontWeight: 'bold',
-              textDecorationLine: 'underline',
-            }}>
-            Resend
-          </Text>
-          . {'\n'}Having trouble with the authentication? {'\n'}
-          Raise a support request ticket.
+          Didn't receive the code?
+          <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helveticaLight, color: colors.white, lineHeight: hp('3') }}> Tap here </Text>
+          to {`\n`}resend. Having trouble with the authentication? {`\n`}
+
+          <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helveticaLight, color: colors.white, lineHeight: hp('3') }}>Raise a support request ticket</Text>
+
         </Text>
       </View>
     </ImageBackground>
@@ -269,8 +275,8 @@ const OTPEnter = ({route}) => {
 };
 
 const styles = StyleSheet.create({
-  root: {flex: 1, padding: 20},
-  title: {textAlign: 'center', fontSize: 30},
+  root: { flex: 1, padding: 20 },
+  title: { textAlign: 'center', fontSize: 30 },
   codeFieldRoot: {
     marginTop: 20,
     width: 280,

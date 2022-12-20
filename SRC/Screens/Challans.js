@@ -43,45 +43,118 @@ const Challans = () => {
     if (clearStack) {
       console.log('Clear');
     }
-  };
 
-  const [payOnlineState, setPayOnlineState] = useState(false);
+    const [payOnlineState, setPayOnlineState] = useState(false);
 
-  const [payableChallans, setPayablesChallans] = useState([
-    {id: 1, challnaDate: 'Oct 2022 - Oct 2022', amount: '11,145'},
-    {id: 2, challnaDate: 'Sep 2022 - Sep 2022', amount: '10,000'},
-  ]);
 
-  const [paidChallans, setPaidChallans] = useState([
-    {
-      id: 1,
-      challnDate: 'Apr 2022 - Apr 2022',
-      amount: '10,000',
-      challnaDate: 'Apr 2022 - Apr 2022',
-      paidDate: '20-Apr',
-    },
-    {
-      id: 2,
-      challnaDate: 'Mar 2022 - Mar 2022',
-      amount: '8500',
-      challnaDate: 'Mar 2022 - Mar 2022',
-      paidDate: '20-Mar',
-    },
-    {
-      id: 3,
-      challnaDate: 'Feb 2022 - Feb 2022',
-      amount: '8000',
-      challnaDate: 'Feb 2022 - Feb 2022',
-      paidDate: '20-Feb',
-    },
-  ]);
-  // childrenData?.posts?.result?.children[]?.system_id
-  useEffect(index => {
-    dispatch(getChallan(childDatahere?.posts?.result?.children[0]?.system_id));
-    // setPayablesChallans(feeChallanHere);
-    // if (feeChallanHere) {
-    //     setPaidChallans(feeChallanHere);
-    //     setPayablesChallans(feeChallanHere)
+    const [payableChallans, setPayablesChallans] = useState([
+        { id: 1, challnaDate: 'Oct 2022 - Oct 2022', amount: '11,145' },
+        { id: 2, challnaDate: 'Sep 2022 - Sep 2022', amount: '10,000' }
+    ]);
+
+    const [paidChallans, setPaidChallans] = useState(
+        [
+            { id: 1, challnDate: 'Apr 2022 - Apr 2022', amount: '10,000', challnaDate: 'Apr 2022 - Apr 2022', paidDate: '20-Apr' },
+            { id: 2, challnaDate: 'Mar 2022 - Mar 2022', amount: '8500', challnaDate: 'Mar 2022 - Mar 2022', paidDate: '20-Mar' },
+            { id: 3, challnaDate: 'Feb 2022 - Feb 2022', amount: '8000', challnaDate: 'Feb 2022 - Feb 2022', paidDate: '20-Feb' }
+        ]
+    )
+    // childrenData?.posts?.result?.children[]?.system_id
+    useEffect((index) => {
+        dispatch(getChallan(childDatahere?.posts?.result?.children[0]?.system_id));
+        // setPayablesChallans(feeChallanHere);
+        // if (feeChallanHere) {
+        //     setPaidChallans(feeChallanHere);
+        //     setPayablesChallans(feeChallanHere)
+        // }
+    }, [])
+    // console.log(paidChallans, "paid")
+    // console.log(payableChallans, "payable")
+
+
+
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        // initialCall();
+        console.log("add", 2 + 2);
+        setRefreshing(false);
+        // console.log("calling again", initialCall());
+    }
+
+    // console.log("paidChallansHere11", paidChallans);
+
+
+
+    const renderItem = ({ item, index }) => {
+
+        setPayOnlineState(item.status == 0 ? true : false);
+        console.log("item", item);
+
+        return (
+            <>
+                {/* {
+                    item.status == 0 ? */}
+                <View style={styles.challansMainView}>
+                    <LeftRightImgText
+                        leftText={item.fee_period}
+                    />
+                    <LineSeprator style={styles.listSeprator} />
+
+
+                    <View style={styles.challanUpperMainView}>
+                        <View style={styles.challanUpperView}>
+                            <Text style={styles.challanUpperText1}>{`Rs ${item.net_payable}/-`}</Text>
+                            <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
+                        </View>
+                        <View style={styles.challanUpperRightView}>
+                            <Button
+                                onPress={() => Linking.openURL('http://b2training.beaconhouse.net/students/ism/ism_report_invoice_printed_n.php?company_id=1&from_date=01/02/2019&app=Y&invoice_num=2140005127671')}
+                                height={hp('4.5')}
+                                width={wp('25')}
+                                borderRadius={wp('1.5')}
+                                text="View Challan"
+                                // bgColor={colors.appColor}
+                                colorsArray={['#296cb1', '#2760a7', '#203d88']}
+                                textColor={colors.white}
+                                textSize={hp('1.3')}
+                                textWeight={"bold"}
+                            />
+                        </View>
+                    </View>
+
+                    <LineSeprator style={styles.listSecondSeprator} />
+
+                    <View style={styles.challanUpperMainView}>
+                        <View style={{ flex: 0.5, justifyContent: 'center' }}>
+                            <Text style={styles.challanUpperText1}>{`Rs ${item.net_payable}/-`}</Text>
+                            <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
+                        </View>
+                        <View style={styles.challanLowerRightView}>
+                            <Button
+                                height={hp('4.5')}
+                                width={wp('38')}
+                                borderRadius={wp('1.5')}
+                                text="Get Challan Via Email"
+                                // bgColor={colors.appColor}
+                                colorsArray={['#296cb1', '#2760a7', '#203d88']}
+                                textColor={colors.white}
+                                textSize={hp('1.3')}
+                                textWeight={"bold"}
+                            />
+                        </View>
+                    </View>
+
+                </View>
+                {/* :
+                        null
+                } */}
+
+            </>
+        );
+    }
+    // const renderItemStatus  = ({item, index}) =>{
+    //     return()
     // }
   }, []);
   // console.log(paidChallans, "paid")
@@ -100,190 +173,101 @@ const Challans = () => {
   const renderItem = ({item, index}) => {
     setPayOnlineState(item.status == 1 ? false : true);
     return (
-      <>
-        {item.status == 0 ? (
-          <View style={styles.challansMainView}>
-            <LeftRightImgText leftText={item.fee_period} />
-            <LineSeprator style={styles.listSeprator} />
+        <SafeAreaView style={{ flex: 1, backgroundColor: Platform.OS === "android" ? colors.white : colors.white }}>
 
-            <View style={styles.challanUpperMainView}>
-              <View style={styles.challanUpperView}>
-                <Text
-                  style={
-                    styles.challanUpperText1
-                  }>{`Rs ${item.net_payable}/-`}</Text>
-                <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
-              </View>
-              <View style={styles.challanUpperRightView}>
-                <Button
-                  onPress={() => Linking.openURL(item.invoice_pdf)}
-                  height={hp('4.5')}
-                  width={wp('25')}
-                  borderRadius={wp('1.5')}
-                  text="View Challan"
-                  bgColor={colors.appColor}
-                  textColor={colors.white}
-                  textSize={hp('1.3')}
-                  textWeight={'bold'}
+            <StatusBar barStyle={'default'} backgroundColor={"#606060"} />
+
+            {childDatahere?.posts?.result?.children.length > 0 && (
+                <MainHeader
+                    onPressRightImg={() => navigation.goBack()}
+                    topLeftImg={'backarrow'}
+                    text={'Challans'}
+                    data={childDatahere?.posts?.result?.children}
                 />
-              </View>
-            </View>
+            )}
 
-            <LineSeprator style={styles.listSecondSeprator} />
+            <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: colors.white, marginVertical: hp(2) }}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                        // we can implement multiple colors in the form of array 
+                        colors={[colors.fbColor, colors.paratGreen, colors.red]}
+                        // background color of the refresh indicator
+                        progressBackgroundColor={colors.silverGrey}
+                        tintColor={colors.appColor}
 
-            <View style={styles.challanUpperMainView}>
-              <View style={{flex: 0.5, justifyContent: 'center'}}>
-                <Text
-                  style={
-                    styles.challanUpperText1
-                  }>{`Rs ${item.net_payable}/-`}</Text>
-                <Text style={styles.challanUpperText2}>{`Amount Payable`}</Text>
-              </View>
-              <View style={styles.challanLowerRightView}>
-                <Button
-                  height={hp('4.5')}
-                  width={wp('38')}
-                  borderRadius={wp('1.5')}
-                  text="Get Challan Via Email"
-                  bgColor={colors.appColor}
-                  textColor={colors.white}
-                  textSize={hp('1.3')}
-                  textWeight={'bold'}
-                />
-              </View>
-            </View>
-          </View>
-        ) : null}
-      </>
+                    // title={"loading"}
+                    // titleColor={colors.white}
+
+                    // size between 0 to 1
+                    // size={"large"}
+                    />
+                }
+            >
+
+
+                <View style={{ marginTop: hp('5') }}>
+                    {feeChallanHere?.posts?.result?.feechallan?.length > 0 &&
+                        <FlatListItem
+                            data={feeChallanHere.posts.result.feechallan}
+                            renderItem={renderItem}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
+                    }
+
+                </View>
+
+                {
+                    payOnlineState ?
+                        <View style={{ alignItems: 'center', marginVertical: hp('2') }}>
+                            <Button
+                                height={hp('4.5')}
+                                width={wp('35')}
+                                borderRadius={wp('1.5')}
+                                text="Pay Online"
+                                // bgColor={colors.appColor}
+                                colorsArray={['#296cb1', '#2760a7', '#203d88']}
+                                textColor={colors.white}
+                                textSize={hp('1.5')}
+                                textWeight={"bold"}
+                            />
+                        </View>
+                        :
+                        null
+
+                }
+
+
+
+                <View style={{ marginTop: hp('2') }}>
+
+                    <LeftRightImgText
+                        leftText={"Past Challans"}
+                        marginHorizontal={wp('8')}
+                    />
+                    <LineSeprator style={styles.listSepratorPast} />
+
+                    {feeChallanHere?.posts?.result?.feechallan?.length > 0 &&
+                        <FlatListItem
+                            data={feeChallanHere.posts.result.feechallan
+                            }
+                            renderItem={renderItemPastChallan}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
+
+                    }
+
+                </View>
+
+                <View style={{ marginBottom: hp('2') }}>
+
+                </View>
+
+            </ScrollView>
+        </SafeAreaView>
     );
-  };
-  // const renderItemStatus  = ({item, index}) =>{
-  //     return()
-  // }
-  const renderItemPastChallan = ({item, index}) => {
-    console.log('itemHere', item);
-    // console.log("itemStatus", item.status);
-    return (
-      <>
-        {item.status == 1 ? (
-          <View style={styles.pastChallanMainView}>
-            <View style={styles.pastChallanView}>
-              <View style={styles.pastChallanUpperView}>
-                <Text
-                  style={
-                    styles.pastChallanUpperText
-                  }>{`${item.paid_date}`}</Text>
-              </View>
-              <View style={styles.pastChallanLowerView}>
-                <Text
-                  style={
-                    styles.pastChallanLowerText1
-                  }>{`Rs ${item.net_payable}`}</Text>
-                <Text
-                  style={
-                    styles.pastChallanLowerText2
-                  }>{`${item.paid_date} - ${item.paid_date}`}</Text>
-                <Text
-                  style={
-                    styles.pastChallanLowerText2
-                  }>{`Paid on ${item.paid_date}`}</Text>
-              </View>
-            </View>
-
-            <LineSeprator style={styles.listSecondSeprator} />
-          </View>
-        ) : null}
-      </>
-    );
-  };
-
-  return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor:
-          Platform.OS === 'android' ? colors.white : colors.white,
-      }}>
-      <StatusBar barStyle={'default'} backgroundColor={'#606060'} />
-
-      {childDatahere?.posts?.result?.children.length > 0 && (
-        <MainHeader
-          onPressRightImg={() => navigation.goBack()}
-          topLeftImg={'backarrow'}
-          text={'Challan'}
-          data={childDatahere?.posts?.result?.children}
-        />
-      )}
-
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          backgroundColor: colors.white,
-          marginVertical: hp(2),
-        }}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            // we can implement multiple colors in the form of array
-            colors={[colors.fbColor, colors.paratGreen, colors.red]}
-            // background color of the refresh indicator
-            progressBackgroundColor={colors.silverGrey}
-            tintColor={colors.appColor}
-
-            // title={"loading"}
-            // titleColor={colors.white}
-
-            // size between 0 to 1
-            // size={"large"}
-          />
-        }>
-        <View style={{marginTop: hp('5')}}>
-          {feeChallanHere?.posts?.result?.feechallan?.length > 0 && (
-            <FlatListItem
-              data={feeChallanHere.posts.result.feechallan}
-              renderItem={renderItem}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          )}
-        </View>
-
-        {payOnlineState ? (
-          <View style={{alignItems: 'center', marginVertical: hp('2')}}>
-            <Button
-              height={hp('4.5')}
-              width={wp('35')}
-              borderRadius={wp('1.5')}
-              text="Pay Online"
-              bgColor={colors.appColor}
-              textColor={colors.white}
-              textSize={hp('1.5')}
-              textWeight={'bold'}
-            />
-          </View>
-        ) : null}
-
-        <View style={{marginTop: hp('2')}}>
-          <LeftRightImgText
-            leftText={'Past Challans'}
-            marginHorizontal={wp('8')}
-          />
-          <LineSeprator style={styles.listSepratorPast} />
-
-          {feeChallanHere?.posts?.result?.feechallan?.length > 0 && (
-            <FlatListItem
-              data={feeChallanHere.posts.result.feechallan}
-              renderItem={renderItemPastChallan}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          )}
-        </View>
-
-        <View style={{marginBottom: hp('2')}}></View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+}
 
 const styles = StyleSheet.create({
   listSeprator: {

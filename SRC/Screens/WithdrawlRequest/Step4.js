@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -12,7 +12,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import ImagePicker from 'react-native-image-crop-picker';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import Button from '../../Components/Button/Button';
 import colors from '../../Styles/colors';
@@ -23,7 +23,7 @@ import ImagePickerCrop from '../../Components/ImagePicker/ImagePickerCrop';
 import DatePicker from 'react-native-date-picker';
 import DatePickerModal from '../../Components/DatePicker/DatePicker';
 import moment from 'moment';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Step4 = ({
   propRelation,
@@ -106,16 +106,16 @@ const Step4 = ({
     setModalVisible(!modalVisible);
   };
 
-  useEffect(() => {}, [parentsListFromStep2]);
+  useEffect(() => { }, [parentsListFromStep2]);
 
-  const renderItem = ({item, index}) => {
+  const renderItem = ({ item, index }) => {
     // console.log("itemAtRender", item);
     return (
       <View>
         <TouchableOpacity
-          onPress={() => onPressSelected({item, index})}
-          style={{flexDirection: 'row', marginHorizontal: wp('3')}}>
-          <View style={{flex: 0.85, justifyContent: 'center'}}>
+          onPress={() => onPressSelected({ item, index })}
+          style={{ flexDirection: 'row', marginHorizontal: wp('3') }}>
+          <View style={{ flex: 0.85, justifyContent: 'center' }}>
             <Text style={styles.modalText}>{item.RELATION_DESC}</Text>
           </View>
           <View
@@ -123,11 +123,11 @@ const Step4 = ({
               flex: 0.15,
               justifyContent: 'center',
               alignItems: 'flex-end',
-              marginVertical: hp('2'),
+              marginVertical: hp('1'),
             }}>
             <Image
-              source={{uri: item.checked ? 'addlocation' : 'circleselect'}}
-              style={{height: hp('2'), width: wp('4')}}
+              source={{ uri: item.checked ? 'addlocation' : 'circleselect' }}
+              style={{ height: hp('2'), width: wp('4') }}
               resizeMode={'contain'}
             />
           </View>
@@ -138,7 +138,7 @@ const Step4 = ({
     );
   };
 
-  const onPressSelected = ({item, index}) => {
+  const onPressSelected = ({ item, index }) => {
     // let parentsListArray = [...parentsListFromStep2];
     let ourGettingValue = [...JSON.parse(JSON.stringify(parentsListFromStep2))];
 
@@ -255,12 +255,12 @@ const Step4 = ({
 
   return (
     <>
-      <View style={{marginHorizontal: wp('4'), marginBottom: hp('2')}}>
+      <View style={{ marginHorizontal: wp('4'), marginBottom: hp('2') }}>
         <Text
           style={{
             marginHorizontal: wp('3'),
-            fontFamily: fontFamily.regular,
-            fontSize: hp('2.15'),
+            fontFamily: fontFamily.helveticaLight,
+            fontSize: hp('1.7'),
             color: colors.lightBlack,
             textAlign: 'justify',
             lineHeight: hp('2.5'),
@@ -287,16 +287,15 @@ const Step4 = ({
           <View style={styles.modalMainView}>
             <TouchableOpacity
               onPress={onPressModal}
-              style={{flex: 0.4}}></TouchableOpacity>
+              style={{ flex: 0.5 }}></TouchableOpacity>
             <View style={styles.modalView}>
               <FlatListItem
-                data={parentsListFromStep2}
-                renderItem={renderItem}
+                data={parentsListFromStep2} renderItem={renderItem}
               />
             </View>
             <TouchableOpacity
               onPress={onPressModal}
-              style={{flex: 0.4}}></TouchableOpacity>
+              style={{ flex: 0.35 }}></TouchableOpacity>
           </View>
         </Modal>
 
@@ -306,8 +305,8 @@ const Step4 = ({
 
         <View style={styles.selectValueRightView}>
           <Image
-            source={{uri: 'arrowdown'}}
-            style={{height: hp('2'), width: wp('4')}}
+            source={{ uri: 'dropdowngrey' }}
+            style={{ height: hp('3.5'), width: wp('7') }}
             resizeMode={'contain'}
           />
         </View>
@@ -323,18 +322,18 @@ const Step4 = ({
 
         <View style={styles.selectedRelationLowerView}>
           <Text style={styles.selectedRelatioDetailsText}>
-            CNIC: <Text style={{fontWeight: 'normal'}}>{CNIC}</Text>
+            CNIC: <Text style={{ fontFamily: fontFamily.helveticaLight }}>{CNIC}</Text>
           </Text>
           <Text style={styles.selectedRelatioDetailsText}>
-            Email: <Text style={{fontWeight: 'normal'}}>{email}</Text>
+            Email: <Text style={{ fontFamily: fontFamily.helveticaLight }}>{email}</Text>
           </Text>
           <Text style={styles.selectedRelatioDetailsText}>
             Contact Number:{' '}
-            <Text style={{fontWeight: 'normal'}}>{contact}</Text>
+            <Text style={{ fontFamily: fontFamily.helveticaLight }}>{contact}</Text>
           </Text>
           <Text style={styles.selectedRelatioDetailsText}>
             Correspondance Address:{' '}
-            <Text style={{fontWeight: 'normal'}}>{address}</Text>
+            <Text style={{ fontFamily: fontFamily.helveticaLight }}>{address}</Text>
           </Text>
         </View>
       </View>
@@ -342,44 +341,44 @@ const Step4 = ({
 
  <Text>{CNIC}</Text> */}
 
-      <View style={{flexDirection: 'row', marginVertical: hp('2')}}>
-        <View style={{flex: 0.1, justifyContent: 'center'}}></View>
+      <View style={{ flexDirection: 'row', marginVertical: hp('2') }}>
+        <View style={{ flex: 0.1, justifyContent: 'center' }}></View>
         <TouchableOpacity
           onPress={onPressFrontIdCardModal}
-          style={{flex: 0.35, justifyContent: 'center', alignItems: 'center'}}>
+          style={{ flex: 0.35, justifyContent: 'center', alignItems: 'center' }}>
           <Image
-            source={{uri: idCardFront}}
+            source={{ uri: idCardFront }}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
         </TouchableOpacity>
 
-        <View style={{flex: 0.1, justifyContent: 'center'}}></View>
+        <View style={{ flex: 0.1, justifyContent: 'center' }}></View>
 
         <TouchableOpacity
           onPress={onPressBackIdCardModal}
-          style={{flex: 0.35, justifyContent: 'center', alignItems: 'center'}}>
+          style={{ flex: 0.35, justifyContent: 'center', alignItems: 'center' }}>
           <Image
-            source={{uri: idCardBack}}
+            source={{ uri: idCardBack }}
             style={styles.imageStyle}
             resizeMode={'stretch'}
           />
         </TouchableOpacity>
-        <View style={{flex: 0.1, justifyContent: 'center'}}></View>
+        <View style={{ flex: 0.1, justifyContent: 'center' }}></View>
       </View>
 
-      <View style={{marginHorizontal: wp('4'), marginBottom: hp('2')}}>
+      <View style={{ marginHorizontal: wp('4'), marginVertical: hp('2') }}>
         <Text
           style={{
             marginHorizontal: wp('3'),
-            fontFamily: fontFamily.regular,
-            fontSize: hp('1.75'),
+            fontFamily: fontFamily.helveticaLight,
+            fontSize: hp('1.6'),
             color: colors.grey,
             textAlign: 'justify',
             lineHeight: hp('2.5'),
           }}>
           {
-            'Freeimage.host is a rocket fast free image hosting service. Upload image anonymously, Upload images to albums'
+            'Please upload your valid CNIC (Front and Back) in PNG / JPEG format. File size should not exceed 3MB.'
           }
         </Text>
       </View>
@@ -389,8 +388,8 @@ const Step4 = ({
           <Text style={styles.selectValueText}>{'Last day in school'}</Text>
         </View>
 
-        <View style={{flex: 0.4, justifyContent: 'center'}}>
-          <Text style={styles.selectRelationText}>{withrawDateFromPicker}</Text>
+        <View style={{ flex: 0.4, justifyContent: 'center' }}>
+          <Text style={styles.selectDateText}>{withrawDateFromPicker}</Text>
         </View>
 
         <View style={{}}></View>
@@ -404,25 +403,25 @@ const Step4 = ({
         }}>
         <TouchableOpacity
           onPress={onPressCheckbox}
-          style={{flex: 0.2, justifyContent: 'center', alignItems: 'center'}}>
+          style={{ flex: 0.2, justifyContent: 'center', alignItems: 'center' }}>
           <Image
-            source={{uri: checkbox ? 'checked' : 'uncheck'}}
-            style={{height: hp('3'), width: wp('6')}}
+            source={{ uri: checkbox ? 'checked' : 'uncheck' }}
+            style={{ height: hp('3'), width: wp('6') }}
             resizeMode={'contain'}
           />
         </TouchableOpacity>
-        <View style={{flex: 0.8, justifyContent: 'center'}}>
+        <View style={{ flex: 0.8, justifyContent: 'center', marginRight: wp('7') }}>
           <Text
             style={{
-              marginHorizontal: wp('3'),
-              fontFamily: fontFamily.regular,
-              fontSize: hp('2.15'),
-              color: colors.lightBlack,
-              textAlign: 'justify',
-              lineHeight: hp('2.5'),
+
+              fontFamily: fontFamily.helveticaLight,
+              fontSize: hp('1.6'),
+              color: colors.black,
+              textAlign: 'left',
+              lineHeight: hp('2.75'),
             }}>
             {
-              "I herby understand that one month written notice of withdrawal is required for refund of the security fee, alternatively, one month's fee must be paid in lieu of such notice."
+              "I hereby understand that one month written notice of withdrawal is required for refund of the security fee, alternatively, one month's fee must be paid in lieu of such notice."
             }
           </Text>
         </View>
@@ -434,19 +433,20 @@ const Step4 = ({
           marginVertical: hp('3'),
           marginHorizontal: wp('5'),
         }}>
-        <View style={{flex: 0.4}}>
+        <View style={{ flex: 0.4 }}>
           <Button
             onPress={onPressBack}
             height={hp('4.5')}
             borderRadius={wp('1.5')}
             text="Back"
-            bgColor={colors.appColor}
+            colorsArray={['#296cb1', '#2760a7', '#203d88']}
+            // bgColor={colors.appColor}
             textColor={colors.white}
             textSize={hp('1.75')}
           />
         </View>
-        <View style={{flex: 0.05}}></View>
-        <View style={{flex: 0.55}}>
+        <View style={{ flex: 0.05 }}></View>
+        <View style={{ flex: 0.55 }}>
           <Button
             onPress={() =>
               onPressNext(
@@ -465,13 +465,15 @@ const Step4 = ({
             text="Submit Application"
             textColor={colors.white}
             textSize={hp('1.75')}
-            bgColor={disableBtn ? colors.grey : colors.appColor}
             disabled={disableBtn}
+            colorsArray={disableBtn ? ['#888888', '#cccccc'] : ['#296cb1', '#2760a7', '#203d88']}
+          // bgColor={disableBtn ? colors.grey : colors.appColor}
+
           />
         </View>
       </View>
 
-      <View style={{marginBottom: hp('1.5')}}></View>
+      <View style={{ marginBottom: hp('1.5') }}></View>
 
       <ImagePickerCrop
         modalVisible={frontModalValue}
@@ -488,7 +490,7 @@ const Step4 = ({
       />
 
       {dateModal && (
-        <View style={{marginHorizontal: wp('0')}}>
+        <View style={{ marginHorizontal: wp('0') }}>
           <DatePickerModal
             modalVisible={dateModal}
             onPressModal={onPressDate}
@@ -507,30 +509,36 @@ const styles = StyleSheet.create({
     borderColor: colors.grey,
     borderWidth: wp('0.15'),
     borderRadius: wp('3'),
+    marginTop: hp('1')
   },
 
   selectValueLeftView: {
-    flex: 0.6,
+    flex: 0.65,
     justifyContent: 'center',
   },
   selectValueText: {
     marginLeft: hp('2'),
-    fontSize: hp('1.75'),
-    fontFamily: fontFamily.regularAlatsi,
+    fontSize: hp('1.7'),
+    fontFamily: fontFamily.helveticaLight,
     color: colors.appColor,
   },
 
   selectRelationImgView: {
-    flex: 0.25,
+    flex: 0.2,
     justifyContent: 'center',
   },
   selectRelationText: {
+    textAlign: 'right',
+    color: colors.appColor,
+    fontSize: hp('1.6'),
+    fontFamily: fontFamily.helveticaLight,
+  },
+  selectDateText: {
     textAlign: 'center',
     color: colors.appColor,
     fontSize: hp('1.6'),
-    fontFamily: fontFamily.regularAlatsi,
+    fontFamily: fontFamily.helveticaLight,
   },
-
   selectValueRightView: {
     flex: 0.15,
     justifyContent: 'center',
@@ -540,16 +548,15 @@ const styles = StyleSheet.create({
   modalMainView: {
     flex: 1,
     flexDirection: 'column',
-    margin: hp('5'),
+    paddingHorizontal: hp('5'),
     justifyContent: 'center',
   },
 
   modalView: {
-    flex: 0.2,
+    flex: 0.15,
     justifyContent: 'center',
-
     backgroundColor: 'white',
-    padding: hp('1'),
+    paddingVertical: hp('1'),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -560,12 +567,18 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
 
+  modalText: {
+    color: colors.lightBlack,
+    fontFamily: fontFamily.helveticaLight,
+    fontSize: hp('1.5'),
+  },
+
   lineSeprator: {
     height: hp('0.1'),
     backgroundColor: colors.grey,
     marginTop: hp('1'),
     marginBottom: hp('1'),
-    marginLeft: wp('5'),
+    marginLeft: wp('3'),
   },
 
   parentDetailsView: {
@@ -576,7 +589,7 @@ const styles = StyleSheet.create({
 
     elevation: 10,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 3},
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
     borderRadius: wp('2'),
   },
@@ -588,8 +601,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: wp('1'),
   },
   selectedRelationHeaderText: {
-    fontSize: hp('2'),
-    fontFamily: fontFamily.regular,
+    fontSize: hp('1.7'),
+    fontFamily: fontFamily.helveticaRegular,
     color: colors.silverGrey,
   },
   selectedRelationLowerView: {
@@ -598,16 +611,15 @@ const styles = StyleSheet.create({
     paddingBottom: hp('2'),
   },
   selectedRelatioDetailsText: {
-    fontSize: hp('2'),
-    fontFamily: fontFamily.regular,
+    fontSize: hp('1.7'),
+    fontFamily: fontFamily.helveticaBold,
     color: colors.grey,
-    fontWeight: 'bold',
-    lineHeight: hp('3.5'),
+    lineHeight: hp('3'),
   },
 
   imageStyle: {
-    height: hp('10'),
-    width: wp('24'),
+    height: hp('8'),
+    width: wp('18'),
     borderRadius: wp('1'),
   },
 });

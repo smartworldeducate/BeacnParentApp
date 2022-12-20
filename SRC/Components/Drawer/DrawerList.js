@@ -5,7 +5,7 @@ import colors from '../../Styles/colors';
 import fontFamily from '../../Styles/fontFamily';
 
 
-const DrawerList = ({onPress, leftImg, rightText }) => {
+const DrawerList = ({ onPress, leftImg, rightText }) => {
 
     return (
         <TouchableOpacity
@@ -32,7 +32,7 @@ const DrawerList = ({onPress, leftImg, rightText }) => {
 const styles = StyleSheet.create({
     mainTouchableOpacity: {
         flexDirection: 'row',
-        paddingVertical: hp('2')
+        paddingVertical: hp('1.5')
     },
     leftView: {
         flex: 0.2,
@@ -49,10 +49,9 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     rightText: {
-        fontSize: hp('2'),
-        fontFamily: fontFamily.bold,
-        color: colors.grey,
-        fontWeight: "bold"
+        fontSize: hp('1.7'),
+        fontFamily: fontFamily.helveticaBold,
+        color: colors.lightGrey,
     }
 });
 

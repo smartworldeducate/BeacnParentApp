@@ -24,7 +24,6 @@ export const APIS = {
   StudentImageUploadAPI: BASE_URL + 'upload_student_picture',
   WithdrawlReasonAPI: BASE_URL + 'get_ism_withdrawal_reasons_list',
   WithdrawlRequestAPI: BASE_URL + 'save_ism_withdrawal_request',
-  ContactAPI: BASE_URL + 'contact_info',
   ContactAPI: BASE_URL + 'request_category',
   ContactComplaintAPI: BASE_URL + 'save_request_ticket',
 };

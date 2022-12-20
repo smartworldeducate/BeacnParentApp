@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -12,18 +12,18 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Button from '../../Components/Button/Button';
 import colors from '../../Styles/colors';
 import fontFamily from '../../Styles/fontFamily';
 import WithDrawlReasonsModal from '../../Components/Modal/WithDrawlReasonsModal';
 import TextInputCustom from '../../Components/TextInput/TextInput';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {withdrawlReasonAction} from '../../Redux/Features/WithdrawlRequestKit/WithdrawalReasonKit';
+import { withdrawlReasonAction } from '../../Redux/Features/WithdrawlRequestKit/WithdrawalReasonKit';
 import FlatListItem from '../../Components/FlatList/FlatList';
 
-const Step3 = ({onPressBack, onPressNext}) => {
+const Step3 = ({ onPressBack, onPressNext }) => {
   const dispatch = useDispatch();
   const childDatahere = useSelector(state => state.children);
   const withdrawalReasonHere = useSelector(state => state.withDrawlReasonStore);
@@ -82,29 +82,29 @@ const Step3 = ({onPressBack, onPressNext}) => {
   console.log('question1', question1);
   console.log('question2', question2);
 
-  const renderItemWithdrawlReasons = ({item, index}) => {
+  const renderItemWithdrawlReasons = ({ item, index }) => {
     // console.log("item333", item);
     return (
       <TouchableOpacity
-        onPress={() => onPressSelectedWithdrawlReasonModal({item})}
+        onPress={() => onPressSelectedWithdrawlReasonModal({ item })}
         style={styles.renderMainView}>
-        <View style={{flex: 0.85, justifyContent: 'center'}}>
+        <View style={{ flex: 0.85, justifyContent: 'center' }}>
           <Text
             style={{
-              fontSize: hp('2.15'),
+              fontSize: hp('1.7'),
               textAlign: 'left',
-              fontFamily: fontFamily.regular,
+              fontFamily: fontFamily.helveticaLight,
               color: colors.lightBlack,
-              lineHeight: hp('3'),
+              lineHeight: hp('2.5'),
             }}>
             {item.reason_name}
           </Text>
         </View>
 
         <View
-          style={{flex: 0.15, justifyContent: 'center', alignItems: 'center'}}>
+          style={{ flex: 0.15, justifyContent: 'center', alignItems: 'center' }}>
           <Image
-            source={{uri: 'forwardarrow'}}
+            source={{ uri: 'forwardarrow' }}
             style={styles.listRightImg}
             resizeMode={'contain'}
           />
@@ -113,7 +113,7 @@ const Step3 = ({onPressBack, onPressNext}) => {
     );
   };
 
-  const onPressSelectedWithdrawlReasonModal = ({item, index}) => {
+  const onPressSelectedWithdrawlReasonModal = ({ item, index }) => {
     // console.log("questions", item?.questions);
     // console.log("itemReason", item?.questions?.map((e) => {
     //     console.log("e", e.question_id);
@@ -132,7 +132,7 @@ const Step3 = ({onPressBack, onPressNext}) => {
   // console.log("questions", questions);
   // console.log("disableBtn", disableBtn);
 
-  const questionsRenderInput = ({item, index}) => {
+  const questionsRenderInput = ({ item, index }) => {
     // console.log("itemQuestionsId's", item);
     // console.log("questionsIndex", index);
 
@@ -150,8 +150,8 @@ const Step3 = ({onPressBack, onPressNext}) => {
           style={{
             padding: hp('2'),
             color: colors.appColor,
-            fontFamily: fontFamily.regular,
-            fontSize: hp('1.85'),
+            fontFamily: fontFamily.helveticaLight,
+            fontSize: hp('1.7'),
           }}>
           {item.question_name}
         </Text>
@@ -206,17 +206,17 @@ const Step3 = ({onPressBack, onPressNext}) => {
       <TouchableOpacity
         onPress={onPressWithdrawlReasonModal}
         style={styles.mainTouchableOpacity}>
-        <View style={{flex: 0.85, justifyContent: 'center'}}>
+        <View style={{ flex: 0.85, justifyContent: 'center' }}>
           <Text
             style={{
               marginLeft: hp('2'),
-              fontSize: hp('1.85'),
-              fontFamily: fontFamily.regular,
+              fontSize: hp('1.7'),
+              fontFamily: fontFamily.helveticaLight,
               color: colors.appColor,
             }}>
             {selectReason?.length > 0
               ? selectReason
-              : 'Please Select Reason for withdrawl'}
+              : 'Please select reason for withdrawal'}
           </Text>
         </View>
 
@@ -231,10 +231,10 @@ const Step3 = ({onPressBack, onPressNext}) => {
         />
 
         <View
-          style={{flex: 0.15, justifyContent: 'center', alignItems: 'center'}}>
+          style={{ flex: 0.15, justifyContent: 'center', alignItems: 'center' }}>
           <Image
-            source={{uri: 'forwardarrow'}}
-            style={{height: hp('2'), width: wp('4')}}
+            source={{ uri: 'forwardarrow' }}
+            style={{ height: hp('2'), width: wp('4') }}
             resizeMode={'contain'}
           />
         </View>
@@ -256,19 +256,20 @@ const Step3 = ({onPressBack, onPressNext}) => {
           marginVertical: hp('3'),
           marginHorizontal: wp('5'),
         }}>
-        <View style={{flex: 0.47}}>
+        <View style={{ flex: 0.47 }}>
           <Button
             onPress={onPressBack}
             height={hp('4.5')}
             borderRadius={wp('1.5')}
             text="Back"
-            bgColor={colors.appColor}
+            colorsArray={['#296cb1', '#2760a7', '#203d88']}
+            // bgColor={colors.appColor}
             textColor={colors.white}
             textSize={hp('1.75')}
           />
         </View>
-        <View style={{flex: 0.04}}></View>
-        <View style={{flex: 0.47}}>
+        <View style={{ flex: 0.04 }}></View>
+        <View style={{ flex: 0.47 }}>
           <Button
             onPress={() =>
               onPressNext(
@@ -284,9 +285,10 @@ const Step3 = ({onPressBack, onPressNext}) => {
             text="Next"
             textColor={colors.white}
             textSize={hp('1.75')}
-            // disabled={question1?.length > 0 ? false : true}
-            // bgColor={question1?.length > 0 && disableBtn == false ? colors.appColor : colors.grey}
-            bgColor={colors.appColor}
+            disabled={question1?.length || question2?.length > 0 ? false : true}
+            colorsArray={question1?.length > 0 || question2?.length ? ['#296cb1', '#2760a7', '#203d88'] : ['#888888', '#cccccc']}
+
+          // bgColor={question1?.length > 0 || question2?.length ? colors.appColor : colors.grey}
           />
         </View>
       </View>
@@ -332,8 +334,8 @@ const styles = StyleSheet.create({
   textInputCustomStyle: {
     paddingLeft: wp('4'),
     paddingVertical: hp('1'),
-    fontSize: hp('1.75'),
-    fontFamily: fontFamily.regular,
+    fontSize: hp('1.7'),
+    fontFamily: fontFamily.helveticaLight,
     color: colors.appColor,
   },
 });

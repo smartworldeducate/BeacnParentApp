@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Text, ImageBackground} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, ImageBackground, Appearance } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -13,7 +13,7 @@ import DeviceInfo from 'react-native-device-info';
 
 // or ES6+ destructured imports
 
-import {getUniqueId, getManufacturer} from 'react-native-device-info';
+import { getUniqueId, getManufacturer } from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import colors from '../Styles/colors';
@@ -21,7 +21,7 @@ import fontFamily from '../Styles/fontFamily';
 import Button from '../Components/Button/Button';
 import TextInputCustom from '../Components/TextInput/TextInput';
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   clearState,
   createPost,
@@ -30,11 +30,24 @@ import Toast from 'react-native-toast-message';
 import Loader from '../Components/Loader/Loader';
 
 const MobileNumperEnter = () => {
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+
+  Appearance.addChangeListener((scheme) => {
+    // console.log("scheme", scheme.colorScheme);
+    setTheme(scheme.colorScheme);
+  })
+
+  useEffect(() => {
+
+  }, [theme])
+
+  console.log("theme", theme);
+
   const dispatch = useDispatch();
   const post = useSelector(state => state.post);
   console.log(post, 'post');
   const [inputContactState, setInputContactState] = useState('');
-  const [values, setValues] = useState({sms_number: ''});
+  const [values, setValues] = useState({ sms_number: '' });
   const [deviceType, setDeviceType] = useState('android');
   const [deviceIdentifier, setDeviceIdentifier] = useState('asdf');
   const [deviceToken, setDeviceToken] = useState('asdf');
@@ -48,7 +61,7 @@ const MobileNumperEnter = () => {
 
   const onChangeContact = val => {
     setInputContactState(val);
-    setValues({...values, sms_number: val});
+    setValues({ ...values, sms_number: val });
   };
 
   const validateField = () => {
@@ -61,7 +74,7 @@ const MobileNumperEnter = () => {
   };
 
   const onPressSendCode = () => {
-    validateField();
+    // validateField();
     dispatch(createPost(inputContactState.toString()));
     dispatch(clearState());
   };
@@ -78,19 +91,28 @@ const MobileNumperEnter = () => {
     }
     if (post.message) {
       Toast.show({
-        type: 'success',
+        // type: 'success',
         text2: `${post.message}`,
         visibilityTime: 4000,
         position: 'top',
       });
     }
   }, [post]);
+
+  const toastConfig = {
+    success: internalState => (
+      <View style={{ height: hp('8'), width: wp('90'), marginHorizontal: wp('5'), backgroundColor: "#333333", borderRadius: wp('1.5'), justifyContent: "center" }}>
+        <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helveticaLight, color: colors.white, paddingHorizontal: wp('3'), paddingVertical: hp('1.5'), lineHeight: hp('2.5') }}>{internalState.text2}</Text>
+      </View>
+    )
+  }
+
   return (
     <ImageBackground
-      source={{uri: 'mainsplash'}}
-      style={{flex: 1}}
+      source={{ uri: 'mainsplash' }}
+      style={{ flex: 1 }}
       resizeMode={'stretch'}>
-      <Toast />
+      <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
       {post?.isLoading && <Loader></Loader>}
       <View style={styles.mainTopView}></View>
       <View style={styles.contactNumberMainView}>
@@ -100,9 +122,6 @@ const MobileNumperEnter = () => {
             onChangeText={onChangeContact}
             keyboardType={'numeric'}
             maxLength={11}
-            placeholder={'Phone Number'}
-            placeholderColor={colors.grey}
-            textColor={colors.fbColor}
             returnKeyType={'go'}
             style={styles.textInputCustomStyle}
           />
@@ -121,7 +140,8 @@ const MobileNumperEnter = () => {
             height={hp('4.5')}
             borderRadius={wp('1.5')}
             text="Send Code"
-            bgColor={colors.appColor}
+            colorsArray={['#296cb1', '#2760a7', '#203d88']}
+            // bgColor={colors.appColor}
             textColor={colors.white}
             textSize={hp('1.75')}
           />
@@ -138,11 +158,12 @@ const styles = StyleSheet.create({
 
   textInputCustomStyle: {
     marginHorizontal: wp('5'),
-    fontSize: hp('1.75'),
-    fontFamily: fontFamily.semiBold,
+    fontSize: hp('1.6'),
+    fontFamily: fontFamily.helveticaBold,
     height: hp('5'),
-    borderBottomColor: colors.grey,
-    borderBottomWidth: wp('0.5'),
+    borderBottomColor: colors.lightGrey,
+    borderBottomWidth: wp('0.25'),
+    color: colors.lightGrey
   },
   contactNumberMainView: {
     // flex: 1,
@@ -162,8 +183,8 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: hp('1.4'),
-    fontFamily: fontFamily.regular,
-    color: colors.fbColor,
+    fontFamily: fontFamily.helveticaLight,
+    color: colors.lightGrey,
   },
 });
 export default MobileNumperEnter;

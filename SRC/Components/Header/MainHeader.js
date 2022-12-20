@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import ImagePicker from 'react-native-image-crop-picker';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -14,14 +14,14 @@ import fontFamily from '../../Styles/fontFamily';
 import Swiper from 'react-native-swiper';
 import ImagePickerCrop from '../ImagePicker/ImagePickerCrop';
 import StudentInstructionModal from '../ImagePicker/StudentInstructionModal';
-import {useDispatch, useSelector} from 'react-redux';
-import {getChallan} from '../../Redux/Features/getChallans/challans';
+import { useDispatch, useSelector } from 'react-redux';
+import { getChallan } from '../../Redux/Features/getChallans/challans';
 import Loader from '../Loader/Loader';
-import {getAssessment} from '../../Redux/Features/Assessments/assessment';
-import {calanderAction} from '../../Redux/Features/CalanderKit/CalanderKit';
-import {getNotifications} from '../../Redux/Features/NotificationsKit/NotificationsKit';
-import {imageUpload} from '../../Redux/Features/ImageUploadKit/ImageUploadKit';
-import {contactComplaintAction} from '../../Redux/Features/ContactKit/ContactComplaintKit';
+import { getAssessment } from '../../Redux/Features/Assessments/assessment';
+import { calanderAction } from '../../Redux/Features/CalanderKit/CalanderKit';
+import { getNotifications } from '../../Redux/Features/NotificationsKit/NotificationsKit';
+import { imageUpload } from '../../Redux/Features/ImageUploadKit/ImageUploadKit';
+import { contactComplaintAction } from '../../Redux/Features/ContactKit/ContactComplaintKit';
 
 const MainHeader = ({
   onPressRightImg,
@@ -147,7 +147,7 @@ const MainHeader = ({
   // }, [defaultImg])
 
   return (
-    <View>
+    <View style={{ marginBottom: hp("1") }}>
       <View style={styles.mainView}>
         <LinearGradient
           colors={['#296cb1', '#2760a7', '#203d88']}
@@ -157,7 +157,7 @@ const MainHeader = ({
               onPress={onPressRightImg}
               style={styles.leftTouchable}>
               <Image
-                source={{uri: topLeftImg}}
+                source={{ uri: topLeftImg }}
                 style={styles.imageStyle}
                 resizeMode={'contain'}
               />
@@ -189,6 +189,7 @@ const MainHeader = ({
               ),
             );
           }}>
+
           {data?.length > 0 &&
             data?.map(item => {
               // console.log("itemImg", item?.picture);
@@ -235,12 +236,12 @@ const MainHeader = ({
                       alignItems: 'center',
                       flexDirection: 'row',
                     }}>
-                    <View style={{flexDirection: 'column'}}>
+                    <View style={{ flexDirection: 'column' }}>
                       <TouchableOpacity
                         onPress={onPressCameraImg}
                         style={styles.imageView}>
                         <Image
-                          source={{uri: item.picture}}
+                          source={{ uri: item.picture }}
                           style={styles.mainImageStyle}
                           resizeMode={'cover'}
                         />
@@ -254,25 +255,25 @@ const MainHeader = ({
                           }}>
                           <View
                             style={{
-                              height: hp('1.5'),
-                              width: wp('3'),
+                              height: hp('1'),
+                              width: wp('2'),
                               backgroundColor: '#adff2f',
                               borderRadius: wp('3'),
                             }}></View>
                         </View>
-                        <View style={{flex: 0.7, justifyContent: 'center'}}>
+                        <View style={{ flex: 0.7, justifyContent: 'center' }}>
                           <Text style={styles.textStatus}>
-                            {`${item.std_status}`}
+                            {`${item.std_status && item.wdraw_req_count > 0 ? "Pending" : "On-Roll"}`}
                           </Text>
                         </View>
                       </View>
                     </View>
                   </View>
 
-                  <View style={{flex: 0.05}}>
+                  <View style={{ flex: 0.05 }}>
                     <TouchableOpacity onPress={onPressCameraImg}>
                       <Image
-                        source={{uri: 'camera'}}
+                        source={{ uri: 'camera' }}
                         style={{
                           height: hp('4'),
                           width: wp('8'),
@@ -345,7 +346,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     elevation: 10,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 3},
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
     borderRadius: wp('4'),
   },
@@ -356,7 +357,7 @@ const styles = StyleSheet.create({
   },
   titleMain: {
     fontSize: hp('2'),
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.helvetica,
     color: '#296cb1',
   },
   titleText: {
@@ -371,9 +372,9 @@ const styles = StyleSheet.create({
     marginVertical: hp('1'),
   },
   textDetails: {
-    color: colors.grey,
+    color: colors.lightGrey,
     fontSize: hp('1.5'),
-    fontFamily: fontFamily.regularAlatsi,
+    fontFamily: fontFamily.helveticaBold,
     lineHeight: hp('2'),
   },
   imageMainView: {
@@ -404,9 +405,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   textStatus: {
-    color: colors.grey,
+    color: colors.lightBlack,
     fontSize: hp('1.2'),
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.helvetica,
     alignItems: 'center',
   },
 
