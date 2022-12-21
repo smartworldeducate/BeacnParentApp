@@ -20,6 +20,8 @@ import FlatListItem from '../FlatList/FlatList';
 import {useDispatch, useSelector} from 'react-redux';
 import MainHeader from '../Header/MainHeader';
 import {useNavigation} from '@react-navigation/native';
+import RenderHTML from 'react-native-render-html';
+import {useWindowDimensions} from 'react-native';
 
 const AssessmentReportModal = ({
   modalVisible,
@@ -38,7 +40,7 @@ const AssessmentReportModal = ({
 }) => {
   const childDatahere = useSelector(state => state.children);
   const navigation = useNavigation();
-
+  const {width} = useWindowDimensions();
   return (
     <Modal
       animationType="fade"
@@ -109,7 +111,9 @@ const AssessmentReportModal = ({
               <Text style={styles.remarksDetailsText}>{text3}</Text>
 
               <Text style={styles.remarksHeadsText}>Self Assessment</Text>
-              <Text style={styles.remarksDetailsText}>{text4}</Text>
+              <Text style={styles.remarksDetailsText}>
+                {<RenderHTML contentWidth={width} source={{html: text4}} />}
+              </Text>
             </View>
           </View>
         </ScrollView>

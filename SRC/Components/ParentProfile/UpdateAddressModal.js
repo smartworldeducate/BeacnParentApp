@@ -76,7 +76,7 @@ const UpdateAddressModal = ({
                 height={hp('4.5')}
                 borderRadius={wp('1.5')}
                 text="Update"
-                bgColor={colors.appColor}
+                colorsArray={['#296cb1', '#2760a7', '#203d88']}
                 textColor={colors.white}
                 textSize={hp('1.75')}
               />

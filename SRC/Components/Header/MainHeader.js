@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import ImagePicker from 'react-native-image-crop-picker';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -14,14 +14,14 @@ import fontFamily from '../../Styles/fontFamily';
 import Swiper from 'react-native-swiper';
 import ImagePickerCrop from '../ImagePicker/ImagePickerCrop';
 import StudentInstructionModal from '../ImagePicker/StudentInstructionModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { getChallan } from '../../Redux/Features/getChallans/challans';
+import {useDispatch, useSelector} from 'react-redux';
+import {getChallan} from '../../Redux/Features/getChallans/challans';
 import Loader from '../Loader/Loader';
-import { getAssessment } from '../../Redux/Features/Assessments/assessment';
-import { calanderAction } from '../../Redux/Features/CalanderKit/CalanderKit';
-import { getNotifications } from '../../Redux/Features/NotificationsKit/NotificationsKit';
-import { imageUpload } from '../../Redux/Features/ImageUploadKit/ImageUploadKit';
-import { contactComplaintAction } from '../../Redux/Features/ContactKit/ContactComplaintKit';
+import {getAssessment} from '../../Redux/Features/Assessments/assessment';
+import {calanderAction} from '../../Redux/Features/CalanderKit/CalanderKit';
+import {getNotifications} from '../../Redux/Features/NotificationsKit/NotificationsKit';
+import {imageUpload} from '../../Redux/Features/ImageUploadKit/ImageUploadKit';
+import {contactComplaintAction} from '../../Redux/Features/ContactKit/ContactComplaintKit';
 
 const MainHeader = ({
   onPressRightImg,
@@ -147,7 +147,7 @@ const MainHeader = ({
   // }, [defaultImg])
 
   return (
-    <View style={{ marginBottom: hp("1") }}>
+    <View style={{marginBottom: hp('1')}}>
       <View style={styles.mainView}>
         <LinearGradient
           colors={['#296cb1', '#2760a7', '#203d88']}
@@ -157,7 +157,7 @@ const MainHeader = ({
               onPress={onPressRightImg}
               style={styles.leftTouchable}>
               <Image
-                source={{ uri: topLeftImg }}
+                source={{uri: topLeftImg}}
                 style={styles.imageStyle}
                 resizeMode={'contain'}
               />
@@ -188,8 +188,8 @@ const MainHeader = ({
                 data[index]?.system_id && data[index]?.sms_number,
               ),
             );
+            // console.log("data[index]?.system_id", data[index]?.system_id);
           }}>
-
           {data?.length > 0 &&
             data?.map(item => {
               // console.log("itemImg", item?.picture);
@@ -235,13 +235,14 @@ const MainHeader = ({
                       justifyContent: 'center',
                       alignItems: 'center',
                       flexDirection: 'row',
+                      marginLeft: wp('10'),
                     }}>
-                    <View style={{ flexDirection: 'column' }}>
+                    <View style={{flexDirection: 'column'}}>
                       <TouchableOpacity
                         onPress={onPressCameraImg}
                         style={styles.imageView}>
                         <Image
-                          source={{ uri: item.picture }}
+                          source={{uri: item.picture}}
                           style={styles.mainImageStyle}
                           resizeMode={'cover'}
                         />
@@ -257,29 +258,60 @@ const MainHeader = ({
                             style={{
                               height: hp('1'),
                               width: wp('2'),
-                              backgroundColor: '#adff2f',
+                              backgroundColor:
+                                item.std_status && item.wdraw_req_count > 0
+                                  ? colors.red
+                                  : '#adff2f',
                               borderRadius: wp('3'),
+                              marginLeft:
+                                item.std_status && item.wdraw_req_count > 0
+                                  ? wp('-4.5')
+                                  : wp('4'),
                             }}></View>
                         </View>
-                        <View style={{ flex: 0.7, justifyContent: 'center' }}>
-                          <Text style={styles.textStatus}>
-                            {`${item.std_status && item.wdraw_req_count > 0 ? "Pending" : "On-Roll"}`}
+                        <View
+                          style={{
+                            flex: 0.7,
+                            justifyContent: 'center',
+                            marginLeft:
+                              item.std_status && item.wdraw_req_count > 0
+                                ? wp('-4.5')
+                                : wp('2'),
+                          }}>
+                          <Text
+                            style={{
+                              color: colors.lightBlack,
+                              fontSize:
+                                item.std_status && item.wdraw_req_count > 0
+                                  ? hp('0.9')
+                                  : hp('1.15'),
+                              fontFamily: fontFamily.regularAlatsi,
+                              textAlign:
+                                item.std_status && item.wdraw_req_count > 0
+                                  ? 'center'
+                                  : 'auto',
+                            }}>
+                            {`${
+                              item.std_status && item.wdraw_req_count > 0
+                                ? 'Withdrawal in Process'
+                                : 'On-Roll'
+                            }`}
                           </Text>
                         </View>
                       </View>
                     </View>
                   </View>
 
-                  <View style={{ flex: 0.05 }}>
+                  <View style={{flex: 0.05}}>
                     <TouchableOpacity onPress={onPressCameraImg}>
                       <Image
-                        source={{ uri: 'camera' }}
+                        source={{uri: 'camera'}}
                         style={{
-                          height: hp('4'),
-                          width: wp('8'),
+                          height: hp('2.35'),
+                          width: wp('5'),
                           zIndex: 1,
-                          left: wp('-10'),
-                          top: hp('1'),
+                          left: wp('-7'),
+                          top: hp('2'),
                         }}
                         resizeMode={'contain'}
                       />
@@ -330,6 +362,8 @@ const styles = StyleSheet.create({
   },
   rightView: {
     flex: 0.8,
+    // backgroundColor: "red",
+    marginTop: hp('-0.25'),
   },
   textStyle: {
     fontSize: hp('1.85'),
@@ -346,7 +380,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     elevation: 10,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
+    shadowOffset: {width: 0, height: 3},
     shadowOpacity: 0.5,
     borderRadius: wp('4'),
   },
@@ -387,6 +421,7 @@ const styles = StyleSheet.create({
     height: hp('10'),
     width: hp('10'),
     marginVertical: hp('1'),
+    marginLeft: wp('1'),
   },
   mainImageStyle: {
     height: hp('10'),
@@ -403,12 +438,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+    // backgroundColor: "pink"
   },
   textStatus: {
     color: colors.lightBlack,
-    fontSize: hp('1.2'),
+    fontSize: hp('0.75'),
     fontFamily: fontFamily.helvetica,
-    alignItems: 'center',
+    textAlign: 'justify',
   },
 
   wrapper: {

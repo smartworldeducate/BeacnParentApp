@@ -191,7 +191,7 @@ const Assessment = () => {
             <View style={styles.innerHeaderView}>
               <View
                 style={{
-                  flex: 0.85,
+                  flex: 10,
                   justifyContent: 'center',
                   // backgroundColor: 'green',
                 }}>
@@ -205,7 +205,7 @@ const Assessment = () => {
               <TouchableOpacity
                 onPress={() => onPressSelected({item, index})}
                 style={{
-                  flex: 0.15,
+                  flex: 0.05,
                   justifyContent: 'center',
                   // backgroundColor: 'red',
                 }}>
@@ -285,7 +285,7 @@ const Assessment = () => {
                 width={wp('25')}
                 borderRadius={wp('1')}
                 text="View Report"
-                bgColor={colors.appColor}
+                colorsArray={['#296cb1', '#2760a7', '#203d88']}
                 textColor={colors.white}
                 textSize={hp('1.5')}
               />

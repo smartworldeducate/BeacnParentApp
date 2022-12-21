@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,7 +16,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import colors from '../Styles/colors';
 import MainHeader from '../Components/Header/MainHeader';
@@ -29,22 +29,24 @@ import ModalNotification from '../Components/Modal/ModalNotification';
 import ListEmptyComponent from '../Components/FlatList/ListemptyComponent';
 import Loader from '../Components/Loader/Loader';
 
-import { getChild } from '../Redux/Features/getChildData/children';
-import { useDispatch, useSelector } from 'react-redux';
+import {getChild} from '../Redux/Features/getChildData/children';
+import {useDispatch, useSelector} from 'react-redux';
 
-import { getNotifications } from '../Redux/Features/NotificationsKit/NotificationsKit';
+import {getNotifications} from '../Redux/Features/NotificationsKit/NotificationsKit';
 import moment from 'moment';
 import RenderHtml from 'react-native-render-html';
-import { useWindowDimensions } from 'react-native';
+import {useWindowDimensions} from 'react-native';
 import SingleLine from '../Components/SingleLine/SingleLine';
 
 const HomeScreen = () => {
-  const { width } = useWindowDimensions();
+  const {width} = useWindowDimensions();
 
   const dispatch = useDispatch();
   const childDatahere = useSelector(state => state.children);
   const mobile = useSelector(state => state.OTPCodeStore);
   const notificationsHere = useSelector(state => state.notifications);
+
+  console.log('childDatahere', childDatahere);
 
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = React.useState(false);
@@ -78,7 +80,6 @@ const HomeScreen = () => {
   // console.log("notificationsHere", notificationsHere?.notifications?.notifications);
   // console.log("childDataHere", childDatahere);
 
-
   useEffect(() => {
     AsyncStorage.setItem('token', 'token');
     getNumber();
@@ -99,30 +100,28 @@ const HomeScreen = () => {
     }
   };
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({item, index}) => {
     // console.log("item", item);
     var myDate1 = moment(item.date).format('D');
     var myDate2 = moment(item.date).format('MMM');
 
-
-    var splitDate = item.date.split(" ");
+    var splitDate = item.date.split(' ');
     // console.log("date333", splitDate[1]);
 
-    var splitFirst = splitDate[1].split(" ");
+    var splitFirst = splitDate[1].split(' ');
     // console.log("splitFirst", splitFirst);
 
-    var splitSecond = splitFirst[0].split(" ");
+    var splitSecond = splitFirst[0].split(' ');
     // console.log("splitSecond", splitSecond);
 
-    var splitThird = splitSecond[0].split("-")
+    var splitThird = splitSecond[0].split('-');
     // console.log("splitThird", splitThird);
 
     // console.log("splitLast1", splitThird[0]);
     // console.log("splitLast2", splitThird[1]);
 
-    var splitFinal = splitSecond[0].split(" ");
+    var splitFinal = splitSecond[0].split(' ');
     // console.log("splitFinal", splitFinal);
-
 
     return (
       <View style={styles.listMainView}>
@@ -149,7 +148,7 @@ const HomeScreen = () => {
               ) ? (
                 <RenderHtml
                   contentWidth={width}
-                  source={{ html: index != 0 ? item.body : item.title }}
+                  source={{html: index != 0 ? item.body : item.title}}
                   tagsStyles={tagsStyles}
                   defaultTextProps={
                     {
@@ -166,10 +165,10 @@ const HomeScreen = () => {
           <Text style={styles.centalLowerText}>{item.notification_type}</Text>
         </View>
         <TouchableOpacity
-          onPress={() => onPressRightImg({ item })}
+          onPress={() => onPressRightImg({item})}
           style={styles.listRightView}>
           <Image
-            source={{ uri: 'forwardarrow' }}
+            source={{uri: 'forwardarrow'}}
             style={styles.listRightImg}
             resizeMode={'contain'}
           />
@@ -178,7 +177,7 @@ const HomeScreen = () => {
     );
   };
 
-  const onPressRightImg = ({ item }) => {
+  const onPressRightImg = ({item}) => {
     // setDate(item.date);
     // setText(item.text);
     // setType(item.type);
@@ -267,7 +266,6 @@ const HomeScreen = () => {
           />
 
           <LineSeprator style={styles.lineSeprator} />
-          {/* <Loader ></Loader> */}
           <FlatListItem
             data={notificationsHere?.notifications?.notifications}
             renderItem={renderItem}
@@ -291,14 +289,14 @@ const HomeScreen = () => {
           <ModalNotification
             modalVisible={modalVisible}
             onPressModal={onPressModal}
-            modalUpperFlex={0.3}
-            modalLowerFlex={0.7}
+            modalUpperFlex={0.25}
+            modalLowerFlex={0.75}
             to={to}
             details={details}
             sentBy={sentBy}
           />
 
-          <View style={{ marginBottom: hp('5') }}></View>
+          <View style={{marginBottom: hp('5')}}></View>
         </ScrollView>
       )}
     </SafeAreaView>
@@ -347,11 +345,10 @@ const styles = StyleSheet.create({
   },
   centalUpperText: {
     fontSize: hp('1.85'),
-    fontFamily: fontFamily.helveticaLight,
+    fontFamily: fontFamily.helveticaBold,
     color: colors.grey,
     lineHeight: hp('2.5'),
   },
-
 
   centalLowerText: {
     fontSize: hp('1.7'),
@@ -402,10 +399,10 @@ const styles = StyleSheet.create({
 const tagsStyles = {
   body: {
     whiteSpace: 'normal',
-    color: 'red'
+    color: 'red',
   },
   a: {
-    color: 'green'
-  }
+    color: 'green',
+  },
 };
 export default HomeScreen;

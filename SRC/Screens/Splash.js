@@ -33,9 +33,9 @@ const Splash = () => {
 
   return (
     <ImageBackground
-      source={{uri: 'mainsplash'}}
+      source={{uri: 'mainsplashhere'}}
       style={{flex: 1}}
-      resizeMode={'stretch'}></ImageBackground>
+      resizeMode={'cover'}></ImageBackground>
   );
 };
 

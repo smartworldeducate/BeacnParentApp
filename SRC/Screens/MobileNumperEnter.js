@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ImageBackground, Appearance } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ImageBackground,
+  Appearance,
+} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -13,7 +19,7 @@ import DeviceInfo from 'react-native-device-info';
 
 // or ES6+ destructured imports
 
-import { getUniqueId, getManufacturer } from 'react-native-device-info';
+import {getUniqueId, getManufacturer} from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import colors from '../Styles/colors';
@@ -21,7 +27,7 @@ import fontFamily from '../Styles/fontFamily';
 import Button from '../Components/Button/Button';
 import TextInputCustom from '../Components/TextInput/TextInput';
 
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   clearState,
   createPost,
@@ -32,22 +38,20 @@ import Loader from '../Components/Loader/Loader';
 const MobileNumperEnter = () => {
   const [theme, setTheme] = useState(Appearance.getColorScheme());
 
-  Appearance.addChangeListener((scheme) => {
+  Appearance.addChangeListener(scheme => {
     // console.log("scheme", scheme.colorScheme);
     setTheme(scheme.colorScheme);
-  })
+  });
 
-  useEffect(() => {
+  useEffect(() => {}, [theme]);
 
-  }, [theme])
-
-  console.log("theme", theme);
+  console.log('theme', theme);
 
   const dispatch = useDispatch();
   const post = useSelector(state => state.post);
   console.log(post, 'post');
   const [inputContactState, setInputContactState] = useState('');
-  const [values, setValues] = useState({ sms_number: '' });
+  const [values, setValues] = useState({sms_number: ''});
   const [deviceType, setDeviceType] = useState('android');
   const [deviceIdentifier, setDeviceIdentifier] = useState('asdf');
   const [deviceToken, setDeviceToken] = useState('asdf');
@@ -61,7 +65,7 @@ const MobileNumperEnter = () => {
 
   const onChangeContact = val => {
     setInputContactState(val);
-    setValues({ ...values, sms_number: val });
+    setValues({...values, sms_number: val});
   };
 
   const validateField = () => {
@@ -81,7 +85,7 @@ const MobileNumperEnter = () => {
   useEffect(() => {
     if (post.success) {
       AsyncStorage.setItem('number', inputContactState);
-      handleNavigate('OTPEnter', false, {
+      handleNavigate('HomeScreen', false, {
         deviceTypeParam: deviceType,
         contactNumberParam: inputContactState,
         deviceIdentifierParam: deviceIdentifier,
@@ -101,17 +105,35 @@ const MobileNumperEnter = () => {
 
   const toastConfig = {
     success: internalState => (
-      <View style={{ height: hp('8'), width: wp('90'), marginHorizontal: wp('5'), backgroundColor: "#333333", borderRadius: wp('1.5'), justifyContent: "center" }}>
-        <Text style={{ fontSize: hp('1.5'), fontFamily: fontFamily.helveticaLight, color: colors.white, paddingHorizontal: wp('3'), paddingVertical: hp('1.5'), lineHeight: hp('2.5') }}>{internalState.text2}</Text>
+      <View
+        style={{
+          height: hp('8'),
+          width: wp('90'),
+          marginHorizontal: wp('5'),
+          backgroundColor: '#333333',
+          borderRadius: wp('1.5'),
+          justifyContent: 'center',
+        }}>
+        <Text
+          style={{
+            fontSize: hp('1.5'),
+            fontFamily: fontFamily.helveticaLight,
+            color: colors.white,
+            paddingHorizontal: wp('3'),
+            paddingVertical: hp('1.5'),
+            lineHeight: hp('2.5'),
+          }}>
+          {internalState.text2}
+        </Text>
       </View>
-    )
-  }
+    ),
+  };
 
   return (
     <ImageBackground
-      source={{ uri: 'mainsplash' }}
-      style={{ flex: 1 }}
-      resizeMode={'stretch'}>
+      source={{uri: 'loginbglatest'}}
+      style={{flex: 1}}
+      resizeMode={'cover'}>
       <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
       {post?.isLoading && <Loader></Loader>}
       <View style={styles.mainTopView}></View>
@@ -160,16 +182,16 @@ const styles = StyleSheet.create({
     marginHorizontal: wp('5'),
     fontSize: hp('1.6'),
     fontFamily: fontFamily.helveticaBold,
-    height: hp('5'),
+    height: hp('6'),
     borderBottomColor: colors.lightGrey,
     borderBottomWidth: wp('0.25'),
-    color: colors.lightGrey
+    color: colors.lightGrey,
   },
   contactNumberMainView: {
     // flex: 1,
     flexDirection: 'column',
     backgroundColor: 'white',
-    marginBottom: hp('5'),
+    marginBottom: hp('5.5'),
     marginHorizontal: wp('5'),
     borderRadius: wp('5'),
   },
