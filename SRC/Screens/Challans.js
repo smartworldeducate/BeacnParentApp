@@ -98,7 +98,7 @@ const Challans = () => {
   // console.log("paidChallansHere11", paidChallans);
 
   const renderItem = ({item, index}) => {
-    setPayOnlineState(item.status == 0 ? false : true);
+    setPayOnlineState(item.status.length == 1 ? true : false);
     return (
       <>
         {item.status == 0 ? (
@@ -165,7 +165,7 @@ const Challans = () => {
     // console.log("itemStatus", item.status);
     return (
       <>
-        {item.status == 1 ? (
+        {item.status.length == 1 ? (
           <View style={styles.pastChallanMainView}>
             <View style={styles.pastChallanView}>
               <View style={styles.pastChallanUpperView}>

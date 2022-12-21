@@ -278,7 +278,9 @@ const HomeScreen = () => {
             //     text={'Right Now there is no notification'}
             //   />
             // }
-            initialNumToRender={8}
+            initialNumToRender={5}
+            windowSize={5}
+            maxToRenderPerBatch={5}
             ItemSeparatorComponent={
               <LineSeprator style={styles.listSeprator} />
             }

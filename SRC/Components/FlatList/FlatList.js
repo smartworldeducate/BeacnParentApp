@@ -10,6 +10,8 @@ const FlatListItem = ({
   ListEmptyComponent,
   initialNumToRender,
   ItemSeparatorComponent,
+  windowSize,
+  maxToRenderPerBatch,
 }) => {
   return (
     <FlatList
@@ -21,6 +23,8 @@ const FlatListItem = ({
       ListEmptyComponent={ListEmptyComponent}
       initialNumToRender={initialNumToRender}
       ItemSeparatorComponent={ItemSeparatorComponent}
+      windowSize={windowSize}
+      maxToRenderPerBatch={maxToRenderPerBatch}
     />
   );
 };

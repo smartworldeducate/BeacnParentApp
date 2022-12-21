@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -16,7 +16,7 @@ import colors from '../../Styles/colors';
 import fontFamily from '../../Styles/fontFamily';
 import NotificationHeader from '../Header/NotificationHeader';
 import RenderHtml from 'react-native-render-html';
-import { useWindowDimensions } from 'react-native';
+import {useWindowDimensions} from 'react-native';
 import SingleLine from '../SingleLine/SingleLine';
 
 const ModalNotification = ({
@@ -28,7 +28,7 @@ const ModalNotification = ({
   details,
   sentBy,
 }) => {
-  const { width } = useWindowDimensions();
+  const {width} = useWindowDimensions();
   return (
     <Modal
       animationType="slide"
@@ -38,9 +38,9 @@ const ModalNotification = ({
       <View style={styles.modalView}>
         <TouchableOpacity
           onPress={onPressModal}
-          style={{ flex: modalUpperFlex }}></TouchableOpacity>
+          style={{flex: modalUpperFlex}}></TouchableOpacity>
 
-        <View style={{ flex: modalLowerFlex, backgroundColor: colors.white }}>
+        <View style={{flex: modalLowerFlex, backgroundColor: colors.white}}>
           <NotificationHeader
             text={'Notification Details'}
             rightImg={'crosscircle'}
@@ -49,12 +49,7 @@ const ModalNotification = ({
 
           <ScrollView>
             <View style={styles.modalLowerInnerView}>
-              {/* <Text style={styles.sentToText}>{to}</Text> */}
-              {/* <SingleLine /> */}
-              <RenderHtml contentWidth={width} source={{ html: details }} />
-              {/* <Text style={styles.lowerText}>{details}</Text> */}
-              {/* <Text style={styles.lowerText}>{`Regards`}</Text>
-                            <Text style={styles.lowerText}>{sentBy}</Text> */}
+              <RenderHtml contentWidth={width} source={{html: details}} />
             </View>
           </ScrollView>
         </View>
@@ -77,7 +72,7 @@ const styles = StyleSheet.create({
   },
   modalLowerInnerView: {
     marginVertical: hp('2'),
-    marginHorizontal: wp('5')
+    marginHorizontal: wp('5'),
   },
   sentToText: {
     fontSize: hp('1.85'),

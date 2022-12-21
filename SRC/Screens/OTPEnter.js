@@ -180,7 +180,7 @@ const OTPEnter = ({route}) => {
       <View style={{marginBottom: hp('1.5'), marginHorizontal: wp('5')}}>
         <Text
           style={{
-            color: colors.solidAppColor,
+            color: '#1883b5',
             fontFamily: fontFamily.helvetica,
             fontSize: hp('1.5'),
           }}>
@@ -285,10 +285,10 @@ const OTPEnter = ({route}) => {
         }}>
         <Text
           style={{
-            color: colors.solidAppColor,
+            color: '#1883b5',
             fontFamily: fontFamily.helveticaLight,
             fontSize: hp('1.6'),
-            lineHeight: hp('2'),
+            lineHeight: hp('2.5'),
           }}>
           Didn't receive the code?
           <Text

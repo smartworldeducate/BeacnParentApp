@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     borderTopColor: colors.lightGrey,
     borderTopWidth: wp('0.15'),
     paddingBottom: hp('2'),
-    marginHorizontal: wp('6'),
+    marginHorizontal: wp('4'),
   },
   innerMainView: {
     flex: 1,
@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
   touchableIcon: {
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: hp('1'),
   },
   imgStyle: {
     height: hp('4.5'),
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.helveticaBold,
     color: colors.lightGrey,
     fontWeight: 'bold',
-    paddingHorizontal: wp('1'),
+    // paddingHorizontal: wp('1'),
   },
 });
 

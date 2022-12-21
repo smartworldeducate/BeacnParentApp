@@ -22,6 +22,7 @@ import MainHeader from '../Header/MainHeader';
 import {useNavigation} from '@react-navigation/native';
 import RenderHTML from 'react-native-render-html';
 import {useWindowDimensions} from 'react-native';
+import SingleLine from '../SingleLine/SingleLine';
 
 const AssessmentReportModal = ({
   modalVisible,
@@ -109,11 +110,12 @@ const AssessmentReportModal = ({
 
               <Text style={styles.remarksHeadsText}>Achievements</Text>
               <Text style={styles.remarksDetailsText}>{text3}</Text>
-
               <Text style={styles.remarksHeadsText}>Self Assessment</Text>
-              <Text style={styles.remarksDetailsText}>
-                {<RenderHTML contentWidth={width} source={{html: text4}} />}
-              </Text>
+              <View style={styles.remarksDetailsText1}>
+                <Text>
+                  {<RenderHTML contentWidth={width} source={{html: text4}} />}
+                </Text>
+              </View>
             </View>
           </View>
         </ScrollView>
@@ -180,6 +182,12 @@ const styles = StyleSheet.create({
   remarksDetailsText: {
     color: colors.lightBlack,
     fontSize: hp('1.4'),
+    fontFamily: fontFamily.regular,
+    lineHeight: hp('2.5'),
+  },
+  remarksDetailsText1: {
+    color: colors.lightBlack,
+    fontSize: hp('1'),
     fontFamily: fontFamily.regular,
     lineHeight: hp('2.5'),
   },
