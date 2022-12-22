@@ -6,10 +6,12 @@ import Routes from './Routes';
 
 const App = () => {
   console.log("Apps");
+  console.disableYellowBox = true;
   return (
 
     <Provider store={store}>
       <Routes />
+
     </Provider>
   );
 };

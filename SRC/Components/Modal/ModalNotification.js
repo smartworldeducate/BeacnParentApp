@@ -43,7 +43,7 @@ const ModalNotification = ({
         <View style={{ flex: modalLowerFlex, backgroundColor: colors.white }}>
           <NotificationHeader
             text={'Notification Details'}
-            rightImg={'crosscircle'}
+            rightImg={'closesilver'}
             onPressRightImg={onPressModal}
           />
 

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -13,14 +13,14 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
-import {Calendar} from 'react-native-calendars';
+import { useNavigation } from '@react-navigation/native';
+import { Calendar } from 'react-native-calendars';
 
 import colors from '../Styles/colors';
 import MainHeader from '../Components/Header/MainHeader';
 
-import {useDispatch, useSelector} from 'react-redux';
-import {calanderAction} from '../Redux/Features/CalanderKit/CalanderKit';
+import { useDispatch, useSelector } from 'react-redux';
+import { calanderAction } from '../Redux/Features/CalanderKit/CalanderKit';
 import FlatListItem from '../Components/FlatList/FlatList';
 
 import fontFamily from '../Styles/fontFamily';
@@ -71,10 +71,10 @@ const Attendance = () => {
   //     })
   // }));
 
-  const renderItem = ({item, index}) => {
+  const renderItem = ({ item, index }) => {
     return (
       <>
-        <Text style={{fontSize: hp('2'), fontFamily: fontFamily.semiBold}}>
+        <Text style={{ fontSize: hp('2'), fontFamily: fontFamily.semiBold }}>
           {moment(item.date_full).format('YYYY-MM-DD')}
         </Text>
         {/* <FlatListItem
@@ -85,7 +85,7 @@ const Attendance = () => {
     );
   };
 
-  const renderItemDates = ({item, index}) => {
+  const renderItemDates = ({ item, index }) => {
     // console.log("itemDate", item.date_full);
     return (
       <>
@@ -132,10 +132,12 @@ const Attendance = () => {
         item.status === 'Present'
           ? colors.lightGreen
           : item.status === 'Absent'
-          ? '#8f211d'
-          : item.status === 'Online_present'
-          ? '#2f727e'
-          : null,
+            ? '#8f211d'
+            : item.status === 'Online_present'
+              ? '#2f727e'
+              : item.status === 'Holiday'
+                ? '#8996a3'
+                : null,
       // selectedColor: item.status === "Present" ? "green" : item.status === "Absent" ? "#8f211d" : item.status === "Online_present" ? "#2f727e" : null,
     };
   });
@@ -148,7 +150,7 @@ const Attendance = () => {
           Platform.OS === 'android' ? colors.white : colors.white,
       }}>
       <ScrollView
-        contentContainerStyle={{flexGrow: 1, backgroundColor: colors.white}}>
+        contentContainerStyle={{ flexGrow: 1, backgroundColor: colors.white }}>
         <StatusBar barStyle={'default'} backgroundColor={colors.lightBlack} />
 
         {childDatahere?.posts?.result?.children.length > 0 && (
@@ -162,7 +164,7 @@ const Attendance = () => {
 
         {/* calander work */}
 
-        <Text>{}</Text>
+        <Text>{ }</Text>
 
         {calanderHere?.isLoading && <Loader></Loader>}
 
@@ -214,57 +216,57 @@ const Attendance = () => {
             // markingType={'custom'}
             markedDates={markedDay}
 
-            // markedDates={{
+          // markedDates={{
 
-            // }}
+          // }}
 
-            // 16-10-2022
+          // 16-10-2022
 
-            // markedDates={{
-            //     '16-11-2022': {
-            //         customStyles: {
-            //             container: {
-            //                 backgroundColor: 'green'
-            //             },
-            //             text: {
-            //                 color: 'black',
-            //                 fontWeight: 'bold'
-            //             }
-            //         }
-            //     },
-            //     '15-11-2022': {
-            //         customStyles: {
-            //             container: {
-            //                 backgroundColor: 'red',
-            //                 elevation: 2
-            //             },
-            //             text: {
-            //                 color: 'blue'
-            //             }
-            //         }
-            //     }
-            // }}
+          // markedDates={{
+          //     '16-11-2022': {
+          //         customStyles: {
+          //             container: {
+          //                 backgroundColor: 'green'
+          //             },
+          //             text: {
+          //                 color: 'black',
+          //                 fontWeight: 'bold'
+          //             }
+          //         }
+          //     },
+          //     '15-11-2022': {
+          //         customStyles: {
+          //             container: {
+          //                 backgroundColor: 'red',
+          //                 elevation: 2
+          //             },
+          //             text: {
+          //                 color: 'blue'
+          //             }
+          //         }
+          //     }
+          // }}
 
-            // markedDates={{
-            //     [calanderHere?.posts?.result?.attendance.map((item) => {
-            //         return item.data.map((e) => {
-            //             return moment(e.date_full).format("YYYY-MM-DD")
-            //         })
-            //     })]: {
-            //         customStyles: {
-            //             text: {
-            //                 color: "blue", fontFamily: fontFamily.semiBold, fontSize: 12
-            //             },
-            //             container: {
-            //                 backgroundColor: "red",
-            //                 borderRadius: 5,
-            //                 justifyContent: "center",
-            //                 alignItems: "center",
-            //                 elevation: 2, height: hp("3.5%")
-            //             }
-            //         },
-            //     }
-            // }}
+          // markedDates={{
+          //     [calanderHere?.posts?.result?.attendance.map((item) => {
+          //         return item.data.map((e) => {
+          //             return moment(e.date_full).format("YYYY-MM-DD")
+          //         })
+          //     })]: {
+          //         customStyles: {
+          //             text: {
+          //                 color: "blue", fontFamily: fontFamily.semiBold, fontSize: 12
+          //             },
+          //             container: {
+          //                 backgroundColor: "red",
+          //                 borderRadius: 5,
+          //                 justifyContent: "center",
+          //                 alignItems: "center",
+          //                 elevation: 2, height: hp("3.5%")
+          //             }
+          //         },
+          //     }
+          // }}
           />
 
           {/* <Calendar
@@ -318,7 +320,7 @@ const Attendance = () => {
                         }}
                     /> */}
         </View>
-        <View style={{width: '100%', paddingHorizontal: 20}}>
+        <View style={{ width: '100%', paddingHorizontal: 20 }}>
           <View
             style={{
               height: 0.8,
@@ -327,32 +329,32 @@ const Attendance = () => {
               alignSelf: 'center',
             }}></View>
         </View>
-        <View style={{flexDirection: 'row', width: '100%', padding: 20}}>
-          <View style={{width: '50%'}}>
+        <View style={{ flexDirection: 'row', width: '100%', padding: 20 }}>
+          <View style={{ width: '50%' }}>
             <View style={styles.row}>
               <View style={styles.box}></View>
               <Text style={styles.textStyle}>Present Physically</Text>
             </View>
             <View style={styles.row}>
-              <View style={[styles.box, {backgroundColor: '#8f211d'}]}></View>
+              <View style={[styles.box, { backgroundColor: '#8f211d' }]}></View>
               <Text style={styles.textStyle}>Absent</Text>
             </View>
             <View style={styles.row}>
-              <View style={[styles.box, {backgroundColor: '#2c71b3'}]}></View>
+              <View style={[styles.box, { backgroundColor: '#2c71b3' }]}></View>
               <Text style={styles.textStyle}>Exempted</Text>
             </View>
           </View>
-          <View style={{width: '50%'}}>
+          <View style={{ width: '50%' }}>
             <View style={styles.row}>
-              <View style={[styles.box, {backgroundColor: '#2f727e'}]}></View>
+              <View style={[styles.box, { backgroundColor: '#2f727e' }]}></View>
               <Text style={styles.textStyle}>Present Online</Text>
             </View>
             <View style={styles.row}>
-              <View style={[styles.box, {backgroundColor: '#e27538'}]}></View>
+              <View style={[styles.box, { backgroundColor: '#e27538' }]}></View>
               <Text style={styles.textStyle}>On Leave</Text>
             </View>
             <View style={styles.row}>
-              <View style={[styles.box, {backgroundColor: '#8996a3'}]}></View>
+              <View style={[styles.box, { backgroundColor: '#8996a3' }]}></View>
               <Text style={styles.textStyle}>Holidays</Text>
             </View>
           </View>
@@ -368,7 +370,7 @@ const Attendance = () => {
 };
 
 const styles = StyleSheet.create({
-  row: {flexDirection: 'row', alignItems: 'center', marginBottom: 10},
+  row: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
   box: {
     height: hp('2.75'),
     width: wp('5.5'),

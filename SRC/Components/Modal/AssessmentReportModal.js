@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -17,11 +17,11 @@ import {
 import colors from '../../Styles/colors';
 import fontFamily from '../../Styles/fontFamily';
 import FlatListItem from '../FlatList/FlatList';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MainHeader from '../Header/MainHeader';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import RenderHTML from 'react-native-render-html';
-import {useWindowDimensions} from 'react-native';
+import { useWindowDimensions } from 'react-native';
 
 const AssessmentReportModal = ({
   modalVisible,
@@ -40,7 +40,8 @@ const AssessmentReportModal = ({
 }) => {
   const childDatahere = useSelector(state => state.children);
   const navigation = useNavigation();
-  const {width} = useWindowDimensions();
+  const { width } = useWindowDimensions();
+  const regex = /(<([^>]+)>)/ig;
   return (
     <Modal
       animationType="fade"
@@ -70,23 +71,29 @@ const AssessmentReportModal = ({
             backgroundColor: colors.white,
             marginVertical: hp(2),
           }}>
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <View style={styles.detailsView}>
               <Text style={styles.assessmentYearText}>{assessmentYear}</Text>
-              <Text style={styles.detailsText}>{stdClass}</Text>
+              <Text style={{
+                color: colors.lightBlack,
+                fontSize: hp('1.65'),
+                fontFamily: fontFamily.regular,
+                lineHeight: hp('2.5'),
+                marginLeft: wp('-1')
+              }}>{stdClass}</Text>
               <Text style={styles.detailsText}>{campus}</Text>
               <Text style={styles.detailsText}>{termAttendence}</Text>
             </View>
 
-            <View style={{flexDirection: 'column'}}>
+            <View style={{ flexDirection: 'column' }}>
               <View style={styles.tableMainView}>
-                <View style={{flex: 0.35, alignItems: 'center'}}>
+                <View style={{ flex: 0.35, alignItems: 'center' }}>
                   <Text style={styles.tableHeader}>Subjects </Text>
                 </View>
-                <View style={{flex: 0.35, alignItems: 'center'}}>
+                <View style={{ flex: 0.35, alignItems: 'center' }}>
                   <Text style={styles.tableHeader}>Marks</Text>
                 </View>
-                <View style={{flex: 0.3, alignItems: 'center'}}>
+                <View style={{ flex: 0.3, alignItems: 'center' }}>
                   <Text style={styles.tableHeader}> Remarks</Text>
                 </View>
               </View>
@@ -111,9 +118,17 @@ const AssessmentReportModal = ({
               <Text style={styles.remarksDetailsText}>{text3}</Text>
 
               <Text style={styles.remarksHeadsText}>Self Assessment</Text>
-              <Text style={styles.remarksDetailsText}>
-                {<RenderHTML contentWidth={width} source={{html: text4}} />}
-              </Text>
+              <View style={styles.remarksDetailsText}>
+                <Text>
+                  {/* {text4.replace(regex, '')}{' '} */}
+                  {<RenderHTML contentWidth={width} source={{ html: text4 }} tagsStyles={tagsStyles} defaultTextProps={
+                    {
+
+                      // numberOfLines: 1, ellipsizeMode: 'tail'
+                    }
+                  } />}
+                </Text>
+              </View>
             </View>
           </View>
         </ScrollView>
@@ -183,5 +198,23 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.regular,
     lineHeight: hp('2.5'),
   },
+  remarksDetailsText1: {
+    color: colors.lightBlack,
+    fontSize: hp('1.4'),
+    fontFamily: fontFamily.regular,
+    lineHeight: hp('2.5'),
+    marginVertical: hp('2'),
+    marginHorizontal: wp('5')
+  },
 });
+
+const tagsStyles = {
+  body: {
+    whiteSpace: 'normal',
+    // color: 'red',
+  },
+  a: {
+    color: 'green',
+  },
+};
 export default AssessmentReportModal;

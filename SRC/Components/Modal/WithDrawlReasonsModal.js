@@ -43,7 +43,7 @@ const WithDrawlReasonsModal = ({
         <View style={{ flex: modalLowerFlex, backgroundColor: colors.white }}>
           <NotificationHeader
             text={'Withdrawl Request Detail'}
-            rightImg={'crosscircle'}
+            rightImg={'closesilver'}
             onPressRightImg={onPressModal}
           />
 

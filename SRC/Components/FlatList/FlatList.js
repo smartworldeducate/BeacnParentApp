@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, FlatList} from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 
 const FlatListItem = ({
   data,
@@ -10,6 +10,8 @@ const FlatListItem = ({
   ListEmptyComponent,
   initialNumToRender,
   ItemSeparatorComponent,
+  windowSize,
+  maxToRenderPerBatch
 }) => {
   return (
     <FlatList
@@ -21,6 +23,8 @@ const FlatListItem = ({
       ListEmptyComponent={ListEmptyComponent}
       initialNumToRender={initialNumToRender}
       ItemSeparatorComponent={ItemSeparatorComponent}
+      windowSize={windowSize}
+      maxToRenderPerBatch={maxToRenderPerBatch}
     />
   );
 };

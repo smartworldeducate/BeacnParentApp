@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,7 +16,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import fontFamily from '../Styles/fontFamily';
 
 import colors from '../Styles/colors';
@@ -28,12 +28,12 @@ import ModalNotification from '../Components/Modal/ModalNotification';
 import Loader from '../Components/Loader/Loader';
 import moment from 'moment';
 import RenderHtml from 'react-native-render-html';
-import {useWindowDimensions} from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import SingleLine from '../Components/SingleLine/SingleLine';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-const ViewAllNotifications = ({route}) => {
-  const {width} = useWindowDimensions();
+const ViewAllNotifications = ({ route }) => {
+  const { width } = useWindowDimensions();
   const childDatahere = useSelector(state => state.children);
   const notificationsHere = useSelector(state => state.notifications);
 
@@ -69,7 +69,7 @@ const ViewAllNotifications = ({route}) => {
     // console.log("calling again", initialCall());
   };
 
-  const onPressRightImg = ({item}) => {
+  const onPressRightImg = ({ item }) => {
     // setDate(item.date);
     // setText(item.text);
     // setType(item.type);
@@ -79,7 +79,7 @@ const ViewAllNotifications = ({route}) => {
     onPressModal();
   };
 
-  const renderItem = ({item, index}) => {
+  const renderItem = ({ item, index }) => {
     var splitDate = item.date.split(' ');
     // console.log("date333", splitDate[1]);
 
@@ -109,7 +109,8 @@ const ViewAllNotifications = ({route}) => {
               color: colors.grey,
             }}>
             {/* {`${moment(item.date).format('D')}\n${moment(item.date).format('MMM')}`} */}
-            {`${splitThird[0]}\n${splitThird[1]}`}
+            {/* {`${splitThird[0]}\n${splitThird[1]}`} */}
+            {`${splitThird[0].length === 1 ? `0${splitThird[0]}` : splitThird[0]}\n${splitThird[1]}`}
           </Text>
         </View>
         <View style={styles.listCentralView}>
@@ -124,7 +125,7 @@ const ViewAllNotifications = ({route}) => {
               ) ? (
                 <RenderHtml
                   contentWidth={width}
-                  source={{html: index != 0 ? item.body : item.title}}
+                  source={{ html: index != 0 ? item.body : item.title }}
                   defaultTextProps={
                     {
                       // numberOfLines: 1, ellipsizeMode: 'tail'
@@ -139,10 +140,10 @@ const ViewAllNotifications = ({route}) => {
           <Text style={styles.centalLowerText}>{item.notification_type}</Text>
         </View>
         <TouchableOpacity
-          onPress={() => onPressRightImg({item})}
+          onPress={() => onPressRightImg({ item })}
           style={styles.listRightView}>
           <Image
-            source={{uri: 'forwardarrow'}}
+            source={{ uri: 'forwardarrow' }}
             style={styles.listRightImg}
             resizeMode={'contain'}
           />
@@ -186,11 +187,11 @@ const ViewAllNotifications = ({route}) => {
             progressBackgroundColor={colors.silverGrey}
             tintColor={colors.appColor}
 
-            // title={"loading"}
-            // titleColor={colors.white}
+          // title={"loading"}
+          // titleColor={colors.white}
 
-            // size between 0 to 1
-            // size={"large"}
+          // size between 0 to 1
+          // size={"large"}
           />
         }>
         <View style={styles.notificationView}>
@@ -222,7 +223,7 @@ const ViewAllNotifications = ({route}) => {
           sentBy={sentBy}
         />
 
-        <View style={{marginBottom: hp('5')}}></View>
+        <View style={{ marginBottom: hp('5') }}></View>
       </ScrollView>
     </SafeAreaView>
   );

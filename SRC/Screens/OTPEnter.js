@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -32,7 +32,7 @@ import {
 } from 'react-native-confirmation-code-field';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   clearState,
   OTPCodeAction,
@@ -51,7 +51,7 @@ import {
   useOtpVerify,
 } from 'react-native-otp-verify';
 const CELL_COUNT = 4;
-const OTPEnter = ({route}) => {
+const OTPEnter = ({ route }) => {
   const [firstOTP, setFirstOTP] = useState('');
   const [otpCode, setOtpCode] = useState('');
   // const onChangeFirstOTP = val => {
@@ -59,7 +59,7 @@ const OTPEnter = ({route}) => {
   //   setValuesObj({...valuesObj, pin_code_sms: val});
   // };
   const [value, setValue] = useState('');
-  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
+  const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
@@ -91,8 +91,8 @@ const OTPEnter = ({route}) => {
 
   // console.log('valuesObj', valuesObj);
 
-  const {hash, otp, message, timeoutError, stopListener, startListener} =
-    useOtpVerify({numberOfDigits: 4});
+  const { hash, otp, message, timeoutError, stopListener, startListener } =
+    useOtpVerify({ numberOfDigits: 4 });
   useEffect(() => {
     getHash().then(console.log).catch(console.log);
     getOtp()
@@ -104,7 +104,7 @@ const OTPEnter = ({route}) => {
     console.log('otp<<', otp);
     setValue(otp);
     handleNavigate('HomeScreen');
-    setValuesObj({...valuesObj, pin_code_sms: otp});
+    setValuesObj({ ...valuesObj, pin_code_sms: otp });
     // setOtpCode(otp);
     removeListener();
     Keyboard.dismiss();
@@ -169,18 +169,18 @@ const OTPEnter = ({route}) => {
 
   return (
     <ImageBackground
-      source={{uri: 'loginbglatest'}}
-      style={{flex: 1}}
+      source={{ uri: 'loginbglatest' }}
+      style={{ flex: 1 }}
       resizeMode={'cover'}>
       {/* <Toast /> */}
       <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
       {OTPCodeHere?.isLoading && <Loader></Loader>}
-      <View style={{flex: 3.5}}></View>
+      <View style={{ flex: 3.5 }}></View>
 
-      <View style={{marginBottom: hp('1.5'), marginHorizontal: wp('5')}}>
+      <View style={{ marginBottom: hp('1.5'), marginHorizontal: wp('5') }}>
         <Text
           style={{
-            color: colors.solidAppColor,
+            color: "#1883b5",
             fontFamily: fontFamily.helvetica,
             fontSize: hp('1.5'),
           }}>
@@ -241,7 +241,7 @@ const OTPEnter = ({route}) => {
                 rootStyle={styles.codeFieldRoot}
                 keyboardType="number-pad"
                 // textContentType="oneTimeCode"
-                renderCell={({index, symbol, isFocused}) => (
+                renderCell={({ index, symbol, isFocused }) => (
                   <View
                     // Make sure that you pass onLayout={getCellOnLayoutHandler(index)} prop to root component of "Cell"
                     onLayout={getCellOnLayoutHandler(index)}
@@ -285,10 +285,10 @@ const OTPEnter = ({route}) => {
         }}>
         <Text
           style={{
-            color: colors.solidAppColor,
+            color: "#1883b5",
             fontFamily: fontFamily.helveticaLight,
             fontSize: hp('1.6'),
-            lineHeight: hp('2'),
+            lineHeight: hp('2.5'),
           }}>
           Didn't receive the code?
           <Text
@@ -318,8 +318,8 @@ const OTPEnter = ({route}) => {
 };
 
 const styles = StyleSheet.create({
-  root: {flex: 1, padding: 20},
-  title: {textAlign: 'center', fontSize: 30},
+  root: { flex: 1, padding: 20 },
+  title: { textAlign: 'center', fontSize: 30 },
   codeFieldRoot: {
     marginTop: 20,
     width: 280,

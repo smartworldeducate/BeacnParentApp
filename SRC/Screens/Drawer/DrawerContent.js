@@ -42,6 +42,9 @@ const DrawerContent = ({ }) => {
     await AsyncStorage.removeItem('token');
     await AsyncStorage.removeItem('number');
     handleNavigate('MobileNumperEnter', true);
+    // console.log("adder", 2 + 2);
+    // var myToken = AsyncStorage.getItem("token")
+    // console.log("myToken", myToken);
   };
 
   return (

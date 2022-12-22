@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -14,18 +14,18 @@ import {
 import colors from '../../Styles/colors';
 import fontFamily from '../../Styles/fontFamily';
 
-const BottomTab = ({state, descriptors, navigation}) => {
+const BottomTab = ({ state, descriptors, navigation }) => {
   return (
-    <View style={{backgroundColor: colors.white}}>
+    <View style={{ backgroundColor: colors.white }}>
       <View style={styles.container}>
         {state.routes.map((route, index) => {
-          const {options} = descriptors[route.key];
+          const { options } = descriptors[route.key];
           const label =
             options.tabBarLabel !== undefined
               ? options.tabBarLabel
               : options.title !== undefined
-              ? options.title
-              : route.name;
+                ? options.title
+                : route.name;
 
           const isFocused = state.index === index;
 
@@ -59,18 +59,25 @@ const BottomTab = ({state, descriptors, navigation}) => {
                   <Text style={styles.textStyle}>Notifications</Text>
                 </TouchableOpacity>
               ) : index === 1 ? (
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                   <TouchableOpacity
                     onPress={onPress}
                     style={styles.centralIcon}>
                     <Image
-                      source={{uri: isFocused ? 'studentblue' : 'studentblue'}}
+                      source={{ uri: isFocused ? 'studentblue' : 'studentblue' }}
                       style={styles.centralImgStyle}
                       resizeMode={'contain'}
                     />
                   </TouchableOpacity>
                   <View style={{}}>
-                    <Text style={styles.textStyle}>Student Profile</Text>
+                    <Text style={{
+                      alignItems: 'center',
+                      fontSize: hp('1.9'),
+                      fontFamily: fontFamily.helveticaBold,
+                      color: colors.lightGrey,
+                      fontWeight: 'bold',
+                      paddingBottom: hp('0.25')
+                    }}>Student Profile</Text>
                   </View>
                 </View>
               ) : index === 2 ? (
@@ -78,7 +85,7 @@ const BottomTab = ({state, descriptors, navigation}) => {
                   onPress={onPress}
                   style={styles.touchableIcon}>
                   <Image
-                    source={{uri: isFocused ? 'contactblue' : 'contactblue'}}
+                    source={{ uri: isFocused ? 'contactblue' : 'contactblue' }}
                     style={styles.imgStyle}
                     resizeMode={'contain'}
                   />
@@ -101,7 +108,7 @@ const styles = StyleSheet.create({
     borderTopColor: colors.lightGrey,
     borderTopWidth: wp('0.15'),
     paddingBottom: hp('2'),
-    marginHorizontal: wp('6'),
+    marginHorizontal: wp('4'),
   },
   innerMainView: {
     flex: 1,
@@ -111,6 +118,7 @@ const styles = StyleSheet.create({
   touchableIcon: {
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: hp('1')
   },
   imgStyle: {
     height: hp('4.5'),
@@ -130,7 +138,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.helveticaBold,
     color: colors.lightGrey,
     fontWeight: 'bold',
-    paddingHorizontal: wp('1'),
+    // paddingHorizontal: wp('1'),
   },
 });
 
