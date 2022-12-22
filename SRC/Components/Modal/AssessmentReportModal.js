@@ -23,6 +23,7 @@ import {useNavigation} from '@react-navigation/native';
 import RenderHTML from 'react-native-render-html';
 import {useWindowDimensions} from 'react-native';
 import SingleLine from '../SingleLine/SingleLine';
+import AssessmentReportHeader from '../Header/AssessmentReportHeader';
 
 const AssessmentReportModal = ({
   modalVisible,
@@ -42,6 +43,7 @@ const AssessmentReportModal = ({
   const childDatahere = useSelector(state => state.children);
   const navigation = useNavigation();
   const {width} = useWindowDimensions();
+  const regex = /(<([^>]+)>)/gi;
   return (
     <Modal
       animationType="fade"
@@ -57,10 +59,10 @@ const AssessmentReportModal = ({
         <StatusBar barStyle={'default'} backgroundColor={'#606060'} />
 
         {childDatahere?.posts?.result?.children.length > 0 && (
-          <MainHeader
+          <AssessmentReportHeader
             onPressRightImg={onPressModal}
-            topLeftImg={'backarrow'}
-            text={'Mid Year Report'}
+            topLeftImg={'close'}
+            text={'End of Year Report'}
             data={childDatahere?.posts?.result?.children}
           />
         )}
@@ -74,7 +76,7 @@ const AssessmentReportModal = ({
           <View style={{flex: 1}}>
             <View style={styles.detailsView}>
               <Text style={styles.assessmentYearText}>{assessmentYear}</Text>
-              <Text style={styles.detailsText}>{stdClass}</Text>
+              <Text style={styles.detailsText1}>{stdClass}</Text>
               <Text style={styles.detailsText}>{campus}</Text>
               <Text style={styles.detailsText}>{termAttendence}</Text>
             </View>
@@ -111,11 +113,11 @@ const AssessmentReportModal = ({
               <Text style={styles.remarksHeadsText}>Achievements</Text>
               <Text style={styles.remarksDetailsText}>{text3}</Text>
               <Text style={styles.remarksHeadsText}>Self Assessment</Text>
-              <View style={styles.remarksDetailsText1}>
+              <ScrollView style={styles.remarksDetailsText}>
                 <Text>
                   {<RenderHTML contentWidth={width} source={{html: text4}} />}
                 </Text>
-              </View>
+              </ScrollView>
             </View>
           </View>
         </ScrollView>
@@ -139,6 +141,13 @@ const styles = StyleSheet.create({
     fontSize: hp('1.65'),
     fontFamily: fontFamily.regularAlatsi,
     lineHeight: hp('3'),
+  },
+  detailsText1: {
+    color: colors.lightBlack,
+    fontSize: hp('1.65'),
+    fontFamily: fontFamily.regular,
+    lineHeight: hp('2.5'),
+    marginLeft: wp('-0.75'),
   },
   detailsText: {
     color: colors.lightBlack,
@@ -189,7 +198,7 @@ const styles = StyleSheet.create({
     color: colors.lightBlack,
     fontSize: hp('1'),
     fontFamily: fontFamily.regular,
-    lineHeight: hp('2.5'),
+    lineHeight: hp('1'),
   },
 });
 export default AssessmentReportModal;

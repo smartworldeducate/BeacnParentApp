@@ -68,25 +68,42 @@ const ParentProfile = () => {
       ?.MOBILE_PHONE,
   );
 
+  const [fatherName, setFatherName] = useState(
+    gurdians?.posts?.result?.guardians[0]?.guardian_name,
+  );
+
+  const [motherName, setMotherName] = useState(
+    gurdians?.posts?.result?.guardians[1]?.guardian_name,
+  );
+
+  const [fatherCnic, setFatherCnic] = useState(
+    childDatahere?.posts?.result?.children[0]?.guardians[0]?.CONTACT_INFO
+      ?.NIC_NUMBER,
+  );
+
+  const [motherCnic, setMotherCnic] = useState(
+    childDatahere?.posts?.result?.children[1]?.guardians[0]?.CONTACT_INFO
+      ?.NIC_NUMBER,
+  );
+
   const [fatherEmail, setFatherEmail] = useState(
     gurdians?.posts?.result?.guardians[0]?.primary_e_mail,
   );
 
-  const onChangeName = val => {
-    setInputName(val);
-  };
-
-  const onChangeCNIC = val => {
-    setInputCNIC(val);
-  };
-
-  // liveWorking
-
-  const onChangeContact = val => {
-    setCheckContact(val);
-  };
-
   // APIImpliments
+  const [fatherPhoneValues, setFatherPhoneValues] = useState({
+    system_id: '146660',
+    sms_number: '03046121456',
+    field_value: '',
+    field_name: '3',
+  });
+
+  const [motherPhoneValues, setMotherPhoneValues] = useState({
+    system_id: '146660',
+    sms_number: '03046121456',
+    field_value: '',
+    field_name: '3',
+  });
 
   const [fatherEmailValues, setFatherEmailValues] = useState({
     system_id: '146660',
@@ -96,6 +113,48 @@ const ParentProfile = () => {
   });
 
   const [motherEmailValues, setMotherEmailValues] = useState({
+    system_id: '146660',
+    sms_number: '03046121456',
+    field_value: '',
+    field_name: '3',
+  });
+
+  const [inputAddress, setInputAddress] = useState({
+    system_id: '146660',
+    sms_number: '03046121456',
+    field_value: '',
+    field_name: '3',
+  });
+
+  const [changeFatherName, setChangeFatherName] = useState({
+    system_id: '146660',
+    sms_number: '03046121456',
+    field_value: '',
+    field_name: '3',
+  });
+
+  const [changeMotherName, setChangeMotherName] = useState({
+    system_id: '146660',
+    sms_number: '03046121456',
+    field_value: '',
+    field_name: '3',
+  });
+
+  const [changeMotherCnic, setChangeMotherCnic] = useState({
+    system_id: '146660',
+    sms_number: '03046121456',
+    field_value: '',
+    field_name: '3',
+  });
+
+  const [changeFatherCnic, setChangeFatherCnic] = useState({
+    system_id: '146660',
+    sms_number: '03046121456',
+    field_value: '',
+    field_name: '3',
+  });
+
+  const [changeContactNo, setChangeContactNo] = useState({
     system_id: '146660',
     sms_number: '03046121456',
     field_value: '',
@@ -112,6 +171,38 @@ const ParentProfile = () => {
     // console.log('inside', fatherEmailValues.field_value);
   };
 
+  const onChangeMotherPhone = val => {
+    setMotherPhoneValues({...motherPhoneValues, field_value: val});
+  };
+
+  const onChangeFatherPhone = val => {
+    setFatherPhoneValues({...fatherPhoneValues, field_value: val});
+  };
+
+  const onChangeFatherName = val => {
+    setChangeFatherName({...changeFatherName, field_value: val});
+  };
+
+  const onChangeMotherName = val => {
+    setChangeMotherName({...changeMotherName, field_value: val});
+  };
+
+  const onChangeFatherCnic = val => {
+    setChangeFatherCnic({...changeFatherCnic, field_value: val});
+  };
+
+  const onChangeMotherCnic = val => {
+    setChangeMotherCnic({...changeMotherCnic, field_value: val});
+  };
+
+  const onChangeAddress = val => {
+    setInputAddress({...inputAddress, field_value: val});
+  };
+
+  const onChangeContactNo = val => {
+    setChangeContactNo({...changeContactNo, field_value: val});
+  };
+
   // console.log('outside', fatherEmailValues.field_value);
 
   const onPressUpdateFatherEmailBtn = () => {
@@ -123,13 +214,6 @@ const ParentProfile = () => {
   // const onChangeEmail = val => {
   //   setInputEmail(val);
   // };
-
-  const [inputAddress, setInputAddress] = useState('');
-
-  const onChangeAddress = val => {
-    setInputAddress(val);
-  };
-
   const onRefresh = () => {
     setRefreshing(true);
     // initialCall();
@@ -334,13 +418,10 @@ const ParentProfile = () => {
           <UpdateCNICModal
             modalUpperFlex={0.3}
             modalLowerFlex={0.7}
-            inputName={gurdians?.posts?.result?.guardians[0]?.guardian_name}
-            onChangeName={onChangeName}
-            inputCNIC={
-              childDatahere?.posts?.result?.children[0]?.guardians[0]
-                ?.CONTACT_INFO?.NIC_NUMBER
-            }
-            onChangeCNIC={onChangeCNIC}
+            inputName={changeFatherName.field_value}
+            onChangeName={onChangeFatherName}
+            inputCNIC={changeFatherCnic.field_value}
+            onChangeCNIC={onChangeFatherCnic}
             text1={'Father Name'}
             text2={'Father CNIC'}
             modalVisible={CNICModal}
@@ -354,8 +435,8 @@ const ParentProfile = () => {
           <UpdateContactNoModal
             modalUpperFlex={0.3}
             modalLowerFlex={0.7}
-            inputContact={checkContact}
-            onChangeContact={onChangeContact}
+            inputContact={fatherPhoneValues.field_value}
+            onChangeContact={onChangeFatherPhone}
             text1={'Father Mobile Number'}
             modalVisible={contactNoModal}
             headerTitle={"Update Father's Mobile Number"}
@@ -387,13 +468,10 @@ const ParentProfile = () => {
           <UpdateCNICModal
             modalUpperFlex={0.3}
             modalLowerFlex={0.7}
-            inputName={gurdians?.posts?.result?.guardians[1]?.guardian_name}
-            onChangeName={onChangeName}
-            inputCNIC={
-              childDatahere?.posts?.result?.children[0]?.guardians[1]
-                ?.CONTACT_INFO?.NIC_NUMBER
-            }
-            onChangeCNIC={onChangeCNIC}
+            inputName={changeMotherName.field_value}
+            onChangeName={onChangeMotherName}
+            inputCNIC={changeMotherCnic.field_value}
+            onChangeCNIC={onChangeMotherCnic}
             text1={'Mother Name'}
             text2={'Mother CNIC'}
             modalVisible={CNICModalMother}
@@ -407,11 +485,8 @@ const ParentProfile = () => {
           <UpdateContactNoModal
             modalUpperFlex={0.3}
             modalLowerFlex={0.7}
-            inputContact={
-              childDatahere?.posts?.result?.children[0]?.guardians[1]
-                ?.CONTACT_INFO?.MOBILE_PHONE
-            }
-            onChangeContact={onChangeContact}
+            inputContact={motherPhoneValues.field_value}
+            onChangeContact={onChangeMotherPhone}
             text1={'Mother Mobile Number'}
             modalVisible={contactNoModalMother}
             headerTitle={"Update Mother's Mobile Number"}
@@ -424,7 +499,7 @@ const ParentProfile = () => {
           <UpdateEmail
             modalUpperFlex={0.3}
             modalLowerFlex={0.7}
-            inputEmail={gurdians?.posts?.result?.guardians[1]?.primary_e_mail}
+            inputEmail={changeMotherName.field_value}
             onChangeEmail={onChangeMotherEmail}
             text1={'Mother Email Address'}
             text2={'Ayeshakhan@bh.edu.pk'}
@@ -439,9 +514,7 @@ const ParentProfile = () => {
           <UpdateAddressModal
             modalUpperFlex={0.3}
             modalLowerFlex={0.7}
-            inputAddress={
-              childDatahere?.posts?.result?.children[0]?.street_address
-            }
+            inputAddress={inputAddress.field_value}
             onChangeAddress={onChangeAddress}
             headerTitle={'Update Correspondence Address'}
             modalVisible={addressModal}
