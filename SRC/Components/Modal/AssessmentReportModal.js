@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -17,9 +17,9 @@ import {
 import colors from '../../Styles/colors';
 import fontFamily from '../../Styles/fontFamily';
 import FlatListItem from '../FlatList/FlatList';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MainHeader from '../Header/MainHeader';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import RenderHTML from 'react-native-render-html';
 import {useWindowDimensions} from 'react-native';
 import SingleLine from '../SingleLine/SingleLine';
@@ -73,7 +73,7 @@ const AssessmentReportModal = ({
             backgroundColor: colors.white,
             marginVertical: hp(2),
           }}>
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <View style={styles.detailsView}>
               <Text style={styles.assessmentYearText}>{assessmentYear}</Text>
               <Text style={styles.detailsText1}>{stdClass}</Text>
@@ -81,15 +81,15 @@ const AssessmentReportModal = ({
               <Text style={styles.detailsText}>{termAttendence}</Text>
             </View>
 
-            <View style={{flexDirection: 'column'}}>
+            <View style={{ flexDirection: 'column' }}>
               <View style={styles.tableMainView}>
-                <View style={{flex: 0.35, alignItems: 'center'}}>
+                <View style={{ flex: 0.35, alignItems: 'center' }}>
                   <Text style={styles.tableHeader}>Subjects </Text>
                 </View>
-                <View style={{flex: 0.35, alignItems: 'center'}}>
+                <View style={{ flex: 0.35, alignItems: 'center' }}>
                   <Text style={styles.tableHeader}>Marks</Text>
                 </View>
-                <View style={{flex: 0.3, alignItems: 'center'}}>
+                <View style={{ flex: 0.3, alignItems: 'center' }}>
                   <Text style={styles.tableHeader}> Remarks</Text>
                 </View>
               </View>
@@ -201,4 +201,14 @@ const styles = StyleSheet.create({
     lineHeight: hp('1'),
   },
 });
+
+const tagsStyles = {
+  body: {
+    whiteSpace: 'normal',
+    // color: 'red',
+  },
+  a: {
+    color: 'green',
+  },
+};
 export default AssessmentReportModal;

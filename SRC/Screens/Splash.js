@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, ImageBackground} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, ImageBackground } from 'react-native';
 import {
   useLinkProps,
   useNavigation,
@@ -33,11 +33,59 @@ const Splash = () => {
 
   return (
     <ImageBackground
-      source={{uri: 'mainsplashhere'}}
-      style={{flex: 1}}
+      // source={{ uri: 'loginbglatest' }}
+      source={require('../Images/splashhere.jpg')}
+      style={{ flex: 1 }}
       resizeMode={'cover'}></ImageBackground>
   );
 };
 
 export default Splash;
 const styles = StyleSheet.create({});
+
+
+
+
+
+
+
+
+
+
+// import React from 'react';
+// import { StyleSheet, ImageBackground } from 'react-native';
+// import { useLinkProps, useNavigation, CommonActions } from '@react-navigation/native';
+
+// const Splash = () => {
+
+//   const navigation = useNavigation();
+//   const handleNavigate = (routeName, clearStack, params) => {
+//     navigation.navigate(routeName, params);
+//     if (clearStack) {
+//       console.log("Clear")
+//     }
+
+//   }
+
+//   setTimeout(() => {
+//     navigation.dispatch(
+//       CommonActions.reset({
+//         index: 1,
+//         routes: [{ name: 'MobileNumperEnter' }],
+//       }),
+//     );
+//     handleNavigate("MobileNumperEnter")
+//   }, 40000)
+
+//   return (
+//     <ImageBackground
+//       source={require('../Images/splashhere.jpg')}
+//       style={{ flex: 1 }}
+//       resizeMode={"cover"}>
+//     </ImageBackground>
+//   );
+// }
+
+// export default Splash;
+// const styles = StyleSheet.create({
+// });

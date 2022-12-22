@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, FlatList} from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 
 const FlatListItem = ({
   data,

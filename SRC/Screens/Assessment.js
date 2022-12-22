@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -15,7 +15,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import FlatListItem from '../Components/FlatList/FlatList';
 
 import colors from '../Styles/colors';
@@ -25,9 +25,9 @@ import LineSeprator from '../Components/LineSeprator/LineSeprator';
 import Button from '../Components/Button/Button';
 import AssessmentReportModal from '../Components/Modal/AssessmentReportModal';
 import ViewReportModal from '../Components/Modal/ViewReportModal';
-import {getAssessment} from '../Redux/Features/Assessments/assessment';
-import {useDispatch, useSelector} from 'react-redux';
-import {logProfileData} from 'react-native-calendars/src/Profiler';
+import { getAssessment } from '../Redux/Features/Assessments/assessment';
+import { useDispatch, useSelector } from 'react-redux';
+import { logProfileData } from 'react-native-calendars/src/Profiler';
 import Loader from '../Components/Loader/Loader';
 
 const Assessment = () => {
@@ -94,7 +94,7 @@ const Assessment = () => {
     setModalVisible(!modalVisible);
   };
 
-  const onPressViewReport = ({item}) => {
+  const onPressViewReport = ({ item }) => {
     // console.log('itemModal', item);
     setDateFrom(item?.acad_year_title);
     // setDateTo(assessmentHere.posts?.result?.gradebook.class_info[0].acad_year_title);
@@ -110,7 +110,7 @@ const Assessment = () => {
     onPressModal();
   };
 
-  const renderSubjectsItem = ({item, index}) => {
+  const renderSubjectsItem = ({ item, index }) => {
     return (
       <FlatListItem
         data={item?.subjects}
@@ -120,7 +120,7 @@ const Assessment = () => {
     );
   };
 
-  const renderMarksTable = ({item, index}) => {
+  const renderMarksTable = ({ item, index }) => {
     // console.log('itemMarks', item);
     return (
       <View style={styles.tableMainView}>
@@ -134,20 +134,20 @@ const Assessment = () => {
             }>{`${item?.obtained_marks}/ ${item?.total_marks}`}</Text>
         </View>
         <TouchableOpacity
-          onPress={() => onPressView({item})}
+          onPress={() => onPressView({ item })}
           style={{
             flex: 0.3,
             justifyContent: 'center',
             alignItems: 'center',
           }}>
           <Text style={styles.tableText}>
-            <Text style={{fontFamily: fontFamily.semiBold}}>View</Text>
+            <Text style={{ fontFamily: fontFamily.semiBold }}>View</Text>
           </Text>
         </TouchableOpacity>
       </View>
     );
   };
-  const onPressSelected = ({item, index}) => {
+  const onPressSelected = ({ item, index }) => {
     let ourGettingValue = [
       ...JSON.parse(
         JSON.stringify(assessmentHere?.posts?.result?.gradebook?.class_info),
@@ -174,7 +174,7 @@ const Assessment = () => {
     // console.log('adder1', 2 + 2);
   };
 
-  const onPressView = ({item, index}) => {
+  const onPressView = ({ item, index }) => {
     setViewModalVisible(!viewModalVisible);
     setSubName(
       `${item.subject_name}(${item.obtained_marks}/${item.total_marks})`,
@@ -182,7 +182,7 @@ const Assessment = () => {
     setSubRemarks(item.remarks);
   };
 
-  const renderItem = ({item, index}) => {
+  const renderItem = ({ item, index }) => {
     // console.log('itemLength', item);
     return (
       <View>
@@ -203,15 +203,15 @@ const Assessment = () => {
                 )}
               </View>
               <TouchableOpacity
-                onPress={() => onPressSelected({item, index})}
+                onPress={() => onPressSelected({ item, index })}
                 style={{
                   flex: 0.05,
                   justifyContent: 'center',
                   // backgroundColor: 'red',
                 }}>
                 <Image
-                  source={{uri: 'arrowdown'}}
-                  style={{height: hp('2'), width: wp('4')}}
+                  source={{ uri: 'arrowdown' }}
+                  style={{ height: hp('2'), width: wp('4') }}
                   resizeMode={'contain'}
                 />
               </TouchableOpacity>
@@ -251,7 +251,7 @@ const Assessment = () => {
     );
   };
 
-  const renderItemAssessmentReports = ({item, index}) => {
+  const renderItemAssessmentReports = ({ item, index }) => {
     return (
       <>
         <View
@@ -266,7 +266,7 @@ const Assessment = () => {
               paddingHorizontal: wp('2'),
               paddingVertical: hp('1'),
             }}>
-            <View style={{flex: 0.5}}>
+            <View style={{ flex: 0.5 }}>
               <Text
                 style={
                   styles.sectionText
@@ -280,7 +280,7 @@ const Assessment = () => {
                 alignItems: 'flex-end',
               }}>
               <Button
-                onPress={() => onPressViewReport({item})}
+                onPress={() => onPressViewReport({ item })}
                 height={hp('3.5')}
                 width={wp('25')}
                 borderRadius={wp('1')}
@@ -331,14 +331,14 @@ const Assessment = () => {
             progressBackgroundColor={colors.silverGrey}
             tintColor={colors.appColor}
 
-            // title={"loading"}
-            // titleColor={colors.white}
+          // title={"loading"}
+          // titleColor={colors.white}
 
-            // size between 0 to 1
-            // size={"large"}
+          // size between 0 to 1
+          // size={"large"}
           />
         }>
-        <View style={{marginHorizontal: wp('8'), marginVertical: hp('2')}}>
+        <View style={{ marginHorizontal: wp('8'), marginVertical: hp('2') }}>
           <FlatListItem
             data={assessmentHere?.posts?.result?.gradebook?.class_info}
             renderItem={renderItem}

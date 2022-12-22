@@ -198,6 +198,8 @@ const WithdrawlRequest = () => {
     );
   };
 
+  // console.log("getterHere", childDatahere?.posts?.result?.children);
+
   return (
     <SafeAreaView
       style={{
@@ -225,6 +227,18 @@ const WithdrawlRequest = () => {
           marginVertical: hp(2),
         }}>
         <View style={styles.mainView}>
+
+          {/* {
+            childDatahere?.posts?.result?.children ?
+
+              <View>
+                <Text>kkkk</Text>
+              </View>
+              :
+              <Text>hhhh</Text>
+          } */}
+
+
           <View style={styles.mainInnerView}>
             <WithdrawlCentral
               backgroundColor={step1 ? colors.appDarkColor : colors.grey}

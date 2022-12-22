@@ -37,29 +37,30 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     linearGradient: {
-        paddingVertical:hp('2')
+        paddingVertical: hp('2')
     },
     rightView: {
-        flex: 0.8,
+        flex: 0.85,
         paddingLeft: wp('6'),
     },
     mainInnerView: {
         flexDirection: "row",
     },
     leftTouchable: {
-        flex: 0.2,
+        flex: 0.15,
         alignItems: "center",
+        justifyContent: "center"
     },
     imageStyle: {
-        height: hp('2'),
-        width: wp("4")
+        height: hp('1.5'),
+        width: wp("3")
     },
 
     textStyle: {
         fontSize: hp('1.85'),
         fontFamily: fontFamily.semiBold,
         color: colors.white,
-        fontWeight:"bold"
+        fontWeight: "bold"
     },
 });
 export default NotificationHeader;
