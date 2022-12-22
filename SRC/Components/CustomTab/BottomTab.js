@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   touchableIcon: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: hp('1')
+    paddingTop: hp('1'),
   },
   imgStyle: {
     height: hp('4.5'),

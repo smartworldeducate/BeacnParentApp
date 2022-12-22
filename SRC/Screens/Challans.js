@@ -491,7 +491,7 @@ const Challans = () => {
 
   // console.log("paidChallansHere11", paidChallans);
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({item, index}) => {
     setPayOnlineState(item.status.length == 1 ? true : false);
     return (
       <>

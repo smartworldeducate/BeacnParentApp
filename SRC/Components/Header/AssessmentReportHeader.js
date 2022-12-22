@@ -23,11 +23,10 @@ import {getNotifications} from '../../Redux/Features/NotificationsKit/Notificati
 import {imageUpload} from '../../Redux/Features/ImageUploadKit/ImageUploadKit';
 import {contactComplaintAction} from '../../Redux/Features/ContactKit/ContactComplaintKit';
 
-const MainHeader = ({
+const AssessmentReportHeader = ({
   onPressRightImg,
   topLeftImg,
   text,
-  topRightImg,
   stuName,
   stuNumber,
   campName,
@@ -154,6 +153,9 @@ const MainHeader = ({
           colors={['#296cb1', '#2760a7', '#203d88']}
           style={styles.linearGradient}>
           <View style={styles.leftView}>
+            <View style={styles.rightView}>
+              <Text style={styles.textStyle}>{text}</Text>
+            </View>
             <TouchableOpacity
               onPress={onPressRightImg}
               style={styles.leftTouchable}>
@@ -162,15 +164,7 @@ const MainHeader = ({
                 style={styles.imageStyle}
                 resizeMode={'contain'}
               />
-              <Image
-                source={{uri: topRightImg}}
-                style={styles.imageStyle1}
-                resizeMode={'contain'}
-              />
             </TouchableOpacity>
-            <View style={styles.rightView}>
-              <Text style={styles.textStyle}>{text}</Text>
-            </View>
           </View>
         </LinearGradient>
       </View>
@@ -357,15 +351,17 @@ const styles = StyleSheet.create({
   leftView: {
     flexDirection: 'row',
     paddingTop: hp('2.5'),
+    marginLeft: wp('10'),
   },
   leftTouchable: {
     flex: 0.2,
     alignItems: 'center',
   },
   imageStyle: {
-    height: hp('3'),
-    width: wp('6'),
+    height: hp('2'),
+    width: wp('4'),
   },
+
   rightView: {
     flex: 0.8,
     // backgroundColor: "red",
@@ -473,4 +469,4 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
 });
-export default MainHeader;
+export default AssessmentReportHeader;

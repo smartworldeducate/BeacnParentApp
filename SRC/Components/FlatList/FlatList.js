@@ -11,7 +11,7 @@ const FlatListItem = ({
   initialNumToRender,
   ItemSeparatorComponent,
   windowSize,
-  maxToRenderPerBatch
+  maxToRenderPerBatch,
 }) => {
   return (
     <FlatList
