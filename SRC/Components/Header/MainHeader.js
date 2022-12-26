@@ -181,30 +181,28 @@ const MainHeader = ({
           index={0}
           style={styles.wrapper}
           paginationStyle={{bottom: -16}}
-          containerStyle={{borderRadius: wp('4')}}
+          // containerStyle={{borderRadius: wp('4')}}
           showsButtons={false}
           showsPagination={true}
           onIndexChanged={index => {
-            dispatch(getChallan(data[index]?.system_id));
-            dispatch(getAssessment(data[index]?.system_id));
-            dispatch(calanderAction(data[index]?.system_id));
-            dispatch(getNotifications(data[index]?.system_id));
-            dispatch(
-              contactComplaintAction(
-                data[index]?.system_id && data[index]?.sms_number,
-              ),
-            );
+            setTimeout(() => {
+              dispatch(getChallan(data[index]?.system_id));
+              dispatch(getAssessment(data[index]?.system_id));
+              dispatch(calanderAction(data[index]?.system_id));
+              dispatch(getNotifications(data[index]?.system_id));
+              dispatch(
+                contactComplaintAction(
+                  data[index]?.system_id && data[index]?.sms_number,
+                ),
+              );
+            }, 100);
             // console.log("data[index]?.system_id", data[index]?.system_id);
+            console.log(data[index]?.system_id), 'index';
           }}>
           {data?.length > 0 &&
             data?.map(item => {
-              // console.log("itemImg", item?.picture);
-              // setDefaultImg(item?.picture)
-
               return (
                 <View style={styles.slide1}>
-                  {/* {console.log(item?.std_name, 'name')} */}
-
                   <View
                     style={{
                       flex: 0.6,
@@ -368,7 +366,6 @@ const styles = StyleSheet.create({
   },
   rightView: {
     flex: 0.8,
-    // backgroundColor: "red",
     marginTop: hp('-0.25'),
   },
   textStyle: {
@@ -380,15 +377,6 @@ const styles = StyleSheet.create({
     marginTop: hp('-10'),
     height: hp('16'),
     flexDirection: 'row',
-    marginHorizontal: wp('6'),
-    borderColor: colors.white,
-    borderWidth: wp('0.15'),
-    backgroundColor: colors.white,
-    elevation: 10,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity: 0.5,
-    borderRadius: wp('4'),
   },
   infoDetailsView: {
     flex: 0.65,
@@ -461,16 +449,27 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
   },
 
-  wrapper: {
-    borderRadius: wp('4'),
-  },
+  wrapper: {},
   slide1: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: colors.white,
+    alignContent: 'center',
     borderRadius: wp('4'),
     flexDirection: 'row',
     overflow: 'hidden',
+    marginHorizontal: wp('4'),
+    backgroundColor: 'white',
+    borderColor: '#000',
+    borderWidth: wp('0.1'),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 10.84,
+
+    elevation: 10,
   },
 });
 export default MainHeader;

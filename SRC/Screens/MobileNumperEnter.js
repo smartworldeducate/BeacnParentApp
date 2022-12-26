@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -19,7 +19,7 @@ import DeviceInfo from 'react-native-device-info';
 
 // or ES6+ destructured imports
 
-import { getUniqueId, getManufacturer } from 'react-native-device-info';
+import {getUniqueId, getManufacturer} from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import colors from '../Styles/colors';
@@ -27,7 +27,7 @@ import fontFamily from '../Styles/fontFamily';
 import Button from '../Components/Button/Button';
 import TextInputCustom from '../Components/TextInput/TextInput';
 
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   clearState,
   createPost,
@@ -43,7 +43,7 @@ const MobileNumperEnter = () => {
     setTheme(scheme.colorScheme);
   });
 
-  useEffect(() => { }, [theme]);
+  useEffect(() => {}, [theme]);
 
   console.log('theme', theme);
 
@@ -51,7 +51,7 @@ const MobileNumperEnter = () => {
   const post = useSelector(state => state.post);
   console.log(post, 'post');
   const [inputContactState, setInputContactState] = useState('');
-  const [values, setValues] = useState({ sms_number: '' });
+  const [values, setValues] = useState({sms_number: ''});
   const [deviceType, setDeviceType] = useState('android');
   const [deviceIdentifier, setDeviceIdentifier] = useState('asdf');
   const [deviceToken, setDeviceToken] = useState('asdf');
@@ -65,7 +65,7 @@ const MobileNumperEnter = () => {
 
   const onChangeContact = val => {
     setInputContactState(val);
-    setValues({ ...values, sms_number: val });
+    setValues({...values, sms_number: val});
   };
 
   const validateField = () => {
@@ -131,8 +131,8 @@ const MobileNumperEnter = () => {
 
   return (
     <ImageBackground
-      source={{ uri: 'loginbglatest' }}
-      style={{ flex: 1 }}
+      source={{uri: 'loginbglatest'}}
+      style={{flex: 1}}
       resizeMode={'cover'}>
       <Toast config={toastConfig} ref={ref => Toast.setRef(ref)} />
       {post?.isLoading && <Loader></Loader>}
